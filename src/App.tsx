@@ -1,11 +1,14 @@
 import './App.css';
-import { Button } from './components/ui/button';
+import Navbar from './components/Navbar';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
     <>
-      <h2>Migraine Pal</h2>
-      <Button>Hello World</Button>
+      <div className="flex h-screen">
+        <Navbar />
+        <Dashboard />
+      </div>
     </>
   );
 }
