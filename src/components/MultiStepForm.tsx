@@ -31,8 +31,8 @@ const formSchema = z.object({
     required_error: 'Date is required',
     invalid_type_error: 'Invalid date',
   }),
-  email: z.string().email({ message: 'Invalid email address.' }),
-  bio: z.string().min(10, { message: 'Bio must be at least 10 characters.' }),
+  symptoms: z.string(),
+  triggers: z.string(),
 });
 
 function MultiStepForm({
@@ -49,8 +49,8 @@ function MultiStepForm({
     defaultValues: {
       // username: '',
       date: undefined,
-      email: '',
-      bio: '',
+      symptoms: '',
+      triggers: '',
     },
   });
 
@@ -60,9 +60,9 @@ function MultiStepForm({
     if (step === 1) {
       isStepValid = await form.trigger('date');
     } else if (step === 2) {
-      isStepValid = await form.trigger('email');
+      isStepValid = await form.trigger('symptoms');
     } else if (step === 3) {
-      isStepValid = await form.trigger('bio');
+      isStepValid = await form.trigger('triggers');
     }
 
     if (isStepValid) {
@@ -101,9 +101,7 @@ function MultiStepForm({
                           onDateChange={field.onChange}
                         />
                       </FormControl>
-                      <FormDescription>
-                        {/* This is your public display name. */}
-                      </FormDescription>
+                      <FormDescription></FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -113,21 +111,22 @@ function MultiStepForm({
             {step === 2 && (
               <>
                 <DialogHeader>
-                  <DialogTitle>Email address</DialogTitle>
-                  <DialogDescription>Email</DialogDescription>
+                  <DialogTitle>Symptoms</DialogTitle>
+                  <DialogDescription></DialogDescription>
                 </DialogHeader>
                 <FormField
                   control={form.control}
-                  name="email"
+                  name="symptoms"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel>Select your symptoms</FormLabel>
                       <FormControl>
-                        <Input placeholder="you@example.com" {...field} />
+                        <Input
+                          placeholder="Nausea, Dizziness, etc."
+                          {...field}
+                        />
                       </FormControl>
-                      <FormDescription>
-                        Enter your email address.
-                      </FormDescription>
+                      <FormDescription></FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -137,23 +136,23 @@ function MultiStepForm({
             {step === 3 && (
               <>
                 <DialogHeader>
-                  <DialogTitle>Bio</DialogTitle>
-                  <DialogDescription>About you</DialogDescription>
+                  <DialogTitle>Triggers</DialogTitle>
+                  <DialogDescription></DialogDescription>
                 </DialogHeader>
                 <FormField
                   control={form.control}
-                  name="bio"
+                  name="triggers"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Bio</FormLabel>
+                      <FormLabel>Select your triggers (if any)</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Tell us about yourself"
+                          placeholder="Caffeine, Humidity, etc."
                           {...field}
                         />
                       </FormControl>
                       <FormDescription>
-                        Provide a short bio about yourself.
+                        {/* Provide a short bio about yourself. */}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -167,13 +166,12 @@ function MultiStepForm({
                   Previous
                 </Button>
               )}
-              {step < 3 ? (
+              {step < 3 && (
                 <Button type="button" onClick={nextStep}>
                   Next
                 </Button>
-              ) : (
-                <Button type="submit">Save changes</Button>
               )}
+              {step === 3 && <Button type="submit">Save changes</Button>}
             </DialogFooter>
           </form>
         </Form>
