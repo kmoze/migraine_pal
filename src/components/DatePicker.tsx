@@ -13,9 +13,6 @@ interface DatePickerProps {
 }
 
 function DatePicker({ date, onDateChange }: DatePickerProps) {
-  // From Shadcn component
-  // const [date, setDate] = useState<Date>();
-
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -36,6 +33,9 @@ function DatePicker({ date, onDateChange }: DatePickerProps) {
           selected={date}
           onSelect={onDateChange}
           initialFocus
+          disabled={(date) =>
+            date > new Date() || date < new Date('1900-01-01')
+          }
         />
       </PopoverContent>
     </Popover>
