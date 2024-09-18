@@ -29,42 +29,21 @@ function App() {
     setMigraines(data || []);
   }
 
+  // Calculate average pain level
+  function averagePainLevel(migraineData: Migraine[]) {
+    let painValsOnly = migraineData.map((migraine) => migraine.pain);
+    let totalPain = painValsOnly.reduce((accum, currVal) => accum + currVal, 0);
+    return totalPain / painValsOnly.length;
+  }
+
   return (
     <>
-      <ul>
-        {migraines.map((migraine) => (
-          <li key={migraine.id} className="mb-4 p-4 border rounded">
-            <div>
-              <strong>Date:</strong>{' '}
-              {new Date(migraine.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </div>
-            <div>Pain Level: {migraine.pain}</div>
-            <div>
-              <strong>Symptoms:</strong>
-              <ul>
-                {migraine.symptoms.map((symptom, index) => (
-                  <li key={index}>{symptom}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <strong>Triggers:</strong>
-              <ul>
-                {migraine.triggers.map((trigger, index) => (
-                  <li key={index}>{trigger}</li>
-                ))}
-              </ul>
-            </div>
-          </li>
-        ))}
-      </ul>
       <div className="flex h-screen">
         <Navbar getMigraines={getMigraines} />
-        <Dashboard />
+        <Dashboard
+          migraines={migraines}
+          avgPain={averagePainLevel(migraines)}
+        />
       </div>
     </>
   );

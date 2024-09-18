@@ -301,7 +301,7 @@ function MultiStepForm({
                   Next
                 </Button>
               )}
-              {step === 4 && <Button type="submit">Save changes</Button>}
+              {step === 4 && <Button type="submit">Log Migraine</Button>}
             </DialogFooter>
           </form>
         </Form>
