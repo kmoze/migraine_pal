@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
+
+import Select from 'react-select';
 import {
   Form,
   FormField,
@@ -20,19 +22,33 @@ import {
   DialogFooter,
 } from './ui/dialog';
 import { Button } from './ui/button';
-import { Input } from './ui/input';
 import DatePicker from './DatePicker';
+import {
+  Select as ShadcnSelect,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from './ui/select';
 
 const formSchema = z.object({
-  // username: z
-  //   .string()
-  //   .min(3, { message: 'Username must be at least 3 characters.' }),
   date: z.date({
     required_error: 'Date is required',
     invalid_type_error: 'Invalid date',
   }),
-  symptoms: z.string(),
-  triggers: z.string(),
+  pain: z.string(),
+  symptoms: z.array(
+    z.object({
+      value: z.string(),
+      label: z.string(),
+    })
+  ),
+  triggers: z.array(
+    z.object({
+      value: z.string(),
+      label: z.string(),
+    })
+  ),
 });
 
 function MultiStepForm({
@@ -47,10 +63,10 @@ function MultiStepForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      // username: '',
       date: undefined,
-      symptoms: '',
-      triggers: '',
+      pain: undefined,
+      symptoms: undefined,
+      triggers: undefined,
     },
   });
 
@@ -60,8 +76,10 @@ function MultiStepForm({
     if (step === 1) {
       isStepValid = await form.trigger('date');
     } else if (step === 2) {
-      isStepValid = await form.trigger('symptoms');
+      isStepValid = await form.trigger('pain');
     } else if (step === 3) {
+      isStepValid = await form.trigger('symptoms');
+    } else if (step === 4) {
       isStepValid = await form.trigger('triggers');
     }
 
@@ -73,13 +91,32 @@ function MultiStepForm({
   const prevStep = () => setStep((prev) => prev - 1);
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log('Form submitted:', data);
     onOpenChange(false);
+    console.log('Form submitted:', data);
+    form.reset({
+      date: undefined,
+      pain: undefined,
+      symptoms: undefined,
+      triggers: undefined,
+    });
+    setStep(1);
   };
+
+  const symptomOptions = [
+    { value: 'nausea', label: 'Nausea' },
+    { value: 'headache', label: 'Headache' },
+    { value: 'eye pain', label: 'Eye Pain' },
+  ];
+
+  const triggerOptions = [
+    { value: 'caffeine', label: 'Caffeine' },
+    { value: 'stress', label: 'Stress' },
+    { value: 'humidity', label: 'Humidity' },
+  ];
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] min-h-[250px]">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             {step === 1 && (
@@ -111,6 +148,46 @@ function MultiStepForm({
             {step === 2 && (
               <>
                 <DialogHeader>
+                  <DialogTitle>Pain level</DialogTitle>
+                  <DialogDescription>
+                    How painful is your migraine?
+                  </DialogDescription>
+                </DialogHeader>
+                <FormField
+                  control={form.control}
+                  name="pain"
+                  render={({ field }) => (
+                    <FormItem>
+                      <ShadcnSelect
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a pain level from 1 - 10" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="1">1</SelectItem>
+                          <SelectItem value="2">2</SelectItem>
+                          <SelectItem value="3">3</SelectItem>
+                          <SelectItem value="4">4</SelectItem>
+                          <SelectItem value="5">5</SelectItem>
+                          <SelectItem value="6">6</SelectItem>
+                          <SelectItem value="7">7</SelectItem>
+                          <SelectItem value="8">8</SelectItem>
+                          <SelectItem value="9">9</SelectItem>
+                          <SelectItem value="10">10</SelectItem>
+                        </SelectContent>
+                      </ShadcnSelect>
+                    </FormItem>
+                  )}
+                />
+              </>
+            )}
+            {step === 3 && (
+              <>
+                <DialogHeader>
                   <DialogTitle>Symptoms</DialogTitle>
                   <DialogDescription></DialogDescription>
                 </DialogHeader>
@@ -121,9 +198,22 @@ function MultiStepForm({
                     <FormItem>
                       <FormLabel>Select your symptoms</FormLabel>
                       <FormControl>
-                        <Input
-                          placeholder="Nausea, Dizziness, etc."
-                          {...field}
+                        <Controller
+                          name="symptoms"
+                          control={form.control}
+                          render={({ field }) => (
+                            <div className="w-full">
+                              <Select
+                                {...field}
+                                options={symptomOptions}
+                                placeholder="Select a role"
+                                isClearable
+                                onChange={(value) => field.onChange(value)}
+                                value={field.value}
+                                isMulti
+                              />
+                            </div>
+                          )}
                         />
                       </FormControl>
                       <FormDescription></FormDescription>
@@ -133,7 +223,7 @@ function MultiStepForm({
                 />
               </>
             )}
-            {step === 3 && (
+            {step === 4 && (
               <>
                 <DialogHeader>
                   <DialogTitle>Triggers</DialogTitle>
@@ -146,9 +236,22 @@ function MultiStepForm({
                     <FormItem>
                       <FormLabel>Select your triggers (if any)</FormLabel>
                       <FormControl>
-                        <Input
-                          placeholder="Caffeine, Humidity, etc."
-                          {...field}
+                        <Controller
+                          name="triggers"
+                          control={form.control}
+                          render={({ field }) => (
+                            <div className="w-full">
+                              <Select
+                                {...field}
+                                options={triggerOptions}
+                                placeholder="Select a role"
+                                isClearable
+                                onChange={(value) => field.onChange(value)}
+                                value={field.value}
+                                isMulti
+                              />
+                            </div>
+                          )}
                         />
                       </FormControl>
                       <FormDescription>
@@ -160,18 +263,18 @@ function MultiStepForm({
                 />
               </>
             )}
-            <DialogFooter>
+            <DialogFooter className="sticky bottom-0 pt-4 bg-white">
               {step > 1 && (
-                <Button variant="outline" onClick={prevStep}>
+                <Button variant="outline" type="button" onClick={prevStep}>
                   Previous
                 </Button>
               )}
-              {step < 3 && (
+              {step < 4 && (
                 <Button type="button" onClick={nextStep}>
                   Next
                 </Button>
               )}
-              {step === 3 && <Button type="submit">Save changes</Button>}
+              {step === 4 && <Button type="submit">Save changes</Button>}
             </DialogFooter>
           </form>
         </Form>
