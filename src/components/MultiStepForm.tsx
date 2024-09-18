@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller } from 'react-hook-form';
 import { supabase } from '@/lib/supabaseClient';
 import { format } from 'date-fns';
+import { symptomOptions, triggerOptions } from '@/data/formOptions';
 
 import Select from 'react-select';
 import {
@@ -139,26 +140,6 @@ function MultiStepForm({
     });
     setStep(1);
   };
-
-  const symptomOptions = [
-    { value: 'nausea', label: 'Nausea' },
-    { value: 'light sensitivity', label: 'Light sensitivity' },
-    { value: 'fatigue', label: 'Fatigue' },
-    { value: 'neck pain', label: 'Neck pain' },
-    { value: 'irritability', label: 'Irritability' },
-    { value: 'vomiting', label: 'Vomiting' },
-    { value: 'eye pain', label: 'Eye Pain' },
-  ];
-
-  const triggerOptions = [
-    { value: 'caffeine', label: 'Caffeine' },
-    { value: 'stress', label: 'Stress' },
-    { value: 'humidity', label: 'Humidity' },
-    { value: 'illness', label: 'Illness' },
-    { value: 'poor sleep', label: 'Poor sleep' },
-    { value: 'physical exertion', label: 'Physical exertion' },
-    { value: 'alcohol', label: 'Alcohol' },
-  ];
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
