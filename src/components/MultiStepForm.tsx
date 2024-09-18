@@ -206,7 +206,7 @@ function MultiStepForm({
                               <Select
                                 {...field}
                                 options={symptomOptions}
-                                placeholder="Select a role"
+                                placeholder="Symptoms"
                                 isClearable
                                 onChange={(value) => field.onChange(value)}
                                 value={field.value}
@@ -244,7 +244,7 @@ function MultiStepForm({
                               <Select
                                 {...field}
                                 options={triggerOptions}
-                                placeholder="Select a role"
+                                placeholder="Triggers"
                                 isClearable
                                 onChange={(value) => field.onChange(value)}
                                 value={field.value}
