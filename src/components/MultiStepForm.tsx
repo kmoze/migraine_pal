@@ -13,7 +13,6 @@ import {
 } from './ui/form';
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -22,6 +21,7 @@ import {
 } from './ui/dialog';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
+import DatePicker from './DatePicker';
 
 const formSchema = z.object({
   username: z
