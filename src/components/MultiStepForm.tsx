@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller } from 'react-hook-form';
+import { supabase } from '@/lib/supabaseClient';
+import { format } from 'date-fns';
 
 import Select from 'react-select';
 import {
@@ -51,13 +53,17 @@ const formSchema = z.object({
   ),
 });
 
+interface ChildComponentProps {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
+  getMigraines: () => Promise<void>;
+}
+
 function MultiStepForm({
   isOpen,
   onOpenChange,
-}: {
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
-}) {
+  getMigraines,
+}: ChildComponentProps) {
   const [step, setStep] = useState(1);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -90,9 +96,41 @@ function MultiStepForm({
 
   const prevStep = () => setStep((prev) => prev - 1);
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
     onOpenChange(false);
-    console.log('Form submitted:', data);
+
+    let newDate = new Date(data.date);
+    const formattedDate = format(newDate, 'yyyy-MM-dd');
+
+    // Transforming the data to array format instead of array of objects
+    let symptomsArray = data.symptoms.map((symptom) => symptom.value);
+    let triggersArray = data.triggers.map((trigger) => trigger.value);
+
+    let painLevelInteger = Number(data.pain);
+
+    const migraineData = {
+      date: formattedDate,
+      symptoms: symptomsArray,
+      triggers: triggersArray,
+      pain: painLevelInteger,
+    };
+
+    try {
+      const { data: insertedData, error } = await supabase
+        .from('migraine_logs')
+        .insert([migraineData]);
+
+      if (error) {
+        console.error('Error inserting data', error.message);
+      } else {
+        console.log('Data successfully inserted:', insertedData);
+      }
+      // Re-fetch the migraines to ensure the UI is updated
+      await getMigraines();
+    } catch (error) {
+      console.error('Error during Supabase insert', error);
+    }
+
     form.reset({
       date: undefined,
       pain: undefined,

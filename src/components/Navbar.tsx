@@ -9,7 +9,11 @@ import {
 
 import MultiStepForm from './MultiStepForm';
 
-function Navbar() {
+interface IntermediaryComponentProps {
+  getMigraines: () => Promise<void>;
+}
+
+function Navbar({ getMigraines }: IntermediaryComponentProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const openDialog = () => setIsDialogOpen(true);
@@ -45,7 +49,11 @@ function Navbar() {
           </Button>
         </div>
       </div>
-      <MultiStepForm isOpen={isDialogOpen} onOpenChange={setIsDialogOpen} />
+      <MultiStepForm
+        isOpen={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+        getMigraines={getMigraines}
+      />
     </>
   );
 }
