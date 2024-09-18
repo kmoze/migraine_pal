@@ -6,10 +6,15 @@ import { Calendar as CalendarIcon } from 'lucide-react';
 import { Button } from './ui/button';
 import { Calendar } from './ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
-import { useState } from 'react';
 
-function DatePicker() {
-  const [date, setDate] = useState<Date>();
+interface DatePickerProps {
+  date: Date | undefined;
+  onDateChange: (date: Date | undefined) => void;
+}
+
+function DatePicker({ date, onDateChange }: DatePickerProps) {
+  // From Shadcn component
+  // const [date, setDate] = useState<Date>();
 
   return (
     <Popover>
@@ -29,7 +34,7 @@ function DatePicker() {
         <Calendar
           mode="single"
           selected={date}
-          onSelect={setDate}
+          onSelect={onDateChange}
           initialFocus
         />
       </PopoverContent>
