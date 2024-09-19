@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
-// import './App.css';
 import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
 import Analytics from './pages/Analytics';
