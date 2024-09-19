@@ -281,9 +281,7 @@ function MultiStepForm({
                           )}
                         />
                       </FormControl>
-                      <FormDescription>
-                        {/* Provide a short bio about yourself. */}
-                      </FormDescription>
+                      <FormDescription></FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
