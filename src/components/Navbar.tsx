@@ -20,7 +20,7 @@ function Navbar({ getMigraines }: IntermediaryComponentProps) {
 
   return (
     <>
-      <div className="w-1/6 h-full flex flex-col justify-between bg-gray-800 text-white p-4">
+      <div className="w-1/6 h-full flex flex-col justify-between bg-card-coolorsPrimary text-white p-4">
         <h2 className="text-4xl text-left mt-4">MigrainePal</h2>
         <div className="flex-grow flex flex-col items-center">
           <Button className="mt-10 w-10/12 bg-foreground text-base flex items-center justify-start gap-2 pl-4">

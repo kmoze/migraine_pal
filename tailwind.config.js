@@ -20,6 +20,9 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
           dashboard: 'hsl(223.36 23.08% 9.53%)',
+          coolorsPrimary: 'hsl(209, 53%, 16%)',
+          coolorsSecondary: 'hsl(199, 100%, 29%)',
+          coolorsAccent: 'hsl(198, 63%, 38%)',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
