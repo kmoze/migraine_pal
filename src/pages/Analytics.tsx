@@ -121,6 +121,12 @@ function Analytics({ migraines }: AnalyticsProps) {
 
   let symptomsChartData = frequencyCounter(migraines, 'symptoms');
 
+  const sortedMigraines = migraines.slice().sort((a, b) => {
+    return new Date(a.date).getTime() - new Date(b.date).getTime();
+  });
+
+  console.log(sortedMigraines);
+
   return (
     <>
       <div className="h-full flex flex-col w-full p-4 bg-custom-gradient gap-2">
@@ -137,7 +143,8 @@ function Analytics({ migraines }: AnalyticsProps) {
               config={barChartConfig}
               className="min-h-[300px] w-full mt-10"
             >
-              <BarChart accessibilityLayer data={migraines}>
+              {/* Should we be passing in the whole migraines body of data? */}
+              <BarChart accessibilityLayer data={sortedMigraines}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="date"
@@ -155,7 +162,6 @@ function Analytics({ migraines }: AnalyticsProps) {
             </ChartContainer>
           </CardContent>
         </Card>
-        {/* Pie Chart experimentation */}
         <Card className="flex flex-col w-1/3 bg-gray-300 border-none">
           <CardHeader className="items-center pb-0">
             <CardTitle>Most common symptoms</CardTitle>
