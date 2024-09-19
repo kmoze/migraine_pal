@@ -52,7 +52,10 @@ function App() {
               />
             }
           />
-          <Route path="/analytics" element={<Analytics />} />
+          <Route
+            path="/analytics"
+            element={<Analytics migraines={migraines} />}
+          />
         </Routes>
       </div>
     </>
