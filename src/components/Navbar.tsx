@@ -8,6 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 import MultiStepForm from './MultiStepForm';
+import { Link } from 'react-router-dom';
 
 interface IntermediaryComponentProps {
   getMigraines: () => Promise<void>;
@@ -25,11 +26,15 @@ function Navbar({ getMigraines }: IntermediaryComponentProps) {
         <div className="flex-grow flex flex-col items-center">
           <Button className="mt-10 w-10/12 bg-foreground text-base flex items-center justify-start gap-2 pl-4">
             <Squares2X2Icon className="h-5 w-5" />
-            <div className="flex-1 text-center">Dashboard</div>
+            <div className="flex-1 text-center">
+              <Link to="/">Dashboard</Link>
+            </div>
           </Button>
           <Button className="mt-6 w-10/12 bg-foreground text-base flex items-center justify-start gap-2 pl-4">
             <ChartBarSquareIcon className="h-5 w-5" />
-            <div className="flex-1 text-center">Analytics</div>
+            <div className="flex-1 text-center">
+              <Link to="/analytics">Analytics</Link>
+            </div>
           </Button>
         </div>
         <div>

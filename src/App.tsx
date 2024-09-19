@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import './App.css';
+// import './App.css';
 import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
+import Analytics from './pages/Analytics';
+import { Route, Routes } from 'react-router-dom';
 
 const supabase = createClient(
   'https://htwnzkiehjbpzjehiuyj.supabase.co',
@@ -40,10 +42,18 @@ function App() {
     <>
       <div className="flex h-screen">
         <Navbar getMigraines={getMigraines} />
-        <Dashboard
-          migraines={migraines}
-          avgPain={averagePainLevel(migraines)}
-        />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Dashboard
+                migraines={migraines}
+                avgPain={averagePainLevel(migraines)}
+              />
+            }
+          />
+          <Route path="/analytics" element={<Analytics />} />
+        </Routes>
       </div>
     </>
   );
