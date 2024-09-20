@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import myImage from '../assets/analytics.png';
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
@@ -62,6 +63,31 @@ function mode(
 }
 
 function Dashboard({ migraines, avgPain }: DashboardProps) {
+  const [weatherData, setWeatherData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [humidityStatus, setHumidityStatus] = useState('');
+
+  async function fetchWeatherData() {
+    try {
+      const response = await fetch(BASE_URL);
+      if (!response.ok) {
+        throw new Error('Failed to fetch weather');
+      }
+      const data = await response.json();
+      setWeatherData(data);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchWeatherData();
+  }, []);
+
+  console.log(weatherData);
+
   return (
     <div className="h-full flex flex-col w-full p-4 bg-custom-gradient">
       <div className="flex items-start gap-5">
@@ -89,16 +115,24 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
         <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg">
           <h2 className="text-white text-2xl p-6">Your most common symptoms</h2>
           <ul className="text-white pt-2 flex flex-col items-center justify-center h-1/2">
-            {mode(migraines, 'symptoms').map((symptom) => {
-              return <li className="capitalize py-1 text-2xl">{symptom}</li>;
+            {mode(migraines, 'symptoms').map((symptom, index) => {
+              return (
+                <li key={index} className="capitalize py-1 text-2xl">
+                  {symptom}
+                </li>
+              );
             })}
           </ul>
         </div>
         <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg">
           <h2 className="text-white text-2xl p-6">Your most common triggers</h2>
           <ul className="text-white pt-2 flex flex-col items-center justify-center h-1/2">
-            {mode(migraines, 'triggers').map((trigger) => {
-              return <li className="capitalize py-1 text-2xl">{trigger}</li>;
+            {mode(migraines, 'triggers').map((trigger, index) => {
+              return (
+                <li key={index} className="capitalize py-1 text-2xl">
+                  {trigger}
+                </li>
+              );
             })}
           </ul>
         </div>
