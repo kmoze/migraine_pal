@@ -196,6 +196,8 @@ function Analytics({ migraines }: AnalyticsProps) {
         displayDuration = '12h+';
       } else if (duration === '24') {
         displayDuration = 'A full day';
+      } else {
+        displayDuration += 'h';
       }
       termFrequencies.push({
         duration: displayDuration,
@@ -207,8 +209,6 @@ function Analytics({ migraines }: AnalyticsProps) {
   }
 
   let durationFreqData = durationFrequency(migraines);
-
-  console.log(durationFreqData);
 
   return (
     <>
@@ -244,8 +244,16 @@ function Analytics({ migraines }: AnalyticsProps) {
                 </BarChart>
               </ChartContainer>
             </CardContent>
+            <CardFooter className="flex-col gap-2 text-sm">
+              <div className="flex items-center gap-2 font-medium leading-none">
+                Lorem ipsum dolor sit amet consectetur.{' '}
+                <TrendingUp className="h-4 w-4" />
+              </div>
+              <div className="flex items-center gap-2 leading-none text-muted-foreground">
+                Lorem, ipsum dolor.
+              </div>
+            </CardFooter>
           </Card>
-          {/* <RadarChartComponent durationFreqData={durationFreqData} /> */}
           <LineChartTest daysWithoutMigraine={daysWithoutMigraine} />
         </div>
         <div className="flex gap-5">
@@ -313,7 +321,6 @@ function Analytics({ migraines }: AnalyticsProps) {
               </div>
             </CardFooter>
           </Card>
-          {/* <LineChartTest daysWithoutMigraine={daysWithoutMigraine} /> */}
           <RadarChartComponent durationFreqData={durationFreqData} />
         </div>
       </div>

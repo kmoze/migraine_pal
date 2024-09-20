@@ -22,16 +22,7 @@ interface LineChartTestProps {
   daysWithoutMigraine: { date: string; daysWithout: number }[];
 }
 
-const chartConfig = {
-  desktop: {
-    label: 'Desktop',
-    color: 'hsl(var(--chart-1))',
-  },
-  mobile: {
-    label: 'Mobile',
-    color: 'hsl(var(--chart-2))',
-  },
-} satisfies ChartConfig;
+const chartConfig = {} satisfies ChartConfig;
 
 function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
   return (

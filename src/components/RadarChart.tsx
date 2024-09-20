@@ -26,17 +26,17 @@ const chartConfig = {} satisfies ChartConfig;
 
 export function RadarChartComponent({ durationFreqData }: RadarChartProps) {
   return (
-    <Card className="w-1/2">
+    <Card className="w-1/3 bg-gray-300">
       <CardHeader className="items-center">
-        <CardTitle>Radar Chart - Dots</CardTitle>
+        <CardTitle>Migraine Duration Frequency</CardTitle>
         <CardDescription>
-          Showing total visitors for the last 6 months
+          Showing the duration of your migraines and how often
         </CardDescription>
       </CardHeader>
       <CardContent className="pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className="mx-auto w-full aspect-square max-h-[250px]"
         >
           <RadarChart data={durationFreqData}>
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
@@ -44,8 +44,8 @@ export function RadarChartComponent({ durationFreqData }: RadarChartProps) {
             <PolarGrid />
             <Radar
               dataKey="frequency"
-              fill="var(--color-desktop)"
-              fillOpacity={0.5}
+              fill="#6e97c8"
+              fillOpacity={0.6}
               dot={{
                 r: 4,
                 fillOpacity: 1,
