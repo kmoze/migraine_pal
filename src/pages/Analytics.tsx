@@ -120,17 +120,16 @@ function Analytics({ migraines }: AnalyticsProps) {
   }
 
   let symptomsChartData = frequencyCounter(migraines, 'symptoms');
+  let triggersChartData = frequencyCounter(migraines, 'triggers');
 
   const sortedMigraines = migraines.slice().sort((a, b) => {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   });
 
-  console.log(sortedMigraines);
-
   return (
     <>
       <div className="h-full flex flex-col w-full p-4 bg-custom-gradient gap-2">
-        Analytics
+        <h2 className="text-2xl">Analytics</h2>
         <Card className="flex flex-col w-1/3 bg-gray-300 border-none">
           <CardHeader className="items-center pb-0">
             <CardTitle>Pain Levels</CardTitle>
@@ -162,38 +161,72 @@ function Analytics({ migraines }: AnalyticsProps) {
             </ChartContainer>
           </CardContent>
         </Card>
-        <Card className="flex flex-col w-1/3 bg-gray-300 border-none">
-          <CardHeader className="items-center pb-0">
-            <CardTitle>Most common symptoms</CardTitle>
-            <CardDescription>
-              Hover over the chart to see the frequency
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex-1 pb-0">
-            <ChartContainer
-              config={chartConfigPie}
-              className="mx-auto aspect-square max-h-[300px] w-full [&_.recharts-pie-label-text]:fill-foreground"
-            >
-              <PieChart>
-                <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-                <Pie
-                  data={symptomsChartData}
-                  dataKey="frequency"
-                  label={({ name }) => name}
-                  nameKey="term"
-                />
-              </PieChart>
-            </ChartContainer>
-          </CardContent>
-          <CardFooter className="flex-col gap-2 text-sm">
-            <div className="flex items-center gap-2 font-medium leading-none">
-              Lorem ipsum dolor sit amet. <TrendingUp className="h-4 w-4" />
-            </div>
-            <div className="leading-none text-muted-foreground">
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-            </div>
-          </CardFooter>
-        </Card>
+        <div className="flex gap-5">
+          <Card className="flex flex-col w-1/3 bg-gray-300 border-none">
+            <CardHeader className="items-center pb-0">
+              <CardTitle>Most common symptoms</CardTitle>
+              <CardDescription>
+                Hover over the chart to see the frequency
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex-1 pb-0">
+              <ChartContainer
+                config={chartConfigPie}
+                className="mx-auto aspect-square max-h-[300px] w-full [&_.recharts-pie-label-text]:fill-foreground"
+              >
+                <PieChart>
+                  <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+                  <Pie
+                    data={symptomsChartData}
+                    dataKey="frequency"
+                    label={({ name }) => name}
+                    nameKey="term"
+                  />
+                </PieChart>
+              </ChartContainer>
+            </CardContent>
+            <CardFooter className="flex-col gap-2 text-sm">
+              <div className="flex items-center gap-2 font-medium leading-none">
+                Lorem ipsum dolor sit amet. <TrendingUp className="h-4 w-4" />
+              </div>
+              <div className="leading-none text-muted-foreground">
+                Lorem ipsum dolor sit amet consectetur adipisicing.
+              </div>
+            </CardFooter>
+          </Card>
+          <Card className="flex flex-col w-1/3 bg-gray-300 border-none">
+            <CardHeader className="items-center pb-0">
+              <CardTitle>Most common triggers</CardTitle>
+              <CardDescription>
+                Hover over the chart to see the frequency
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex-1 pb-0">
+              <ChartContainer
+                config={chartConfigPie}
+                className="mx-auto aspect-square max-h-[300px] w-full [&_.recharts-pie-label-text]:fill-foreground"
+              >
+                <PieChart>
+                  <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+                  <Pie
+                    data={triggersChartData}
+                    dataKey="frequency"
+                    label={({ name }) => name}
+                    nameKey="term"
+                  />
+                </PieChart>
+              </ChartContainer>
+            </CardContent>
+            <CardFooter className="flex-col gap-2 text-sm">
+              <div className="flex items-center gap-2 font-medium leading-none">
+                Lorem ipsum dolor sit amet. <TrendingUp className="h-4 w-4" />
+              </div>
+              <div className="leading-none text-muted-foreground">
+                Lorem ipsum dolor sit amet consectetur adipisicing.
+              </div>
+            </CardFooter>
+          </Card>
+        </div>
       </div>
     </>
   );
