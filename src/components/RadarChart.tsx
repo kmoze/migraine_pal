@@ -16,27 +16,15 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 
+interface RadarChartProps {
+  durationFreqData: { duration: string; frequency: number }[];
+}
+
 export const description = 'A radar chart with dots';
 
-const chartData = [
-  { duration: '1h', frequency: 186 },
-  { duration: '2h', frequency: 305 },
-  { duration: '4h', frequency: 237 },
-  { duration: '6h', frequency: 273 },
-  { duration: '8h', frequency: 209 },
-  { duration: '10h', frequency: 214 },
-  { duration: '12h', frequency: 214 },
-  { duration: '24h', frequency: 214 },
-];
+const chartConfig = {} satisfies ChartConfig;
 
-const chartConfig = {
-  desktop: {
-    label: 'Desktop',
-    color: 'hsl(var(--chart-1))',
-  },
-} satisfies ChartConfig;
-
-export function RadarChartComponent() {
+export function RadarChartComponent({ durationFreqData }: RadarChartProps) {
   return (
     <Card className="w-1/2">
       <CardHeader className="items-center">
@@ -50,7 +38,7 @@ export function RadarChartComponent() {
           config={chartConfig}
           className="mx-auto aspect-square max-h-[250px]"
         >
-          <RadarChart data={chartData}>
+          <RadarChart data={durationFreqData}>
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <PolarAngleAxis dataKey="duration" />
             <PolarGrid />
@@ -68,10 +56,11 @@ export function RadarChartComponent() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          Lorem ipsum dolor sit amet consectetur.{' '}
+          <TrendingUp className="h-4 w-4" />
         </div>
         <div className="flex items-center gap-2 leading-none text-muted-foreground">
-          January - June 2024
+          Lorem, ipsum dolor.
         </div>
       </CardFooter>
     </Card>

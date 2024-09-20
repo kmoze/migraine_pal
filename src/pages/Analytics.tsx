@@ -40,6 +40,7 @@ interface Migraine {
   symptoms: string[];
   triggers: string[];
   pain: number;
+  duration: number;
 }
 
 interface AnalyticsProps {
@@ -50,6 +51,15 @@ interface TermFrequency {
   term: string;
   frequency: number;
   fill: string;
+}
+
+interface DurationFrequency {
+  [duration: number]: number;
+}
+
+interface DurationFrequencyItem {
+  duration: string;
+  frequency: number;
 }
 
 const barChartConfig = {
@@ -165,7 +175,40 @@ function Analytics({ migraines }: AnalyticsProps) {
     }
   });
 
-  console.log(migraines);
+  function durationFrequency(
+    migraineData: Migraine[]
+  ): DurationFrequencyItem[] {
+    const durationCount = migraineData.reduce<DurationFrequency>(
+      (acc, migraine) => {
+        const { duration } = migraine;
+        acc[duration] = (acc[duration] || 0) + 1; // Increment the count for the duration
+        return acc;
+      },
+      {}
+    );
+
+    let termFrequencies: DurationFrequencyItem[] = [];
+
+    for (let duration in durationCount) {
+      let displayDuration = duration;
+
+      if (duration === '15') {
+        displayDuration = '12h+';
+      } else if (duration === '24') {
+        displayDuration = 'A full day';
+      }
+      termFrequencies.push({
+        duration: displayDuration,
+        frequency: durationCount[Number(duration)],
+      });
+    }
+
+    return termFrequencies;
+  }
+
+  let durationFreqData = durationFrequency(migraines);
+
+  console.log(durationFreqData);
 
   return (
     <>
@@ -202,7 +245,7 @@ function Analytics({ migraines }: AnalyticsProps) {
               </ChartContainer>
             </CardContent>
           </Card>
-          <RadarChartComponent />
+          <RadarChartComponent durationFreqData={durationFreqData} />
         </div>
         <div className="flex gap-5">
           <Card className="flex flex-col w-1/3 bg-gray-300 border-none">
