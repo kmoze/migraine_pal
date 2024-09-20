@@ -129,8 +129,6 @@ function Analytics({ migraines }: AnalyticsProps) {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   });
 
-  // console.log(sortedMigraines);
-
   function formatDateWithSuffix(date: Date): string {
     // 'MMM do' format will give us something like 'Sep 1st'
     return format(date, 'MMM do');
@@ -149,7 +147,7 @@ function Analytics({ migraines }: AnalyticsProps) {
         new Date(previousMigraine.date).getTime();
       const differenceInDays = Math.floor(
         differenceInTime / (1000 * 3600 * 24)
-      ); // Convert from milliseconds to days
+      );
 
       return {
         date: formatDateWithSuffix(new Date(migraine.date)),
