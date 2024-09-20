@@ -30,9 +30,9 @@ import {
   PieChart,
 } from 'recharts';
 import LineChartTest from '@/components/LineChartTest';
+import RadarChartComponent from '@/components/RadarChart';
 
 import { format } from 'date-fns';
-import { date } from 'zod';
 
 interface Migraine {
   id: number;
@@ -131,7 +131,7 @@ function Analytics({ migraines }: AnalyticsProps) {
   });
 
   const barChartDateFormat = migraines
-    .slice() // Create a shallow copy of the array to avoid mutating the original array
+    .slice()
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
     .map((migraine) => ({
       ...migraine,
@@ -165,6 +165,8 @@ function Analytics({ migraines }: AnalyticsProps) {
     }
   });
 
+  console.log(migraines);
+
   return (
     <>
       <div className="h-full w-full flex flex-col p-4 bg-custom-gradient gap-2">
@@ -182,7 +184,6 @@ function Analytics({ migraines }: AnalyticsProps) {
                 config={barChartConfig}
                 className="mx-auto aspect-square max-h-[300px] w-full"
               >
-                {/* Should we be passing in the whole migraines body of data? */}
                 <BarChart accessibilityLayer data={barChartDateFormat}>
                   <CartesianGrid vertical={false} />
                   <XAxis
@@ -201,6 +202,7 @@ function Analytics({ migraines }: AnalyticsProps) {
               </ChartContainer>
             </CardContent>
           </Card>
+          <RadarChartComponent />
         </div>
         <div className="flex gap-5">
           <Card className="flex flex-col w-1/3 bg-gray-300 border-none">
