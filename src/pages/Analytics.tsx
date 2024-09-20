@@ -32,6 +32,7 @@ import {
 import LineChartTest from '@/components/LineChartTest';
 
 import { format } from 'date-fns';
+import { date } from 'zod';
 
 interface Migraine {
   id: number;
@@ -129,6 +130,14 @@ function Analytics({ migraines }: AnalyticsProps) {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   });
 
+  const barChartDateFormat = migraines
+    .slice() // Create a shallow copy of the array to avoid mutating the original array
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .map((migraine) => ({
+      ...migraine,
+      date: formatDateWithSuffix(migraine.date),
+    }));
+
   function formatDateWithSuffix(date: Date): string {
     // 'MMM do' format will give us something like 'Sep 1st'
     return format(date, 'MMM do');
@@ -161,7 +170,7 @@ function Analytics({ migraines }: AnalyticsProps) {
       <div className="h-full w-full flex flex-col p-4 bg-custom-gradient gap-2">
         <h2 className="text-2xl">Analytics</h2>
         <div className="flex gap-2">
-          <Card className="flex flex-col w-1/3 bg-gray-300 border-none">
+          <Card className="flex flex-col w-1/2 bg-gray-300 border-none">
             <CardHeader className="items-center pb-0">
               <CardTitle>Pain Levels</CardTitle>
               <CardDescription>
@@ -174,7 +183,7 @@ function Analytics({ migraines }: AnalyticsProps) {
                 className="mx-auto aspect-square max-h-[300px] w-full"
               >
                 {/* Should we be passing in the whole migraines body of data? */}
-                <BarChart accessibilityLayer data={sortedMigraines}>
+                <BarChart accessibilityLayer data={barChartDateFormat}>
                   <CartesianGrid vertical={false} />
                   <XAxis
                     dataKey="date"

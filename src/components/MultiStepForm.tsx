@@ -52,6 +52,7 @@ const formSchema = z.object({
       label: z.string(),
     })
   ),
+  duration: z.string(),
 });
 
 interface ChildComponentProps {
@@ -74,6 +75,7 @@ function MultiStepForm({
       pain: undefined,
       symptoms: undefined,
       triggers: undefined,
+      duration: undefined,
     },
   });
 
@@ -108,12 +110,14 @@ function MultiStepForm({
     let triggersArray = data.triggers.map((trigger) => trigger.value);
 
     let painLevelInteger = Number(data.pain);
+    let durationVal = Number(data.duration);
 
     const migraineData = {
       date: formattedDate,
       symptoms: symptomsArray,
       triggers: triggersArray,
       pain: painLevelInteger,
+      duration: durationVal,
     };
 
     try {
@@ -137,6 +141,7 @@ function MultiStepForm({
       pain: undefined,
       symptoms: undefined,
       triggers: undefined,
+      duration: undefined,
     });
     setStep(1);
   };
@@ -288,18 +293,56 @@ function MultiStepForm({
                 />
               </>
             )}
+            {step === 5 && (
+              <>
+                <DialogHeader>
+                  <DialogTitle>Migraine duration</DialogTitle>
+                  <DialogDescription>
+                    How long has your migraine lasted?
+                  </DialogDescription>
+                </DialogHeader>
+                <FormField
+                  control={form.control}
+                  name="duration"
+                  render={({ field }) => (
+                    <FormItem>
+                      <ShadcnSelect
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="How long has your migraine lasted?" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="1">1h</SelectItem>
+                          <SelectItem value="2">2h</SelectItem>
+                          <SelectItem value="4">4h</SelectItem>
+                          <SelectItem value="6">6h</SelectItem>
+                          <SelectItem value="8">8h</SelectItem>
+                          <SelectItem value="10">10h</SelectItem>
+                          <SelectItem value="15">12h+</SelectItem>
+                          <SelectItem value="24">A full day</SelectItem>
+                        </SelectContent>
+                      </ShadcnSelect>
+                    </FormItem>
+                  )}
+                />
+              </>
+            )}
             <DialogFooter className="sticky bottom-0 pt-4 bg-white">
               {step > 1 && (
                 <Button variant="outline" type="button" onClick={prevStep}>
                   Previous
                 </Button>
               )}
-              {step < 4 && (
+              {step < 5 && (
                 <Button type="button" onClick={nextStep}>
                   Next
                 </Button>
               )}
-              {step === 4 && <Button type="submit">Log Migraine</Button>}
+              {step === 5 && <Button type="submit">Log Migraine</Button>}
             </DialogFooter>
           </form>
         </Form>

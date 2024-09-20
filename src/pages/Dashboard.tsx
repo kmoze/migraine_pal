@@ -78,7 +78,7 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
           </div>
         </div>
         <div className="bg-card-coolorsSecondary shadow-lg shadow-gray-500 p-2 rounded-lg text-white h-56 w-1/4 flex items-center justify-center">
-          <h2 className="text-2xl italic">Placeholder Text</h2>
+          <h2 className="text-2xl italic">Placeholder for Article Carousel</h2>
         </div>
       </div>
       <div className="flex justify-evenly gap-5 mt-5">
@@ -125,10 +125,8 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
           </div>
         </div>
         <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/2 mt-5 rounded-lg">
-          <h2 className="text-white text-2xl p-7 text-left">Articles</h2>
-          <h2 className="text-2xl text-white text-center pt-20 italic">
-            Placeholder for Article Carousel
-          </h2>
+          <h2 className="text-white text-2xl p-7 text-left">Weather</h2>
+          <h2 className="text-2xl text-white text-center pt-20 italic"></h2>
         </div>
       </div>
     </div>
