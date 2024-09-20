@@ -32,6 +32,8 @@ import {
 import TestChart from '@/components/TestChart';
 import LineChartTest from '@/components/LineChartTest';
 
+import { format } from 'date-fns';
+
 interface Migraine {
   id: number;
   date: Date;
@@ -126,6 +128,35 @@ function Analytics({ migraines }: AnalyticsProps) {
 
   const sortedMigraines = migraines.slice().sort((a, b) => {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
+  });
+
+  // console.log(sortedMigraines);
+
+  function formatDateWithSuffix(date: Date): string {
+    // 'MMM do' format will give us something like 'Sep 1st'
+    return format(date, 'MMM do');
+  }
+
+  const daysWithoutMigraine = sortedMigraines.map((migraine, index) => {
+    if (index === 0) {
+      return {
+        date: formatDateWithSuffix(new Date(migraine.date)),
+        daysWithout: 0, // First migraine doesn't have previous one to compare
+      };
+    } else {
+      const previousMigraine = sortedMigraines[index - 1];
+      const differenceInTime =
+        new Date(migraine.date).getTime() -
+        new Date(previousMigraine.date).getTime();
+      const differenceInDays = Math.floor(
+        differenceInTime / (1000 * 3600 * 24)
+      ); // Convert from milliseconds to days
+
+      return {
+        date: formatDateWithSuffix(new Date(migraine.date)),
+        daysWithout: differenceInDays,
+      };
+    }
   });
 
   return (
@@ -230,7 +261,7 @@ function Analytics({ migraines }: AnalyticsProps) {
           </Card>
         </div>
         <TestChart />
-        <LineChartTest />
+        <LineChartTest daysWithoutMigraine={daysWithoutMigraine} />
       </div>
     </>
   );

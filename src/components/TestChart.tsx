@@ -81,8 +81,6 @@ const daysWithoutMigraine = sortedMigraines.map((migraine, index) => {
   }
 });
 
-console.log(daysWithoutMigraine);
-
 function TestChart() {
   return (
     <LineChart width={500} height={300} data={daysWithoutMigraine}>
