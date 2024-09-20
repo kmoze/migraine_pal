@@ -1,3 +1,5 @@
+import myImage from '../assets/analytics.png';
+
 interface Migraine {
   id: number;
   date: Date;
@@ -112,11 +114,15 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
         </div>
       </div>
       <div className="flex flex-grow gap-4">
-        <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/2 mt-5 rounded-lg">
+        <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/2 mt-5 rounded-lg flex flex-col">
           <h2 className="text-white text-2xl p-7 text-left">Analytics</h2>
-          <h2 className="text-2xl text-white text-center pt-20 italic">
-            Placeholder for Analytics Image
-          </h2>
+          <div className="flex flex-grow items-center justify-center">
+            <img
+              className="max-w-lg max-h-96 object-contain rounded-lg mb-4"
+              src={myImage}
+              alt="Analytics Image"
+            />
+          </div>
         </div>
         <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/2 mt-5 rounded-lg">
           <h2 className="text-white text-2xl p-7 text-left">Articles</h2>
