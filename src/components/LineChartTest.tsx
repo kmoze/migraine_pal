@@ -35,13 +35,16 @@ const chartConfig = {
 
 function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
   return (
-    <Card className="w-1/3 bg-gray-300 border-none">
+    <Card className="w-1/2 bg-gray-300 border-none">
       <CardHeader>
         <CardTitle>Lorem, ipsum dolor.</CardTitle>
         <CardDescription>Lorem ipsum dolor sit.</CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
+        <ChartContainer
+          config={chartConfig}
+          className="mx-auto aspect-square w-full max-h-[250px]"
+        >
           <LineChart
             accessibilityLayer
             data={daysWithoutMigraine}

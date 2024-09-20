@@ -245,7 +245,8 @@ function Analytics({ migraines }: AnalyticsProps) {
               </ChartContainer>
             </CardContent>
           </Card>
-          <RadarChartComponent durationFreqData={durationFreqData} />
+          {/* <RadarChartComponent durationFreqData={durationFreqData} /> */}
+          <LineChartTest daysWithoutMigraine={daysWithoutMigraine} />
         </div>
         <div className="flex gap-5">
           <Card className="flex flex-col w-1/3 bg-gray-300 border-none">
@@ -312,7 +313,8 @@ function Analytics({ migraines }: AnalyticsProps) {
               </div>
             </CardFooter>
           </Card>
-          <LineChartTest daysWithoutMigraine={daysWithoutMigraine} />
+          {/* <LineChartTest daysWithoutMigraine={daysWithoutMigraine} /> */}
+          <RadarChartComponent durationFreqData={durationFreqData} />
         </div>
       </div>
     </>
