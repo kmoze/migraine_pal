@@ -29,6 +29,8 @@ import {
   Pie,
   PieChart,
 } from 'recharts';
+import TestChart from '@/components/TestChart';
+import LineChartTest from '@/components/LineChartTest';
 
 interface Migraine {
   id: number;
@@ -227,6 +229,8 @@ function Analytics({ migraines }: AnalyticsProps) {
             </CardFooter>
           </Card>
         </div>
+        <TestChart />
+        <LineChartTest />
       </div>
     </>
   );
