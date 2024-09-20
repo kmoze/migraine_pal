@@ -160,39 +160,41 @@ function Analytics({ migraines }: AnalyticsProps) {
 
   return (
     <>
-      <div className="h-full flex flex-col w-full p-4 bg-custom-gradient gap-2">
+      <div className="h-full w-full flex flex-col p-4 bg-custom-gradient gap-2">
         <h2 className="text-2xl">Analytics</h2>
-        <Card className="flex flex-col w-1/3 bg-gray-300 border-none">
-          <CardHeader className="items-center pb-0">
-            <CardTitle>Pain Levels</CardTitle>
-            <CardDescription>
-              Hover over the chart to see the pain levels
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex-1 pb-0">
-            <ChartContainer
-              config={barChartConfig}
-              className="min-h-[300px] w-full mt-10"
-            >
-              {/* Should we be passing in the whole migraines body of data? */}
-              <BarChart accessibilityLayer data={sortedMigraines}>
-                <CartesianGrid vertical={false} />
-                <XAxis
-                  dataKey="date"
-                  tickLine={false}
-                  tickMargin={10}
-                  axisLine={false}
-                />
-                <ChartTooltip content={<ChartTooltipContent />} />
-                <ChartLegend
-                  className="text-lg"
-                  content={<ChartLegendContent />}
-                />
-                <Bar dataKey="pain" fill="var(--color-pain)" radius={12} />
-              </BarChart>
-            </ChartContainer>
-          </CardContent>
-        </Card>
+        <div className="flex gap-2">
+          <Card className="flex flex-col w-1/3 bg-gray-300 border-none">
+            <CardHeader className="items-center pb-0">
+              <CardTitle>Pain Levels</CardTitle>
+              <CardDescription>
+                Hover over the chart to see the pain levels
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex-1 pb-0">
+              <ChartContainer
+                config={barChartConfig}
+                className="mx-auto aspect-square max-h-[300px] w-full"
+              >
+                {/* Should we be passing in the whole migraines body of data? */}
+                <BarChart accessibilityLayer data={sortedMigraines}>
+                  <CartesianGrid vertical={false} />
+                  <XAxis
+                    dataKey="date"
+                    tickLine={false}
+                    tickMargin={10}
+                    axisLine={false}
+                  />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <ChartLegend
+                    className="text-lg"
+                    content={<ChartLegendContent />}
+                  />
+                  <Bar dataKey="pain" fill="var(--color-pain)" radius={12} />
+                </BarChart>
+              </ChartContainer>
+            </CardContent>
+          </Card>
+        </div>
         <div className="flex gap-5">
           <Card className="flex flex-col w-1/3 bg-gray-300 border-none">
             <CardHeader className="items-center pb-0">
