@@ -18,13 +18,8 @@ import {
 
 export const description = 'A line chart with a label';
 
-interface DaysWithoutMigraineData {
-  date: string;
-  daysWithout: number;
-}
-
 interface LineChartTestProps {
-  daysWithoutMigraine: DaysWithoutMigraineData[];
+  daysWithoutMigraine: { date: string; daysWithout: number }[];
 }
 
 const chartConfig = {
@@ -40,7 +35,7 @@ const chartConfig = {
 
 function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
   return (
-    <Card>
+    <Card className="w-1/3 bg-gray-300 border-none">
       <CardHeader>
         <CardTitle>Lorem, ipsum dolor.</CardTitle>
         <CardDescription>Lorem ipsum dolor sit.</CardDescription>
@@ -51,9 +46,10 @@ function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
             accessibilityLayer
             data={daysWithoutMigraine}
             margin={{
-              top: 20,
-              left: 12,
-              right: 12,
+              top: 25,
+              left: 10,
+              right: 10,
+              bottom: 0,
             }}
           >
             <CartesianGrid vertical={false} />
@@ -70,13 +66,13 @@ function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
             <Line
               dataKey="daysWithout"
               type="bumpX"
-              stroke="var(--color-desktop)"
+              stroke="#1e6091"
               strokeWidth={2}
               dot={{
-                fill: 'var(--color-desktop)',
+                fill: '#FFFFFF',
               }}
               activeDot={{
-                r: 8,
+                r: 6,
               }}
             >
               <LabelList

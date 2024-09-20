@@ -29,7 +29,6 @@ import {
   Pie,
   PieChart,
 } from 'recharts';
-import TestChart from '@/components/TestChart';
 import LineChartTest from '@/components/LineChartTest';
 
 import { format } from 'date-fns';
@@ -259,9 +258,8 @@ function Analytics({ migraines }: AnalyticsProps) {
               </div>
             </CardFooter>
           </Card>
+          <LineChartTest daysWithoutMigraine={daysWithoutMigraine} />
         </div>
-        <TestChart />
-        <LineChartTest daysWithoutMigraine={daysWithoutMigraine} />
       </div>
     </>
   );
