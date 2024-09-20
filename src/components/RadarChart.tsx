@@ -56,7 +56,7 @@ export function RadarChartComponent({ durationFreqData }: RadarChartProps) {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Lorem ipsum dolor sit amet consectetur.{' '}
+          Lorem ipsum dolor sit amet consectetur.
           <TrendingUp className="h-4 w-4" />
         </div>
         <div className="flex items-center gap-2 leading-none text-muted-foreground">

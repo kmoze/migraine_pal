@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import myImage from '../assets/analytics.png';
 
+import { OctagonAlert } from 'lucide-react';
+
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
 const BASE_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=51.5072&lon=-0.1276&appid=${API_KEY}&units=metric&cnt=40`;
@@ -65,7 +67,7 @@ function mode(
 function Dashboard({ migraines, avgPain }: DashboardProps) {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [humidityStatus, setHumidityStatus] = useState('');
+  // const [humidityStatus, setHumidityStatus] = useState('');
 
   async function fetchWeatherData() {
     try {
@@ -87,6 +89,24 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
   }, []);
 
   console.log(weatherData);
+
+  function humidityAnalysis(array) {
+    let list = array.list;
+    let over70 = [];
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].main.humidity > 70) {
+        over70.push(list[i]);
+      }
+    }
+
+    if (over70.length >= 30) {
+      return 'HIGH';
+    } else if (over70.length >= 20 && over70.length <= 29) {
+      return 'MODERATE';
+    } else {
+      return 'MILD';
+    }
+  }
 
   return (
     <div className="h-full flex flex-col w-full p-4 bg-custom-gradient">
@@ -164,7 +184,19 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
         </div>
         <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/2 mt-5 rounded-lg">
           <h2 className="text-white text-2xl p-7 text-left">Weather</h2>
-          <h2 className="text-2xl text-white text-center pt-20 italic"></h2>
+          <h2 className="text-white text-2xl">Humidity Forecast:</h2>
+          <div className="flex items-center gap-2 font-medium leading-none">
+            {loading ? (
+              <p className="text-white text-lg">Loading...</p>
+            ) : (
+              <p className="text-white text-2xl">
+                {weatherData
+                  ? humidityAnalysis(weatherData)
+                  : 'Sorry, there seems to be an error...'}
+              </p>
+            )}
+            <OctagonAlert className="h-6 w-6 text-red-500" />
+          </div>
         </div>
       </div>
     </div>
