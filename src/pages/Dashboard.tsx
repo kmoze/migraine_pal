@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { CarouselPlugin } from '@/components/ArticleCarousel';
-import myImage from '../assets/analytics.png';
 
 import { ThermometerSun, Gauge, TrendingUpDown } from 'lucide-react';
 
 import weatherDashboard from '../assets/person1.svg';
-import { monthNames } from '@/data/monthOptions';
+import myImage from '../assets/analytics.png';
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
@@ -238,55 +237,49 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
     }
   }
 
-  function mostRecentMonth(migraineData) {
-    console.log(migraineData);
+  function mostRecentMonth(migraineData: Migraine[]) {
+    const months = new Set<string>();
 
-    const months = new Set();
     migraineData.forEach((log) => {
-      const month = log.date.split(' ')[0];
-      console.log(month);
+      const logDate = new Date(log.date); // Convert the string date to a Date object
+      const month = String(logDate.getMonth() + 1).padStart(2, '0'); // Extract the month (0-indexed, so +1)
       months.add(month);
     });
-    let uniqueMonths = Array.from(months);
-    let sortedMonths = uniqueMonths.slice().sort((a, b) => {
-      return monthNames.indexOf(a) - monthNames.indexOf(b);
-    });
-    return sortedMonths[sortedMonths.length - 1];
+
+    const uniqueMonths = Array.from(months);
+    const sortedMonths = uniqueMonths.sort((a, b) => Number(a) - Number(b));
+
+    return sortedMonths[sortedMonths.length - 1]; // Most recent month
   }
 
-  if (migraines !== null) {
-    console.log(mostRecentMonth(migraines));
-  }
-
-  function mostRecentDay(logs, month) {
+  function mostRecentDay(logs: Migraine[], month: string) {
     const currentDate = new Date();
 
+    // Filter logs to only include those from the specified month
     const daysInMonth = logs
-      .filter((log) => log.formattedDate.startsWith(month))
-      .map((log) => log.formattedDate);
+      .filter((log) => {
+        const logDate = new Date(log.date); // Convert string to Date object
+        const logMonth = String(logDate.getMonth() + 1).padStart(2, '0'); // Get month (0-indexed, so +1)
+        return logMonth === month;
+      })
+      .map((log) => new Date(log.date)); // Convert the date strings to Date objects
 
-    const sortedDays = daysInMonth.slice().sort((a, b) => {
-      const dayA = parseInt(a.split(' ')[1], 10);
-      const dayB = parseInt(b.split(' ')[1], 10);
-      return dayA - dayB;
-    });
+    if (daysInMonth.length === 0) {
+      return null; // No logs in the specified month
+    }
 
-    // Get the most recent day in the month
+    // Sort the days within the month in ascending order
+    const sortedDays = daysInMonth
+      .slice()
+      .sort((a, b) => a.getDate() - b.getDate());
+
+    // Get the most recent day in the month (the last one in the sorted list)
     const mostRecentDay = sortedDays[sortedDays.length - 1];
 
-    // Parse the most recent date
-    const [mostRecentMonth, mostRecentDayNum] = mostRecentDay.split(' ');
+    // Calculate the difference in time (milliseconds) between current date and most recent migraine date
+    const differenceInTime = currentDate.getTime() - mostRecentDay.getTime();
 
-    // Create a date object for the most recent day
-    const lastMigraineDate = new Date(
-      `${mostRecentMonth} ${parseInt(
-        mostRecentDayNum
-      )}, ${currentDate.getFullYear()}`
-    );
-
-    // Gets amount of milliseconds inbetween the two dates.
-    const differenceInTime = currentDate - lastMigraineDate;
-
+    // Convert milliseconds to days
     const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
 
     return differenceInDays;
@@ -300,15 +293,16 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
             Welcome to MigrainePal 👋🏻
           </h2>
           <div className="flex justify-around gap-5">
-            <h4 className="text-white text-xl p-8 w-1/3 bg-blue-700 bg-opacity-45 mt-2 rounded-sm text-center">
-              Placeholder for analyzing when their last migraine was...
+            <h4 className="text-white text-3xl p-8 w-1/3 bg-blue-700 bg-opacity-45 mt-2 rounded-lg">
+              Your last migraine was{' '}
+              {mostRecentDay(migraines, mostRecentMonth(migraines))} days ago 🎉
             </h4>
-            <h4 className="text-white text-xl p-8 w-1/3 bg-blue-500 bg-opacity-45 mt-2 rounded-sm text-center">
-              Placeholder for indicating if weather events might impact upcoming
-              migraines...
+            <h4 className="text-white text-xl p-8 w-1/3 bg-blue-500 bg-opacity-45 mt-2 rounded-lg">
+              Based on the forecasted weather, there is a ____ probability to
+              experience a migraine
               {/* I.e. If ALL forecast analysis indicates potential changes or more, tell the user this. */}
             </h4>
-            <h4 className="text-white text-xl p-8 w-1/3 bg-sky-500 bg-opacity-45 mt-2 rounded-sm text-center">
+            <h4 className="text-white text-xl p-8 w-1/3 bg-sky-500 bg-opacity-45 mt-2 rounded-lg">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit
             </h4>
           </div>

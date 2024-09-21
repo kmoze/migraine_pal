@@ -15,7 +15,6 @@ import medicalNewsTodayImg from '../assets/medical-news-today-mnt-logo-vector.pn
 import bbcImg from '../assets/p09xtmrn.jpg';
 import washingtonPostImg from '../assets/the-washington-post3353.jpg';
 
-// Sample articles array (replace this with your actual data source)
 const articles = [
   {
     title: 'Migraine shame is real',
