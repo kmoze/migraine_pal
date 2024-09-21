@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react';
 import { CarouselPlugin } from '@/components/ArticleCarousel';
 
-import { ThermometerSun, Gauge, TrendingUpDown } from 'lucide-react';
+import {
+  ThermometerSun,
+  Gauge,
+  TrendingUpDown,
+  Lightbulb,
+  PartyPopper,
+} from 'lucide-react';
 
 import weatherDashboard from '../assets/person1.svg';
 import myImage from '../assets/analytics.png';
@@ -288,14 +294,15 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
   return (
     <div className="h-full flex flex-col w-full p-4 bg-custom-gradient">
       <div className="flex items-start gap-5">
-        <div className="bg-card-coolorsPrimary shadow-lg shadow-gray-500 w-3/4 h-56 rounded-xl p-4 bg-opacity-95">
-          <h2 className="text-white text-3xl pt-3 pb-3">
+        <div className="bg-card-coolorsPrimary shadow-lg shadow-gray-500 w-3/4 h-56 rounded-xl p-2 bg-opacity-95">
+          <h2 className="text-white text-3xl pt-3 pl-3 pb-3">
             Welcome to MigrainePal 👋🏻
           </h2>
           <div className="flex justify-around gap-5">
             <h4 className="text-white text-2xl p-10 w-1/4 bg-blue-700 bg-opacity-45 mt-2 rounded-lg text-left">
               Your last migraine was{' '}
-              {mostRecentDay(migraines, mostRecentMonth(migraines))} days ago 🎉
+              {mostRecentDay(migraines, mostRecentMonth(migraines))} days ago{' '}
+              <PartyPopper className="inline-block mb-2 text-green-500 h-7 w-7" />
             </h4>
             <h4 className="text-white text-xl p-8 w-1/3 bg-blue-500 bg-opacity-45 mt-2 rounded-lg">
               Based on the forecasted weather, there is a{' '}
@@ -303,7 +310,9 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
               experiencing a migraine.
             </h4>
             <h4 className="text-white text-xl p-8 w-1/3 bg-sky-500 bg-opacity-45 mt-2 rounded-lg">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit
+              <Lightbulb className="inline-block mb-2 h-7 w-7 text-yellow-500" />{' '}
+              <span className="text-gray-200"> Daily tip from us: </span> <br />
+              Hydrate to reduce headaches during high humidity.
             </h4>
           </div>
         </div>
