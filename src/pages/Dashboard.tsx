@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { CarouselPlugin } from '@/components/ArticleCarousel';
 import myImage from '../assets/analytics.png';
 
-import { Sparkles, ThermometerSun, Gauge, TrendingUpDown } from 'lucide-react';
+import { ThermometerSun, Gauge, TrendingUpDown } from 'lucide-react';
 
 import myImg from '../assets/person1.svg';
 
@@ -37,9 +37,14 @@ interface WeatherData {
   list: Forecast[];
 }
 
+interface TempChangeEntry {
+  tempChange: string; // Assuming these are strings in the original data
+  pressureChange: string; // Same assumption as above
+}
+
 interface TempChanges {
   [date: string]: {
-    [time: string]: string | number;
+    [time: string]: TempChangeEntry;
   };
 }
 
@@ -233,8 +238,6 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
       return 'No distinct changes';
     }
   }
-
-  console.log(pressureChange(tempAndPressureChangeAnalysis(weatherData)));
 
   return (
     <div className="h-full flex flex-col w-full p-4 bg-custom-gradient">
