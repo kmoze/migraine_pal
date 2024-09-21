@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import myImage from '../assets/analytics.png';
 
-import { OctagonAlert } from 'lucide-react';
+import { Sparkles, ThermometerSun } from 'lucide-react';
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
@@ -21,16 +21,16 @@ interface DashboardProps {
 }
 
 interface Forecast {
-  dt: number; // Unix timestamp
-  dt_txt: string; // Formatted date string
+  dt: number;
+  dt_txt: string;
   main: {
-    temp: number; // Temperature
+    temp: number;
     humidity: number;
   };
 }
 
 interface WeatherData {
-  list: Forecast[]; // List of forecast data
+  list: Forecast[];
 }
 
 interface TempChanges {
@@ -86,7 +86,6 @@ function mode(
 function Dashboard({ migraines, avgPain }: DashboardProps) {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
-  // const [humidityStatus, setHumidityStatus] = useState('');
 
   async function fetchWeatherData() {
     try {
@@ -107,8 +106,6 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
     fetchWeatherData();
   }, []);
 
-  console.log(weatherData);
-
   function humidityAnalysis(array: WeatherData): string {
     let list = array.list;
     let over70 = [];
@@ -119,11 +116,11 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
     }
 
     if (over70.length >= 30) {
-      return 'HIGH';
+      return 'High';
     } else if (over70.length >= 20 && over70.length <= 29) {
-      return 'MODERATE';
+      return 'Moderate';
     } else {
-      return 'MILD';
+      return 'Mild';
     }
   }
 
@@ -168,7 +165,6 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
         });
       });
 
-      // Log or return the results
       return tempDrops;
     }
   }
@@ -193,6 +189,8 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
       return 'No distinct changes';
     }
   }
+
+  console.log(weatherData);
 
   return (
     <div className="h-full flex flex-col w-full p-4 bg-custom-gradient">
@@ -270,36 +268,38 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
         </div>
         <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/2 mt-5 rounded-lg">
           <h2 className="text-white text-2xl p-7 text-left">Weather</h2>
-          <div className="flex gap-2 mx-8">
-            <div className="flex flex-col font-medium leading-none">
-              <h2 className="text-white text-xl mb-2">Humidity Forecast:</h2>
-              <div className="flex items-center gap-2">
+          <div className="flex gap-4 mx-8">
+            <div className="flex flex-col font-medium leading-none border p-5 rounded-md">
+              <h2 className="text-white text-md mb-4">Humidity Forecast:</h2>
+              <div className="flex items-center gap-1">
                 {loading ? (
                   <p className="text-white text-lg">Loading...</p>
                 ) : (
-                  <p className="text-white text-lg">
+                  <p className="text-white text-xl">
                     {weatherData
                       ? humidityAnalysis(weatherData)
                       : 'Sorry, there seems to be an error...'}
                   </p>
                 )}
-                <OctagonAlert className="h-6 w-6 text-red-500" />
+                {/* <OctagonAlert className="h-5 w-5 text-red-500" /> */}
+                <ThermometerSun className="h-6 w-6 text-red-500" />
               </div>
             </div>
-            <div className="flex flex-col font-medium leading-none">
-              <h2 className="text-white text-xl mb-2">
-                Temperate Change Forecast:
+            <div className="flex flex-col font-medium leading-none border p-5 rounded-md">
+              <h2 className="text-white text-md mb-4">
+                Temperature Change Forecast:
               </h2>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 justify-center">
                 {loading ? (
                   <p className="text-white text-lg">Loading...</p>
                 ) : (
-                  <p className="text-white text-lg">
+                  <p className="text-white text-xl">
                     {weatherData
                       ? tempChange(tempChangeAnalysis(weatherData) || {})
                       : 'Sorry, there seems to be an error...'}
                   </p>
                 )}
+                <Sparkles className="h-6 w-6 text-purple-400" />
               </div>
             </div>
           </div>
