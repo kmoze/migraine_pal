@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
 import Analytics from './pages/Analytics';
 import { Route, Routes } from 'react-router-dom';
+import { Toaster } from './components/ui/toaster';
 
 const supabase = createClient(
   'https://htwnzkiehjbpzjehiuyj.supabase.co',
@@ -16,6 +17,7 @@ interface Migraine {
   symptoms: string[];
   triggers: string[];
   pain: number;
+  duration: number;
 }
 
 function App() {
@@ -56,6 +58,7 @@ function App() {
             element={<Analytics migraines={migraines} />}
           />
         </Routes>
+        <Toaster />
       </div>
     </>
   );

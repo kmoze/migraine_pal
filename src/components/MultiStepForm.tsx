@@ -5,7 +5,6 @@ import { useForm, Controller } from 'react-hook-form';
 import { supabase } from '@/lib/supabaseClient';
 import { format } from 'date-fns';
 import { symptomOptions, triggerOptions } from '@/data/formOptions';
-
 import Select from 'react-select';
 import {
   Form,
@@ -34,6 +33,7 @@ import {
   SelectValue,
 } from './ui/select';
 import { Toast } from './ui/toast';
+import { toast, useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
   date: z.date({
@@ -343,7 +343,19 @@ function MultiStepForm({
                   Next
                 </Button>
               )}
-              {step === 5 && <Button type="submit">Log Migraine</Button>}
+              {step === 5 && (
+                <Button
+                  type="submit"
+                  onClick={() => {
+                    toast({
+                      title: 'Migraine successfully logged',
+                      description: 'We hope you feel better soon!',
+                    });
+                  }}
+                >
+                  Log Migraine
+                </Button>
+              )}
             </DialogFooter>
           </form>
         </Form>
