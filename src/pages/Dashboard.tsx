@@ -26,6 +26,7 @@ interface Forecast {
   main: {
     temp: number;
     humidity: number;
+    pressure: number;
   };
 }
 
@@ -124,10 +125,12 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
     }
   }
 
-  function tempChangeAnalysis(array: WeatherData) {
+  function tempAndPressureChangeAnalysis(array: WeatherData) {
     if (array && array.list.length > 0) {
       const forecastData = array.list;
-      const organizedData: { [date: string]: { [time: string]: number } } = {};
+      const organizedData: {
+        [date: string]: { [time: string]: { temp: number; pressure: number } };
+      } = {};
 
       // Organize the forecast data by date and time
       forecastData.forEach((forecast) => {
@@ -139,33 +142,48 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
           organizedData[dateStr] = {};
         }
 
-        // Store the temperature in the organizedData object
-        organizedData[dateStr][timeStr] = forecast.main.temp;
+        // Store both temperature and pressure in the organizedData object
+        organizedData[dateStr][timeStr] = {
+          temp: forecast.main.temp,
+          pressure: forecast.main.pressure,
+        };
       });
 
       const comparisonTimes = ['06:00', '12:00', '18:00'];
-      const tempDrops: { [date: string]: { [time: string]: string } } = {};
+      const changes: {
+        [date: string]: {
+          [time: string]: { tempChange: string; pressureChange: string };
+        };
+      } = {};
 
       const dates = Object.keys(organizedData).sort();
 
-      // Compare temperatures between consecutive days
+      // Compare temperature and pressure between consecutive days
       dates.forEach((date, index) => {
         if (index === 0) return; // Skip the first date since there's no previous day to compare
 
         const prevDate = dates[index - 1]; // Previous day's date
-        tempDrops[date] = {};
+        changes[date] = {};
 
         comparisonTimes.forEach((time) => {
           if (organizedData[date][time] && organizedData[prevDate][time]) {
-            const tempToday = organizedData[date][time];
-            const tempYesterday = organizedData[prevDate][time];
-            const drop = tempYesterday - tempToday;
-            tempDrops[date][time] = drop.toFixed(2); // Save the temperature drop as a string with 2 decimal places
+            const tempToday = organizedData[date][time].temp;
+            const tempYesterday = organizedData[prevDate][time].temp;
+            const tempDrop = tempYesterday - tempToday;
+
+            const pressureToday = organizedData[date][time].pressure;
+            const pressureYesterday = organizedData[prevDate][time].pressure;
+            const pressureDrop = pressureYesterday - pressureToday;
+
+            changes[date][time] = {
+              tempChange: tempDrop.toFixed(2), // Save the temperature drop as a string with 2 decimal places
+              pressureChange: pressureDrop.toFixed(2), // Save the pressure drop as a string with 2 decimal places
+            };
           }
         });
       });
 
-      return tempDrops;
+      return changes;
     }
   }
 
@@ -175,8 +193,8 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
     for (let date in tempChanges) {
       let dayTimes = tempChanges[date];
       for (let time in dayTimes) {
-        if (Math.abs(Number(dayTimes[time])) >= 5) {
-          over5.push(Number(dayTimes[time]));
+        if (Math.abs(Number(dayTimes[time]['tempChange'])) >= 5) {
+          over5.push(Number(dayTimes[time]['tempChange']));
         }
       }
     }
@@ -189,6 +207,31 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
       return 'No distinct changes';
     }
   }
+
+  function pressureChange(pressureChanges: TempChanges) {
+    let over5 = [];
+
+    for (let date in pressureChanges) {
+      let dayTimes = pressureChanges[date];
+      for (let time in dayTimes) {
+        if (Math.abs(Number(dayTimes[time]['pressureChange'])) >= 5) {
+          over5.push(Number(dayTimes[time]['pressureChange']));
+        }
+      }
+    }
+
+    console.log(over5);
+
+    if (over5.length >= 3) {
+      return 'Noticeable changes incoming';
+    } else if (over5.length >= 1 && over5.length < 3) {
+      return 'Potential changes incoming';
+    } else {
+      return 'No distinct changes';
+    }
+  }
+
+  console.log(pressureChange(tempAndPressureChangeAnalysis(weatherData)));
 
   console.log(weatherData);
 
@@ -295,7 +338,9 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
                 ) : (
                   <p className="text-white text-xl">
                     {weatherData
-                      ? tempChange(tempChangeAnalysis(weatherData) || {})
+                      ? tempChange(
+                          tempAndPressureChangeAnalysis(weatherData) || {}
+                        )
                       : 'Sorry, there seems to be an error...'}
                   </p>
                 )}
