@@ -20,6 +20,18 @@ interface DashboardProps {
   avgPain: number;
 }
 
+interface Forecast {
+  dt: number; // Unix timestamp
+  dt_txt: string; // Formatted date string
+  main: {
+    temp: number; // Temperature
+  };
+}
+
+interface WeatherData {
+  list: Forecast[]; // List of forecast data
+}
+
 function mode(
   objectsArray: Migraine[],
   type: 'symptoms' | 'triggers'
@@ -90,7 +102,7 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
 
   console.log(weatherData);
 
-  function humidityAnalysis(array) {
+  function humidityAnalysis(array: WeatherData): string {
     let list = array.list;
     let over70 = [];
     for (let i = 0; i < list.length; i++) {
@@ -105,6 +117,73 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
       return 'MODERATE';
     } else {
       return 'MILD';
+    }
+  }
+
+  function tempChangeAnalysis(array: WeatherData) {
+    if (array && array.list.length > 0) {
+      const forecastData = array.list;
+      const organizedData: { [date: string]: { [time: string]: number } } = {};
+
+      // Organize the forecast data by date and time
+      forecastData.forEach((forecast) => {
+        const dt = new Date(forecast.dt_txt); // Use dt_txt for date and time
+        const dateStr = dt.toISOString().split('T')[0]; // Extract YYYY-MM-DD
+        const timeStr = dt.toTimeString().split(' ')[0].substring(0, 5); // Extract HH:MM
+
+        if (!organizedData[dateStr]) {
+          organizedData[dateStr] = {};
+        }
+
+        // Store the temperature in the organizedData object
+        organizedData[dateStr][timeStr] = forecast.main.temp;
+      });
+
+      const comparisonTimes = ['06:00', '12:00', '18:00'];
+      const tempDrops: { [date: string]: { [time: string]: string } } = {};
+
+      const dates = Object.keys(organizedData).sort();
+
+      // Compare temperatures between consecutive days
+      dates.forEach((date, index) => {
+        if (index === 0) return; // Skip the first date since there's no previous day to compare
+
+        const prevDate = dates[index - 1]; // Previous day's date
+        tempDrops[date] = {};
+
+        comparisonTimes.forEach((time) => {
+          if (organizedData[date][time] && organizedData[prevDate][time]) {
+            const tempToday = organizedData[date][time];
+            const tempYesterday = organizedData[prevDate][time];
+            const drop = tempYesterday - tempToday;
+            tempDrops[date][time] = drop.toFixed(2); // Save the temperature drop as a string with 2 decimal places
+          }
+        });
+      });
+
+      // Log or return the results
+      return tempDrops;
+    }
+  }
+
+  function tempChange(tempChanges) {
+    let over5 = [];
+
+    for (let date in tempChanges) {
+      let dayTimes = tempChanges[date];
+      for (let time in dayTimes) {
+        if (Math.abs(Number(dayTimes[time])) >= 5) {
+          over5.push(Number(dayTimes[time]));
+        }
+      }
+    }
+
+    if (over5.length >= 3) {
+      return 'Noticeable changes incoming';
+    } else if (over5.length >= 1 && over5.length < 3) {
+      return 'Potential changes incoming';
+    } else {
+      return 'No distinct changes';
     }
   }
 
@@ -184,18 +263,38 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
         </div>
         <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/2 mt-5 rounded-lg">
           <h2 className="text-white text-2xl p-7 text-left">Weather</h2>
-          <h2 className="text-white text-2xl">Humidity Forecast:</h2>
-          <div className="flex items-center gap-2 font-medium leading-none">
-            {loading ? (
-              <p className="text-white text-lg">Loading...</p>
-            ) : (
-              <p className="text-white text-2xl">
-                {weatherData
-                  ? humidityAnalysis(weatherData)
-                  : 'Sorry, there seems to be an error...'}
-              </p>
-            )}
-            <OctagonAlert className="h-6 w-6 text-red-500" />
+          <div className="flex gap-2 mx-8">
+            <div className="flex flex-col font-medium leading-none">
+              <h2 className="text-white text-xl mb-2">Humidity Forecast:</h2>
+              <div className="flex items-center gap-2">
+                {loading ? (
+                  <p className="text-white text-lg">Loading...</p>
+                ) : (
+                  <p className="text-white text-lg">
+                    {weatherData
+                      ? humidityAnalysis(weatherData)
+                      : 'Sorry, there seems to be an error...'}
+                  </p>
+                )}
+                <OctagonAlert className="h-6 w-6 text-red-500" />
+              </div>
+            </div>
+            <div className="flex flex-col font-medium leading-none">
+              <h2 className="text-white text-xl mb-2">
+                Temperate Change Forecast:
+              </h2>
+              <div className="flex items-center gap-2">
+                {loading ? (
+                  <p className="text-white text-lg">Loading...</p>
+                ) : (
+                  <p className="text-white text-lg">
+                    {weatherData
+                      ? tempChange(tempChangeAnalysis(weatherData))
+                      : 'Sorry, there seems to be an error...'}
+                  </p>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
