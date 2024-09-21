@@ -76,9 +76,9 @@ export function CarouselPlugin() {
                   <a
                     href={article.link}
                     target="_blank"
-                    className="px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-600"
+                    className="px-4 py-2 bg-blue-800 text-white rounded hover:bg-blue-900"
                   >
-                    Read More
+                    Read Article
                   </a>
                 </CardContent>
               </Card>

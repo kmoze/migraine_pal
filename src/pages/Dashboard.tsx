@@ -293,14 +293,14 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
             Welcome to MigrainePal 👋🏻
           </h2>
           <div className="flex justify-around gap-5">
-            <h4 className="text-white text-3xl p-8 w-1/3 bg-blue-700 bg-opacity-45 mt-2 rounded-lg">
+            <h4 className="text-white text-2xl p-10 w-1/4 bg-blue-700 bg-opacity-45 mt-2 rounded-lg text-left">
               Your last migraine was{' '}
               {mostRecentDay(migraines, mostRecentMonth(migraines))} days ago 🎉
             </h4>
             <h4 className="text-white text-xl p-8 w-1/3 bg-blue-500 bg-opacity-45 mt-2 rounded-lg">
-              Based on the forecasted weather, there is a ____ probability to
-              experience a migraine
-              {/* I.e. If ALL forecast analysis indicates potential changes or more, tell the user this. */}
+              Based on the forecasted weather, there is a{' '}
+              <span className="text-xl text-red-400">High</span> probability of
+              experiencing a migraine.
             </h4>
             <h4 className="text-white text-xl p-8 w-1/3 bg-sky-500 bg-opacity-45 mt-2 rounded-lg">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit
