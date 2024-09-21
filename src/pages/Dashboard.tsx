@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import myImage from '../assets/analytics.png';
 
-import { Sparkles, ThermometerSun } from 'lucide-react';
+import { Sparkles, ThermometerSun, Gauge } from 'lucide-react';
+
+import myImg from '../assets/person1.svg';
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
@@ -309,12 +311,12 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
             />
           </div>
         </div>
-        <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/2 mt-5 rounded-lg">
+        <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/2 mt-5 rounded-lg relative">
           <h2 className="text-white text-2xl p-7 text-left">Weather</h2>
           <div className="flex gap-4 mx-8">
-            <div className="flex flex-col font-medium leading-none border p-5 rounded-md">
+            <div className="flex flex-col w-1/3 font-medium leading-none border p-5 rounded-md">
               <h2 className="text-white text-md mb-4">Humidity Forecast:</h2>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 justify-center">
                 {loading ? (
                   <p className="text-white text-lg">Loading...</p>
                 ) : (
@@ -348,6 +350,30 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
               </div>
             </div>
           </div>
+          <div className="flex flex-col font-medium leading-none border w-1/2 mx-8 p-5 mt-4 rounded-md">
+            <h2 className="text-white text-md mb-4">
+              Barometric Change Forecast:
+            </h2>
+            <div className="flex items-center gap-1 justify-center">
+              {loading ? (
+                <p className="text-white text-lg">Loading...</p>
+              ) : (
+                <p className="text-white text-xl">
+                  {weatherData
+                    ? pressureChange(
+                        tempAndPressureChangeAnalysis(weatherData) || {}
+                      )
+                    : 'Sorry, there seems to be an error...'}
+                </p>
+              )}
+              <Gauge className="h-7 w-7 text-yellow-400" />
+            </div>
+          </div>
+          <img
+            src={myImg}
+            alt=""
+            className="absolute bottom-0 right-0 m-4 w-72 h-48"
+          />
         </div>
       </div>
     </div>
