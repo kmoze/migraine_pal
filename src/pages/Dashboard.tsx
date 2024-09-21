@@ -25,11 +25,18 @@ interface Forecast {
   dt_txt: string; // Formatted date string
   main: {
     temp: number; // Temperature
+    humidity: number;
   };
 }
 
 interface WeatherData {
   list: Forecast[]; // List of forecast data
+}
+
+interface TempChanges {
+  [date: string]: {
+    [time: string]: string | number;
+  };
 }
 
 function mode(
@@ -166,7 +173,7 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
     }
   }
 
-  function tempChange(tempChanges) {
+  function tempChange(tempChanges: TempChanges) {
     let over5 = [];
 
     for (let date in tempChanges) {
@@ -289,7 +296,7 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
                 ) : (
                   <p className="text-white text-lg">
                     {weatherData
-                      ? tempChange(tempChangeAnalysis(weatherData))
+                      ? tempChange(tempChangeAnalysis(weatherData) || {})
                       : 'Sorry, there seems to be an error...'}
                   </p>
                 )}
