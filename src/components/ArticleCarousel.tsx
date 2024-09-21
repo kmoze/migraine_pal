@@ -50,7 +50,7 @@ const articles = [
 ];
 
 export function CarouselPlugin() {
-  const plugin = useRef(Autoplay({ delay: 2000 }));
+  const plugin = useRef(Autoplay({ delay: 6000 }));
 
   return (
     <Carousel
@@ -59,11 +59,11 @@ export function CarouselPlugin() {
       onMouseEnter={() => plugin.current.stop()} // Wrap with an anonymous function
       onMouseLeave={() => plugin.current.play()}
     >
-      <CarouselContent className="">
+      <CarouselContent>
         {articles.map((article, index) => (
           <CarouselItem key={index}>
             <div className="p-1">
-              <Card className="relative overflow-hidden bg-gray-800 text-white">
+              <Card className="relative overflow-hidden bg-gray-800 text-white border-none">
                 <div
                   className="absolute inset-0 bg-cover bg-center"
                   style={{ backgroundImage: `url(${article.img})` }}

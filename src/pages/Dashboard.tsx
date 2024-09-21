@@ -4,7 +4,8 @@ import myImage from '../assets/analytics.png';
 
 import { ThermometerSun, Gauge, TrendingUpDown } from 'lucide-react';
 
-import myImg from '../assets/person1.svg';
+import weatherDashboard from '../assets/person1.svg';
+import { monthNames } from '@/data/monthOptions';
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
@@ -184,8 +185,8 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
             const pressureDrop = pressureYesterday - pressureToday;
 
             changes[date][time] = {
-              tempChange: tempDrop.toFixed(2), // Save the temperature drop as a string with 2 decimal places
-              pressureChange: pressureDrop.toFixed(2), // Save the pressure drop as a string with 2 decimal places
+              tempChange: tempDrop.toFixed(2),
+              pressureChange: pressureDrop.toFixed(2),
             };
           }
         });
@@ -228,8 +229,6 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
       }
     }
 
-    console.log(over5);
-
     if (over5.length >= 3) {
       return 'Noticeable changes incoming';
     } else if (over5.length >= 1 && over5.length < 3) {
@@ -237,6 +236,60 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
     } else {
       return 'No distinct changes';
     }
+  }
+
+  function mostRecentMonth(migraineData) {
+    console.log(migraineData);
+
+    const months = new Set();
+    migraineData.forEach((log) => {
+      const month = log.date.split(' ')[0];
+      console.log(month);
+      months.add(month);
+    });
+    let uniqueMonths = Array.from(months);
+    let sortedMonths = uniqueMonths.slice().sort((a, b) => {
+      return monthNames.indexOf(a) - monthNames.indexOf(b);
+    });
+    return sortedMonths[sortedMonths.length - 1];
+  }
+
+  if (migraines !== null) {
+    console.log(mostRecentMonth(migraines));
+  }
+
+  function mostRecentDay(logs, month) {
+    const currentDate = new Date();
+
+    const daysInMonth = logs
+      .filter((log) => log.formattedDate.startsWith(month))
+      .map((log) => log.formattedDate);
+
+    const sortedDays = daysInMonth.slice().sort((a, b) => {
+      const dayA = parseInt(a.split(' ')[1], 10);
+      const dayB = parseInt(b.split(' ')[1], 10);
+      return dayA - dayB;
+    });
+
+    // Get the most recent day in the month
+    const mostRecentDay = sortedDays[sortedDays.length - 1];
+
+    // Parse the most recent date
+    const [mostRecentMonth, mostRecentDayNum] = mostRecentDay.split(' ');
+
+    // Create a date object for the most recent day
+    const lastMigraineDate = new Date(
+      `${mostRecentMonth} ${parseInt(
+        mostRecentDayNum
+      )}, ${currentDate.getFullYear()}`
+    );
+
+    // Gets amount of milliseconds inbetween the two dates.
+    const differenceInTime = currentDate - lastMigraineDate;
+
+    const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+
+    return differenceInDays;
   }
 
   return (
@@ -374,7 +427,7 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
             </div>
           </div>
           <img
-            src={myImg}
+            src={weatherDashboard}
             alt=""
             className="absolute bottom-0 right-0 m-4 w-72 h-48"
           />
