@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import { CarouselPlugin } from '@/components/ArticleCarousel';
 import myImage from '../assets/analytics.png';
 
-import { Sparkles, ThermometerSun, Gauge } from 'lucide-react';
+import { Sparkles, ThermometerSun, Gauge, TrendingUpDown } from 'lucide-react';
 
 import myImg from '../assets/person1.svg';
 
@@ -235,8 +236,6 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
 
   console.log(pressureChange(tempAndPressureChangeAnalysis(weatherData)));
 
-  console.log(weatherData);
-
   return (
     <div className="h-full flex flex-col w-full p-4 bg-custom-gradient">
       <div className="flex items-start gap-5">
@@ -246,10 +245,12 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
           </h2>
           <div className="flex justify-around gap-5">
             <h4 className="text-white text-xl p-8 w-1/3 bg-blue-700 bg-opacity-45 mt-2 rounded-sm text-center">
-              Lorem, ipsum dolor sit amet consectetur adipisicing.
+              Placeholder for analyzing when their last migraine was...
             </h4>
             <h4 className="text-white text-xl p-8 w-1/3 bg-blue-500 bg-opacity-45 mt-2 rounded-sm text-center">
-              Lorem ipsum dolor sit, amet consectetur adipisicing.
+              Placeholder for indicating if weather events might impact upcoming
+              migraines...
+              {/* I.e. If ALL forecast analysis indicates potential changes or more, tell the user this. */}
             </h4>
             <h4 className="text-white text-xl p-8 w-1/3 bg-sky-500 bg-opacity-45 mt-2 rounded-sm text-center">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit
@@ -257,7 +258,7 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
           </div>
         </div>
         <div className="bg-card-coolorsSecondary shadow-lg shadow-gray-500 p-2 rounded-lg text-white h-56 w-1/4 flex items-center justify-center">
-          <h2 className="text-2xl italic">Placeholder for Article Carousel</h2>
+          <CarouselPlugin />
         </div>
       </div>
       <div className="flex justify-evenly gap-5 mt-5">
@@ -346,7 +347,7 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
                       : 'Sorry, there seems to be an error...'}
                   </p>
                 )}
-                <Sparkles className="h-6 w-6 text-purple-400" />
+                <TrendingUpDown className="h-6 w-6 text-purple-400" />
               </div>
             </div>
           </div>
