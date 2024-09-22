@@ -428,7 +428,7 @@ function Dashboard({ migraines }: DashboardProps) {
               return (
                 <li
                   key={index}
-                  className={`capitalize py-2 px-3 rounded-2xl text-white ${
+                  className={`capitalize py-2 px-4 rounded-3xl text-white ${
                     widths[index]
                   }
                   ${
@@ -458,7 +458,7 @@ function Dashboard({ migraines }: DashboardProps) {
               return (
                 <li
                   key={index}
-                  className={`capitalize py-2 px-3 rounded-2xl text-white ${
+                  className={`capitalize py-2 px-4 rounded-3xl text-white ${
                     widths[index]
                   }
                       ${
