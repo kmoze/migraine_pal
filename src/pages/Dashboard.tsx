@@ -12,8 +12,9 @@ import {
   Lightbulb,
   PartyPopper,
   Sparkles,
-  ArrowRight,
+  ZapOff,
   MoveRight,
+  CloudLightning,
 } from 'lucide-react';
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
@@ -118,7 +119,6 @@ function Dashboard({ migraines }: DashboardProps) {
         throw new Error('Failed to fetch weather');
       }
       const data = await response.json();
-      console.log(data);
 
       setWeatherData(data);
       setLoading(false);
@@ -131,8 +131,6 @@ function Dashboard({ migraines }: DashboardProps) {
   useEffect(() => {
     fetchWeatherData();
   }, []);
-
-  console.log(weatherData);
 
   function humidityAnalysis(array: WeatherData): string {
     let list = array.list;
@@ -406,7 +404,7 @@ function Dashboard({ migraines }: DashboardProps) {
             <PainRadialChart score={Math.round(averagePainLevel(migraines))} />
           </div>
         </div>
-        <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg">
+        {/* <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg">
           <h2 className="text-white text-2xl p-6">Your most common symptoms</h2>
           <ul className="text-white pt-2 flex flex-col items-center justify-center h-1/2">
             {mode(migraines, 'symptoms').map((symptom, index) => {
@@ -417,13 +415,61 @@ function Dashboard({ migraines }: DashboardProps) {
               );
             })}
           </ul>
-        </div>
-        <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg">
-          <h2 className="text-white text-2xl p-6">Your most common triggers</h2>
-          <ul className="text-white pt-2 flex flex-col items-center justify-center h-1/2">
-            {mode(migraines, 'triggers').map((trigger, index) => {
+        </div> */}
+        <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg p-4 flex flex-col">
+          <h2 className="text-white text-2xl mb-4">
+            Your most common symptoms
+          </h2>
+          <ul className="flex flex-col space-y-2 h-full justify-evenly">
+            {mode(migraines, 'symptoms').map((symptom, index) => {
+              const widths = ['w-3/4', 'w-1/2', 'w-1/3']; // Dynamically change width based on index
+              const isTop = index === 0;
+              const isThird = index === 2;
               return (
-                <li key={index} className="capitalize py-1 text-2xl">
+                <li
+                  key={index}
+                  className={`capitalize py-2 px-3 rounded-2xl text-white ${
+                    widths[index]
+                  }
+                  ${
+                    isTop
+                      ? 'text-xl bg-gray-900'
+                      : isThird
+                      ? 'text-sm bg-gray-700'
+                      : 'text-lg bg-gray-800'
+                  }
+                  shadow-sm shadow-gray-700`}
+                >
+                  {symptom}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg p-4 flex flex-col">
+          <h2 className="text-white text-2xl mb-4">
+            Your most common triggers
+          </h2>
+          <ul className="flex flex-col space-y-2 h-full justify-evenly">
+            {mode(migraines, 'triggers').map((trigger, index) => {
+              const widths = ['w-3/4', 'w-1/2', 'w-1/3']; // Dynamically change width based on index
+              const isTop = index === 0;
+              const isThird = index === 2;
+              return (
+                <li
+                  key={index}
+                  className={`capitalize py-2 px-3 rounded-2xl text-white ${
+                    widths[index]
+                  }
+                      ${
+                        isTop
+                          ? 'text-xl bg-gray-900'
+                          : isThird
+                          ? 'text-sm bg-gray-700'
+                          : 'text-lg bg-gray-800'
+                      }
+                      shadow-sm shadow-gray-700`}
+                >
                   {trigger}
                 </li>
               );
@@ -454,7 +500,7 @@ function Dashboard({ migraines }: DashboardProps) {
           <div className="flex items-center h-full">
             <div className="flex flex-col flex-grow">
               <div className="flex gap-2 mx-8">
-                <div className="flex flex-col w-2/3 font-medium leading-none border p-5 rounded-md">
+                <div className="flex flex-col w-1/2 font-medium leading-none border p-5 rounded-md">
                   <h2 className="text-white text-md mb-4">
                     Humidity Forecast:
                   </h2>
@@ -471,7 +517,7 @@ function Dashboard({ migraines }: DashboardProps) {
                     <ThermometerSun className="h-6 w-6 text-red-500" />
                   </div>
                 </div>
-                <div className="flex flex-col font-medium w-2/3 leading-none border p-5 rounded-md">
+                <div className="flex flex-col w-1/2 font-medium leading-none border p-5 rounded-md">
                   <h2 className="text-white text-md mb-4">
                     Temperature Change Forecast:
                   </h2>
@@ -491,23 +537,36 @@ function Dashboard({ migraines }: DashboardProps) {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col font-medium leading-none border w-1/2 mx-8 p-5 mt-4 rounded-md">
-                <h2 className="text-white text-md mb-4">
-                  Barometric Change Forecast:
-                </h2>
-                <div className="flex items-center gap-1 justify-center">
-                  {loading ? (
-                    <p className="text-white text-lg">Loading...</p>
-                  ) : (
-                    <p className="text-white text-xl">
-                      {weatherData
-                        ? pressureChange(
-                            tempAndPressureChangeAnalysis(weatherData) || {}
-                          )
-                        : 'Sorry, there seems to be an error...'}
-                    </p>
-                  )}
-                  <Gauge className="h-7 w-7 text-yellow-400" />
+              <div className="flex gap-2 mx-8 mt-4">
+                <div className="flex flex-col w-1/2 font-medium leading-none border p-5 rounded-md">
+                  <h2 className="text-white text-md mb-4">
+                    Barometric Change Forecast:
+                  </h2>
+                  <div className="flex items-center gap-1 justify-center">
+                    {loading ? (
+                      <p className="text-white text-lg">Loading...</p>
+                    ) : (
+                      <p className="text-white text-xl">
+                        {weatherData
+                          ? pressureChange(
+                              tempAndPressureChangeAnalysis(weatherData) || {}
+                            )
+                          : 'Sorry, there seems to be an error...'}
+                      </p>
+                    )}
+                    <Gauge className="h-7 w-7 text-yellow-400" />
+                  </div>
+                </div>
+                <div className="flex flex-col w-1/2 font-medium leading-none border p-5 rounded-md">
+                  <h2 className="text-white text-md mb-4">Storm Forecast:</h2>
+                  <div className="flex items-center gap-1 justify-center">
+                    {loading ? (
+                      <p className="text-white text-lg">Loading...</p>
+                    ) : (
+                      <p className="text-white text-xl">None detected</p>
+                    )}
+                    <CloudLightning className="h-6 w-6 text-orange-500" />
+                  </div>
                 </div>
               </div>
             </div>

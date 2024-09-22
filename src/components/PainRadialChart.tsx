@@ -21,8 +21,6 @@ export const description = 'A radial chart with text';
 const chartConfig = {} satisfies ChartConfig;
 
 export function PainRadialChart({ score }: { score: number }) {
-  console.log(score);
-
   const getBarLength = (score: number) => {
     // Adjust the length range as needed
     if (score <= 4) return 4;
