@@ -19,7 +19,7 @@ import {
 export const description = 'A line chart with a label';
 
 interface LineChartTestProps {
-  daysWithoutMigraine: { date: string; daysWithout: number }[];
+  daysWithoutMigraine: { date: string; days_without: number }[];
 }
 
 const chartConfig = {} satisfies ChartConfig;
@@ -58,7 +58,7 @@ function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
               content={<ChartTooltipContent indicator="line" />}
             />
             <Line
-              dataKey="daysWithout"
+              dataKey="days_without"
               type="bumpX"
               stroke="#1e6091"
               strokeWidth={2}

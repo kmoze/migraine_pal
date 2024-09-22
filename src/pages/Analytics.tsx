@@ -15,20 +15,8 @@ import {
 } from '@/components/ui/chart';
 
 import { type ChartConfig } from '@/components/ui/chart';
-import { PyramidIcon, Frown, TrendingUp } from 'lucide-react';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  BarChart,
-  Bar,
-  Pie,
-  PieChart,
-} from 'recharts';
+import { Frown, TrendingUp } from 'lucide-react';
+import { XAxis, CartesianGrid, BarChart, Bar, Pie, PieChart } from 'recharts';
 import LineChartTest from '@/components/LineChartTest';
 import RadarChartComponent from '@/components/RadarChart';
 
@@ -157,7 +145,7 @@ function Analytics({ migraines }: AnalyticsProps) {
     if (index === 0) {
       return {
         date: formatDateWithSuffix(new Date(migraine.date)),
-        daysWithout: 0, // First migraine doesn't have previous one to compare
+        days_without: 0, // First migraine doesn't have previous one to compare
       };
     } else {
       const previousMigraine = sortedMigraines[index - 1];
@@ -170,7 +158,7 @@ function Analytics({ migraines }: AnalyticsProps) {
 
       return {
         date: formatDateWithSuffix(new Date(migraine.date)),
-        daysWithout: differenceInDays,
+        days_without: differenceInDays,
       };
     }
   });

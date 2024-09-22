@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { CarouselPlugin } from '@/components/ArticleCarousel';
+import { Button } from '@/components/ui/button';
+
+import { Link } from 'react-router-dom';
 
 import {
   ThermometerSun,
@@ -7,6 +10,9 @@ import {
   TrendingUpDown,
   Lightbulb,
   PartyPopper,
+  Sparkles,
+  ArrowRight,
+  MoveRight,
 } from 'lucide-react';
 
 import weatherDashboard from '../assets/person1.svg';
@@ -44,8 +50,8 @@ interface WeatherData {
 }
 
 interface TempChangeEntry {
-  tempChange: string; // Assuming these are strings in the original data
-  pressureChange: string; // Same assumption as above
+  tempChange: string;
+  pressureChange: string;
 }
 
 interface TempChanges {
@@ -260,15 +266,20 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
 
   function mostRecentDay(logs: Migraine[], month: string) {
     const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0); // Reset hours, minutes, seconds, and milliseconds
 
     // Filter logs to only include those from the specified month
     const daysInMonth = logs
       .filter((log) => {
-        const logDate = new Date(log.date); // Convert string to Date object
+        const logDate = new Date(log.date); // Convert to Date object
         const logMonth = String(logDate.getMonth() + 1).padStart(2, '0'); // Get month (0-indexed, so +1)
         return logMonth === month;
       })
-      .map((log) => new Date(log.date)); // Convert the date strings to Date objects
+      .map((log) => {
+        const logDate = new Date(log.date);
+        logDate.setHours(0, 0, 0, 0); // Reset hours, minutes, seconds, and milliseconds
+        return logDate;
+      });
 
     if (daysInMonth.length === 0) {
       return null; // No logs in the specified month
@@ -288,6 +299,8 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
     // Convert milliseconds to days
     const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
 
+    console.log(differenceInDays);
+
     return differenceInDays;
   }
 
@@ -300,9 +313,21 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
           </h2>
           <div className="flex justify-around gap-5">
             <h4 className="text-white text-2xl p-10 w-1/4 bg-blue-700 bg-opacity-45 mt-2 rounded-lg text-left">
-              Your last migraine was{' '}
-              {mostRecentDay(migraines, mostRecentMonth(migraines))} days ago{' '}
-              <PartyPopper className="inline-block mb-2 text-green-500 h-7 w-7" />
+              {mostRecentDay(migraines, mostRecentMonth(migraines)) === 0 ? (
+                <>Your last migraine was today.</>
+              ) : mostRecentDay(migraines, mostRecentMonth(migraines)) === 1 ? (
+                <>
+                  Your last migraine was yesterday{' '}
+                  <Sparkles className="inline-block mb-2 text-yellow-500 h-7 w-7" />
+                </>
+              ) : (
+                <>
+                  Your last migraine was{' '}
+                  {mostRecentDay(migraines, mostRecentMonth(migraines))} days
+                  ago{' '}
+                  <PartyPopper className="inline-block mb-2 text-green-500 h-7 w-7" />
+                </>
+              )}
             </h4>
             <h4 className="text-white text-xl p-8 w-1/3 bg-blue-500 bg-opacity-45 mt-2 rounded-lg">
               Based on the forecasted weather, there is a{' '}
@@ -312,7 +337,7 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
             <h4 className="text-white text-xl p-8 w-1/3 bg-sky-500 bg-opacity-45 mt-2 rounded-lg">
               <Lightbulb className="inline-block mb-2 h-7 w-7 text-yellow-500" />{' '}
               <span className="text-gray-200"> Daily tip from us: </span> <br />
-              Hydrate to reduce headaches during high humidity.
+              Hydrate well to reduce headaches during high humidity.
             </h4>
           </div>
         </div>
@@ -361,17 +386,22 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
         </div>
       </div>
       <div className="flex flex-grow gap-4">
-        <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/2 mt-5 rounded-lg flex flex-col">
+        <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/4 mt-5 rounded-lg flex flex-col">
           <h2 className="text-white text-2xl p-7 text-left">Analytics</h2>
-          <div className="flex flex-grow items-center justify-center">
-            <img
-              className="max-w-lg max-h-96 object-contain rounded-lg mb-4"
-              src={myImage}
-              alt="Analytics Image"
-            />
+          <div className="flex flex-col items-center justify-center">
+            <h2 className="text-gray-200 mx-16 mt-10 mb-7 text-xl">
+              See the impact your migraines have on your life in easily
+              digestible charts and graphs.
+            </h2>
+            <Link to="/analytics">
+              <Button className="text-md p-5 rounded-md bg-card-coolorsSecondary hover:bg-card-coolorsAccent flex items-center">
+                Go to Analytics
+                <MoveRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
           </div>
         </div>
-        <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/2 mt-5 rounded-lg relative">
+        <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-3/4 mt-5 rounded-lg relative">
           <h2 className="text-white text-2xl p-7 text-left">Weather</h2>
           <div className="flex gap-4 mx-8">
             <div className="flex flex-col w-1/3 font-medium leading-none border p-5 rounded-md">
@@ -386,7 +416,6 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
                       : 'Sorry, there seems to be an error...'}
                   </p>
                 )}
-                {/* <OctagonAlert className="h-5 w-5 text-red-500" /> */}
                 <ThermometerSun className="h-6 w-6 text-red-500" />
               </div>
             </div>
