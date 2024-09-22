@@ -33,6 +33,11 @@ interface Migraine {
   duration: number;
 }
 
+interface DateRange {
+  startDate: Date | null;
+  endDate: Date | null;
+}
+
 interface AnalyticsProps {
   migraines: Migraine[];
 }
@@ -75,20 +80,29 @@ const similarColors = [
   '#0071a1',
 ];
 
+function getStartDateThreeMonthsAgo(): Date {
+  const currentDate = new Date();
+  const startDate = new Date(currentDate.setMonth(currentDate.getMonth() - 3));
+  return new Date(startDate.setDate(1)); // Set to the first day of the month
+}
+
 function Analytics({ migraines }: AnalyticsProps) {
   // --------------------------------------------------------- //
   // --------------------------------------------------------- //
   // --------------------------------------------------------- //
   // Date filtering experiment
-  const [dateRange, setDateRange] = useState({
-    startDate: subMonths(new Date(), 3), // Default: last 3 months
-    endDate: new Date(),
-  });
+
+  const initialDateRange: DateRange = {
+    startDate: getStartDateThreeMonthsAgo(),
+    endDate: new Date(), // Current date as end date
+  };
+
+  const [dateRange, setDateRange] = useState<DateRange>(initialDateRange);
 
   // Date filtering experiment
   function filterByDateRange(
     migraines: Migraine[],
-    { startDate, endDate }: { startDate: Date | null; endDate: Date | null }
+    { startDate, endDate }: DateRange
   ) {
     if (!startDate && !endDate) {
       return migraines; // All-time: no filtering
