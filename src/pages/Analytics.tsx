@@ -19,9 +19,10 @@ import { Frown, TrendingUp } from 'lucide-react';
 import { XAxis, CartesianGrid, BarChart, Bar, Pie, PieChart } from 'recharts';
 import LineChartTest from '@/components/LineChartTest';
 import RadarChartComponent from '@/components/RadarChart';
-import { RadialChart } from '@/components/RadialChart';
 
-import { format } from 'date-fns';
+import { format, isAfter, isBefore, subMonths } from 'date-fns';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 interface Migraine {
   id: number;
@@ -75,6 +76,43 @@ const similarColors = [
 ];
 
 function Analytics({ migraines }: AnalyticsProps) {
+  // --------------------------------------------------------- //
+  // --------------------------------------------------------- //
+  // --------------------------------------------------------- //
+  // Date filtering experiment
+  const [dateRange, setDateRange] = useState({
+    startDate: subMonths(new Date(), 3), // Default: last 3 months
+    endDate: new Date(),
+  });
+
+  // Date filtering experiment
+  function filterByDateRange(
+    migraines: Migraine[],
+    { startDate, endDate }: { startDate: Date | null; endDate: Date | null }
+  ) {
+    if (!startDate && !endDate) {
+      return migraines; // All-time: no filtering
+    }
+    return migraines.filter((migraine) => {
+      const migraineDate = new Date(migraine.date);
+      const isAfterStart = startDate ? migraineDate >= startDate : true;
+      const isBeforeEnd = endDate ? migraineDate <= endDate : true;
+
+      return isAfterStart && isBeforeEnd;
+    });
+  }
+
+  const filteredMigraines = filterByDateRange(migraines, dateRange);
+  console.log(filteredMigraines);
+
+  let symptomsChartData = frequencyCounter(filteredMigraines, 'symptoms');
+  let triggersChartData = frequencyCounter(filteredMigraines, 'triggers');
+
+  // End of date filtering experiment code
+  // --------------------------------------------------------- //
+  // --------------------------------------------------------- //
+  // --------------------------------------------------------- //
+
   function frequencyCounter(
     objectsArray: Migraine[],
     type: 'symptoms' | 'triggers'
@@ -122,14 +160,11 @@ function Analytics({ migraines }: AnalyticsProps) {
     return termFrequencies;
   }
 
-  let symptomsChartData = frequencyCounter(migraines, 'symptoms');
-  let triggersChartData = frequencyCounter(migraines, 'triggers');
-
-  const sortedMigraines = migraines.slice().sort((a, b) => {
+  const sortedMigraines = filteredMigraines.slice().sort((a, b) => {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   });
 
-  const barChartDateFormat = migraines
+  const barChartDateFormat = filteredMigraines
     .slice()
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
     .map((migraine) => ({
@@ -197,12 +232,44 @@ function Analytics({ migraines }: AnalyticsProps) {
     return termFrequencies;
   }
 
-  let durationFreqData = durationFrequency(migraines);
+  let durationFreqData = durationFrequency(filteredMigraines);
 
   return (
     <>
       <div className="h-full w-full flex flex-col p-4 bg-custom-gradient gap-2">
         <h2 className="text-2xl">Analytics</h2>
+        <Button
+          className="w-1/5"
+          onClick={() =>
+            setDateRange({
+              startDate: subMonths(new Date(), 3),
+              endDate: new Date(),
+            })
+          }
+        >
+          Last 3 months
+        </Button>
+        <Button
+          className="w-1/5"
+          onClick={() =>
+            setDateRange({
+              startDate: new Date(
+                new Date().getFullYear(),
+                new Date().getMonth(),
+                1
+              ), // First day of the current month
+              endDate: new Date(), // Current date
+            })
+          }
+        >
+          This month
+        </Button>
+        <Button
+          className="w-1/5"
+          onClick={() => setDateRange({ startDate: null, endDate: null })}
+        >
+          All Time
+        </Button>
         <div className="flex gap-2">
           <Card className="flex flex-col w-1/2 bg-gray-200 border-none">
             <CardHeader className="items-center pb-0">
