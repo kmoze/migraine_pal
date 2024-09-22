@@ -19,6 +19,7 @@ import { Frown, TrendingUp } from 'lucide-react';
 import { XAxis, CartesianGrid, BarChart, Bar, Pie, PieChart } from 'recharts';
 import LineChartTest from '@/components/LineChartTest';
 import RadarChartComponent from '@/components/RadarChart';
+import { Component } from '@/components/Component';
 
 import { format } from 'date-fns';
 
@@ -202,6 +203,7 @@ function Analytics({ migraines }: AnalyticsProps) {
     <>
       <div className="h-full w-full flex flex-col p-4 bg-custom-gradient gap-2">
         <h2 className="text-2xl">Analytics</h2>
+        <Component />
         <div className="flex gap-2">
           <Card className="flex flex-col w-1/2 bg-gray-300 border-none">
             <CardHeader className="items-center pb-0">
