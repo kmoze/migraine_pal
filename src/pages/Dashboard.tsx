@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { CarouselPlugin } from '@/components/ArticleCarousel';
 import { Button } from '@/components/ui/button';
-
 import { Link } from 'react-router-dom';
+import { RadialChart } from '@/components/RadialChart';
+import { PainRadialChart } from '@/components/PainRadialChart';
 
 import {
   ThermometerSun,
@@ -14,9 +15,6 @@ import {
   ArrowRight,
   MoveRight,
 } from 'lucide-react';
-
-import weatherDashboard from '../assets/person1.svg';
-import myImage from '../assets/analytics.png';
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
@@ -32,7 +30,6 @@ interface Migraine {
 
 interface DashboardProps {
   migraines: Migraine[];
-  avgPain: number;
 }
 
 interface Forecast {
@@ -104,7 +101,13 @@ function mode(
   return top3Terms;
 }
 
-function Dashboard({ migraines, avgPain }: DashboardProps) {
+function averagePainLevel(migraineData: Migraine[]) {
+  let painValsOnly = migraineData.map((migraine) => migraine.pain);
+  let totalPain = painValsOnly.reduce((accum, currVal) => accum + currVal, 0);
+  return totalPain / painValsOnly.length;
+}
+
+function Dashboard({ migraines }: DashboardProps) {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -115,6 +118,8 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
         throw new Error('Failed to fetch weather');
       }
       const data = await response.json();
+      console.log(data);
+
       setWeatherData(data);
       setLoading(false);
     } catch (err) {
@@ -126,6 +131,8 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
   useEffect(() => {
     fetchWeatherData();
   }, []);
+
+  console.log(weatherData);
 
   function humidityAnalysis(array: WeatherData): string {
     let list = array.list;
@@ -249,6 +256,54 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
     }
   }
 
+  function migraineProbability() {
+    let score = 0;
+
+    if (
+      pressureChange(tempAndPressureChangeAnalysis(weatherData)) ===
+      'No distinct changes'
+    ) {
+      score += 10;
+    } else if (
+      pressureChange(tempAndPressureChangeAnalysis(weatherData)) ===
+      'Potential changes incoming'
+    ) {
+      score += 30;
+    } else if (
+      pressureChange(tempAndPressureChangeAnalysis(weatherData)) ===
+      'Noticeable changes incoming'
+    ) {
+      score += 50;
+    }
+
+    if (
+      tempChange(tempAndPressureChangeAnalysis(weatherData)) ===
+      'No distinct changes'
+    ) {
+      score += 10;
+    } else if (
+      tempChange(tempAndPressureChangeAnalysis(weatherData)) ===
+      'Potential changes incoming'
+    ) {
+      score += 30;
+    } else if (
+      tempChange(tempAndPressureChangeAnalysis(weatherData)) ===
+      'Noticeable changes incoming'
+    ) {
+      score += 50;
+    }
+
+    if (humidityAnalysis(weatherData) === 'Mild') {
+      score += 10;
+    } else if (humidityAnalysis(weatherData) === 'Moderate') {
+      score += 30;
+    } else if (humidityAnalysis(weatherData) === 'High') {
+      score += 50;
+    }
+
+    return score;
+  }
+
   function mostRecentMonth(migraineData: Migraine[]) {
     const months = new Set<string>();
 
@@ -299,8 +354,6 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
     // Convert milliseconds to days
     const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
 
-    console.log(differenceInDays);
-
     return differenceInDays;
   }
 
@@ -330,9 +383,8 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
               )}
             </h4>
             <h4 className="text-white text-xl p-8 w-1/3 bg-blue-500 bg-opacity-45 mt-2 rounded-lg">
-              Based on the forecasted weather, there is a{' '}
-              <span className="text-xl text-red-400">High</span> probability of
-              experiencing a migraine.
+              There are some new weather updates that might be of use. Check
+              them out below.
             </h4>
             <h4 className="text-white text-xl p-8 w-1/3 bg-sky-500 bg-opacity-45 mt-2 rounded-lg">
               <Lightbulb className="inline-block mb-2 h-7 w-7 text-yellow-500" />{' '}
@@ -346,6 +398,14 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
         </div>
       </div>
       <div className="flex justify-evenly gap-5 mt-5">
+        <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg flex flex-col">
+          <h2 className="text-white text-xl text-left mt-2 ml-4">
+            Your average pain level
+          </h2>
+          <div className="flex items-center justify-center">
+            <PainRadialChart score={Math.round(averagePainLevel(migraines))} />
+          </div>
+        </div>
         <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg">
           <h2 className="text-white text-2xl p-6">Your most common symptoms</h2>
           <ul className="text-white pt-2 flex flex-col items-center justify-center h-1/2">
@@ -370,20 +430,6 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
             })}
           </ul>
         </div>
-        <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg flex flex-col">
-          <h2 className="text-white text-2xl p-7 text-left">
-            Your average pain level
-          </h2>
-          <div className="flex-grow flex items-center justify-center">
-            {avgPain ? (
-              <span className="text-6xl text-white pb-10">
-                {Math.round(avgPain)}
-              </span>
-            ) : (
-              <span className="text-2xl text-white pb-10">Loading...</span>
-            )}
-          </div>
-        </div>
       </div>
       <div className="flex flex-grow gap-4">
         <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/4 mt-5 rounded-lg flex flex-col">
@@ -402,67 +448,77 @@ function Dashboard({ migraines, avgPain }: DashboardProps) {
           </div>
         </div>
         <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-3/4 mt-5 rounded-lg relative">
-          <h2 className="text-white text-2xl p-7 text-left">Weather</h2>
-          <div className="flex gap-4 mx-8">
-            <div className="flex flex-col w-1/3 font-medium leading-none border p-5 rounded-md">
-              <h2 className="text-white text-md mb-4">Humidity Forecast:</h2>
-              <div className="flex items-center gap-1 justify-center">
-                {loading ? (
-                  <p className="text-white text-lg">Loading...</p>
-                ) : (
-                  <p className="text-white text-xl">
-                    {weatherData
-                      ? humidityAnalysis(weatherData)
-                      : 'Sorry, there seems to be an error...'}
-                  </p>
-                )}
-                <ThermometerSun className="h-6 w-6 text-red-500" />
+          <h2 className="text-white text-2xl absolute top-0 left-0 p-7">
+            Weather
+          </h2>
+          <div className="flex items-center h-full">
+            <div className="flex flex-col flex-grow">
+              <div className="flex gap-2 mx-8">
+                <div className="flex flex-col w-2/3 font-medium leading-none border p-5 rounded-md">
+                  <h2 className="text-white text-md mb-4">
+                    Humidity Forecast:
+                  </h2>
+                  <div className="flex items-center gap-1 justify-center">
+                    {loading ? (
+                      <p className="text-white text-lg">Loading...</p>
+                    ) : (
+                      <p className="text-white text-xl">
+                        {weatherData
+                          ? humidityAnalysis(weatherData)
+                          : 'Sorry, there seems to be an error...'}
+                      </p>
+                    )}
+                    <ThermometerSun className="h-6 w-6 text-red-500" />
+                  </div>
+                </div>
+                <div className="flex flex-col font-medium w-2/3 leading-none border p-5 rounded-md">
+                  <h2 className="text-white text-md mb-4">
+                    Temperature Change Forecast:
+                  </h2>
+                  <div className="flex items-center gap-1 justify-center">
+                    {loading ? (
+                      <p className="text-white text-lg">Loading...</p>
+                    ) : (
+                      <p className="text-white text-xl">
+                        {weatherData
+                          ? tempChange(
+                              tempAndPressureChangeAnalysis(weatherData) || {}
+                            )
+                          : 'Sorry, there seems to be an error...'}
+                      </p>
+                    )}
+                    <TrendingUpDown className="h-6 w-6 text-purple-400" />
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col font-medium leading-none border w-1/2 mx-8 p-5 mt-4 rounded-md">
+                <h2 className="text-white text-md mb-4">
+                  Barometric Change Forecast:
+                </h2>
+                <div className="flex items-center gap-1 justify-center">
+                  {loading ? (
+                    <p className="text-white text-lg">Loading...</p>
+                  ) : (
+                    <p className="text-white text-xl">
+                      {weatherData
+                        ? pressureChange(
+                            tempAndPressureChangeAnalysis(weatherData) || {}
+                          )
+                        : 'Sorry, there seems to be an error...'}
+                    </p>
+                  )}
+                  <Gauge className="h-7 w-7 text-yellow-400" />
+                </div>
               </div>
             </div>
-            <div className="flex flex-col font-medium leading-none border p-5 rounded-md">
-              <h2 className="text-white text-md mb-4">
-                Temperature Change Forecast:
-              </h2>
-              <div className="flex items-center gap-1 justify-center">
-                {loading ? (
-                  <p className="text-white text-lg">Loading...</p>
-                ) : (
-                  <p className="text-white text-xl">
-                    {weatherData
-                      ? tempChange(
-                          tempAndPressureChangeAnalysis(weatherData) || {}
-                        )
-                      : 'Sorry, there seems to be an error...'}
-                  </p>
-                )}
-                <TrendingUpDown className="h-6 w-6 text-purple-400" />
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col font-medium leading-none border w-1/2 mx-8 p-5 mt-4 rounded-md">
-            <h2 className="text-white text-md mb-4">
-              Barometric Change Forecast:
-            </h2>
-            <div className="flex items-center gap-1 justify-center">
-              {loading ? (
-                <p className="text-white text-lg">Loading...</p>
+            <div className="p-10">
+              {weatherData !== null ? (
+                <RadialChart score={migraineProbability()} />
               ) : (
-                <p className="text-white text-xl">
-                  {weatherData
-                    ? pressureChange(
-                        tempAndPressureChangeAnalysis(weatherData) || {}
-                      )
-                    : 'Sorry, there seems to be an error...'}
-                </p>
+                <div>Loading...</div>
               )}
-              <Gauge className="h-7 w-7 text-yellow-400" />
             </div>
           </div>
-          <img
-            src={weatherDashboard}
-            alt=""
-            className="absolute bottom-0 right-0 m-4 w-72 h-48"
-          />
         </div>
       </div>
     </div>

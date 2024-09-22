@@ -1,4 +1,3 @@
-import { TrendingUp } from 'lucide-react';
 import {
   Label,
   PolarGrid,
@@ -21,52 +20,49 @@ export const description = 'A radial chart with text';
 
 const chartConfig = {} satisfies ChartConfig;
 
-export function Component() {
-  let score = 100;
+export function PainRadialChart({ score }: { score: number }) {
+  console.log(score);
 
   const getBarLength = (score: number) => {
     // Adjust the length range as needed
-    if (score <= 50) return 20;
-    if (score <= 100) return 60;
-    return 100; // Maximum length
+    if (score <= 4) return 4;
+    if (score <= 8) return 8;
+    return 10; // Maximum length
   };
 
   const getEndAngle = (score: number) => {
-    if (score <= 50) return 90; // 25% of the circle
-    if (score <= 100) return 200; // 50% of the circle
-    return 320; // Full circle
+    if (score <= 1) return 30; // 25% of the circle
+    if (score <= 2) return 60; // 25% of the circle
+    if (score <= 3) return 90; // 25% of the circle
+    if (score <= 4) return 110; // 25% of the circle
+    if (score <= 5) return 175;
+    if (score <= 6) return 200;
+    if (score <= 7) return 230;
+    if (score <= 8) return 250;
+    if (score <= 9) return 290;
+    return 320; // nearly a full circle
   };
 
   const getBarColor = (score: number) => {
-    if (score <= 50) return '#006594'; // Low score color
-    if (score <= 100) return '#005f99'; // Medium score color
-    return '#468faf'; // High score color
+    if (score <= 4) return '#28a428'; // Low score color
+    if (score <= 7) return '#ffbf00'; // Medium score color
+    return '#e20027'; // High score color
   };
 
   const chartData = [
     {
       browser: 'safari',
-      visitors: getBarLength(score), // Dynamically adjust the bar length
+      visitors: getBarLength(score),
       fill: getBarColor(score),
     },
   ];
 
-  const getScoreText = (score: number) => {
-    if (score <= 50) return 'Low';
-    if (score <= 100) return 'Medium';
-    return 'High';
-  };
-
   return (
-    <Card className="flex flex-col">
-      <CardHeader className="items-center pb-0">
-        <CardTitle>Radial Chart - Text</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
-      </CardHeader>
-      <CardContent className="flex-1 pb-0">
+    <Card className="flex w-1/2 flex-col bg-transparent border-none shadow-none">
+      <CardContent className="pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className="mx-auto aspect-square max-h-[200px]"
         >
           <RadialBarChart
             data={chartData}
@@ -87,7 +83,6 @@ export function Component() {
               <Label
                 content={({ viewBox }) => {
                   if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
-                    const text = getScoreText(score);
                     return (
                       <text
                         x={viewBox.cx}
@@ -98,17 +93,16 @@ export function Component() {
                         <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
-                          className="fill-foreground text-4xl font-bold"
+                          className="fill-foreground text-7xl font-bold"
                         >
-                          {text}
+                          {Math.round(score)}
                         </tspan>
                         <tspan
-                          x={viewBox.cx}
-                          y={(viewBox.cy || 0) + 24}
-                          className="fill-muted-foreground"
+                          x={135}
+                          y={(viewBox.cy || 0) + 10}
+                          className="fill-muted-foreground text-lg "
                         >
-                          {/* Optional: Add additional text here */}
-                          Migraine possibility
+                          /10
                         </tspan>
                       </text>
                     );
@@ -120,14 +114,6 @@ export function Component() {
           </RadialBarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter>
     </Card>
   );
 }

@@ -32,27 +32,12 @@ function App() {
     setMigraines(data || []);
   }
 
-  // Calculate average pain level
-  function averagePainLevel(migraineData: Migraine[]) {
-    let painValsOnly = migraineData.map((migraine) => migraine.pain);
-    let totalPain = painValsOnly.reduce((accum, currVal) => accum + currVal, 0);
-    return totalPain / painValsOnly.length;
-  }
-
   return (
     <>
       <div className="flex h-screen">
         <Navbar getMigraines={getMigraines} />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Dashboard
-                migraines={migraines}
-                avgPain={averagePainLevel(migraines)}
-              />
-            }
-          />
+          <Route path="/" element={<Dashboard migraines={migraines} />} />
           <Route
             path="/analytics"
             element={<Analytics migraines={migraines} />}
