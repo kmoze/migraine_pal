@@ -21,6 +21,10 @@ import LineChartTest from '@/components/LineChartTest';
 import RadarChartComponent from '@/components/RadarChart';
 import { ToggleGroupButtons } from '@/components/AnalyticsToggle';
 
+// PDF Generation Experiment
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import MyDocument from '@/components/PDFGenerator';
+
 import { format, subMonths } from 'date-fns';
 import { useState } from 'react';
 
@@ -87,6 +91,12 @@ function getStartDateThreeMonthsAgo(): Date {
 }
 
 function Analytics({ migraines }: AnalyticsProps) {
+  const title = 'Analytics Report';
+  const data = [
+    'Summary of the data...',
+    'Additional details...',
+    'Further analysis...',
+  ];
   // --------------------------------------------------------- //
   // --------------------------------------------------------- //
   // --------------------------------------------------------- //
@@ -117,7 +127,6 @@ function Analytics({ migraines }: AnalyticsProps) {
   }
 
   const filteredMigraines = filterByDateRange(migraines, dateRange);
-  console.log(filteredMigraines);
 
   let symptomsChartData = frequencyCounter(filteredMigraines, 'symptoms');
   let triggersChartData = frequencyCounter(filteredMigraines, 'triggers');
@@ -248,6 +257,8 @@ function Analytics({ migraines }: AnalyticsProps) {
 
   let durationFreqData = durationFrequency(filteredMigraines);
 
+  console.log(durationFreqData);
+
   return (
     <>
       <div className="h-full w-full flex flex-col p-4 bg-card-lightMode dark:bg-card-dashboard gap-2">
@@ -274,6 +285,22 @@ function Analytics({ migraines }: AnalyticsProps) {
               })
             }
           />
+          <PDFDownloadLink
+            document={
+              <MyDocument
+                title={title}
+                data={data}
+                daysWithout={daysWithoutMigraine}
+                durationFreq={durationFreqData}
+              />
+            }
+            fileName="report.pdf"
+          >
+            {/* Not sure what this error is but it works... */}
+            {({ loading }: { loading: boolean }) =>
+              loading ? 'Loading document...' : 'Download PDF'
+            }
+          </PDFDownloadLink>
         </div>
         <div className="flex gap-2">
           <Card className="flex flex-col w-1/2 bg-gray-200 dark:bg-card-darkModePrimary border-none">
