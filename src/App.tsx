@@ -65,11 +65,12 @@ function App() {
 
   return (
     <>
-      <button onClick={deleteMostRecentMigraine} className="w-1/3">
-        Delete Most Recent Migraine
-      </button>
       <div className="flex h-screen">
-        <Navbar getMigraines={getMigraines} />
+        <Navbar
+          getMigraines={getMigraines}
+          deleteMostRecentMigraine={deleteMostRecentMigraine}
+          mostRecentMigraine={mostRecentMigraine}
+        />
         <Routes>
           <Route path="/" element={<Dashboard migraines={migraines} />} />
           <Route

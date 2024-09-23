@@ -9,12 +9,28 @@ import {
 
 import MultiStepForm from './MultiStepForm';
 import { Link } from 'react-router-dom';
+import { SheetDemo } from './SettingsSheet';
+
+interface Migraine {
+  id: number;
+  date: Date;
+  symptoms: string[];
+  triggers: string[];
+  pain: number;
+  duration: number;
+}
 
 interface IntermediaryComponentProps {
   getMigraines: () => Promise<void>;
+  deleteMostRecentMigraine: () => void;
+  mostRecentMigraine: Migraine | null;
 }
 
-function Navbar({ getMigraines }: IntermediaryComponentProps) {
+function Navbar({
+  getMigraines,
+  deleteMostRecentMigraine,
+  mostRecentMigraine,
+}: IntermediaryComponentProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const openDialog = () => setIsDialogOpen(true);
@@ -44,10 +60,10 @@ function Navbar({ getMigraines }: IntermediaryComponentProps) {
           >
             Log Migraine
           </Button>
-          <Button className="mt-10 mb-3 w-1/2 text-base bg-foreground rounded-sm flex items-center justify-start gap-2 pl-4 ml-4">
-            <Cog6ToothIcon className="h-5 w-5" />
-            <div className="flex-1 text-center">Settings</div>
-          </Button>
+          <SheetDemo
+            onDelete={deleteMostRecentMigraine}
+            mostRecentMigraine={mostRecentMigraine}
+          />
           <Button className="text-base mb-10 w-1/2 bg-foreground rounded-sm flex items-center justify-start gap-2 pl-4 ml-4">
             <ArrowLeftStartOnRectangleIcon className="h-5 w-5" />
             <div className="flex-1 text-center">Log out</div>
