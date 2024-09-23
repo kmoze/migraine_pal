@@ -404,18 +404,6 @@ function Dashboard({ migraines }: DashboardProps) {
             <PainRadialChart score={Math.round(averagePainLevel(migraines))} />
           </div>
         </div>
-        {/* <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg">
-          <h2 className="text-white text-2xl p-6">Your most common symptoms</h2>
-          <ul className="text-white pt-2 flex flex-col items-center justify-center h-1/2">
-            {mode(migraines, 'symptoms').map((symptom, index) => {
-              return (
-                <li key={index} className="capitalize py-1 text-2xl">
-                  {symptom}
-                </li>
-              );
-            })}
-          </ul>
-        </div> */}
         <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg p-4 flex flex-col">
           <h2 className="text-white text-2xl mb-4">
             Your most common symptoms

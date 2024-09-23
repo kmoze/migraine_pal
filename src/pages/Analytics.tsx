@@ -19,10 +19,10 @@ import { Frown, TrendingUp } from 'lucide-react';
 import { XAxis, CartesianGrid, BarChart, Bar, Pie, PieChart } from 'recharts';
 import LineChartTest from '@/components/LineChartTest';
 import RadarChartComponent from '@/components/RadarChart';
+import { ToggleGroupButtons } from '@/components/AnalyticsToggle';
 
-import { format, isAfter, isBefore, subMonths } from 'date-fns';
+import { format, subMonths } from 'date-fns';
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
 
 interface Migraine {
   id: number;
@@ -252,20 +252,9 @@ function Analytics({ migraines }: AnalyticsProps) {
     <>
       <div className="h-full w-full flex flex-col p-4 bg-custom-gradient gap-2">
         <h2 className="text-2xl">Analytics</h2>
-        <Button
-          className="w-1/5"
-          onClick={() =>
-            setDateRange({
-              startDate: subMonths(new Date(), 3),
-              endDate: new Date(),
-            })
-          }
-        >
-          Last 3 months
-        </Button>
-        <Button
-          className="w-1/5"
-          onClick={() =>
+        <ToggleGroupButtons
+          allMigraines={() => setDateRange({ startDate: null, endDate: null })}
+          currentMonth={() =>
             setDateRange({
               startDate: new Date(
                 new Date().getFullYear(),
@@ -275,15 +264,13 @@ function Analytics({ migraines }: AnalyticsProps) {
               endDate: new Date(), // Current date
             })
           }
-        >
-          This month
-        </Button>
-        <Button
-          className="w-1/5"
-          onClick={() => setDateRange({ startDate: null, endDate: null })}
-        >
-          All Time
-        </Button>
+          last3Months={() =>
+            setDateRange({
+              startDate: subMonths(new Date(), 3),
+              endDate: new Date(),
+            })
+          }
+        />
         <div className="flex gap-2">
           <Card className="flex flex-col w-1/2 bg-gray-200 border-none">
             <CardHeader className="items-center pb-0">
