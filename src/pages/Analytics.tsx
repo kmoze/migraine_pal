@@ -251,7 +251,7 @@ function Analytics({ migraines }: AnalyticsProps) {
   return (
     <>
       <div className="h-full w-full flex flex-col p-4 bg-custom-gradient gap-2">
-        <h2 className="text-2xl">Analytics</h2>
+        {/* <h2 className="text-2xl">Analytics</h2>
         <ToggleGroupButtons
           allMigraines={() => setDateRange({ startDate: null, endDate: null })}
           currentMonth={() =>
@@ -270,7 +270,31 @@ function Analytics({ migraines }: AnalyticsProps) {
               endDate: new Date(),
             })
           }
-        />
+        /> */}
+        <div className="flex items-center gap-4">
+          <h2 className="text-2xl flex-shrink-0">Analytics</h2>
+          <ToggleGroupButtons
+            allMigraines={() =>
+              setDateRange({ startDate: null, endDate: null })
+            }
+            currentMonth={() =>
+              setDateRange({
+                startDate: new Date(
+                  new Date().getFullYear(),
+                  new Date().getMonth(),
+                  1
+                ), // First day of the current month
+                endDate: new Date(), // Current date
+              })
+            }
+            last3Months={() =>
+              setDateRange({
+                startDate: subMonths(new Date(), 3),
+                endDate: new Date(),
+              })
+            }
+          />
+        </div>
         <div className="flex gap-2">
           <Card className="flex flex-col w-1/2 bg-gray-200 border-none">
             <CardHeader className="items-center pb-0">
