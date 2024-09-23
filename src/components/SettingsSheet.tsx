@@ -8,6 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { toast } from '@/hooks/use-toast';
 import { Cog6ToothIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
@@ -109,7 +110,16 @@ export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
               <p>Most recent migraine already deleted.</p>
             )}
             <Button
-              onClick={onDelete}
+              // onClick={onDelete}
+              onClick={() => {
+                // Call the onDelete function
+                onDelete();
+
+                // Trigger the toast notification
+                toast({
+                  title: 'Migraine successfully deleted',
+                });
+              }}
               disabled={!mostRecentMigraine} // Disable button if no recent migraine
               className={`w-full mt-4 p-2 rounded-sm dark:text-card-darkModeTextPrimary ${
                 !mostRecentMigraine

@@ -358,7 +358,7 @@ function Dashboard({ migraines }: DashboardProps) {
   return (
     <div className="h-full flex flex-col w-full p-4 bg-card-darkModeTextPrimary dark:bg-card-darkModeOther">
       <div className="flex items-start gap-5">
-        <div className="bg-card-lightMode shadow-md shadow-gray-500 w-3/4 h-56 rounded-xl p-2 bg-opacity-55 dark:bg-card-darkModePrimary">
+        <div className="bg-card-lightMode shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-3/4 h-56 rounded-xl p-2 bg-opacity-55 dark:bg-card-darkModePrimary">
           <h2 className="text-card-coolorsPrimary text-3xl pt-3 pl-3 pb-3 font-custom dark:text-card-darkModeTextPrimary">
             Welcome to MigrainePal 👋🏻
           </h2>
@@ -395,12 +395,12 @@ function Dashboard({ migraines }: DashboardProps) {
             </h4>
           </div>
         </div>
-        <div className="bg-card-lightModeSecondary text-white dark:bg-card-darkModePrimary shadow-lg shadow-gray-500 p-2 rounded-lg  h-56 w-1/4 flex items-center justify-center">
+        <div className="bg-card-lightModeSecondary text-white dark:bg-card-darkModePrimary shadow-lg shadow-gray-500 dark:shadow-md dark:shadow-slate-950 p-2 rounded-lg  h-56 w-1/4 flex items-center justify-center">
           <CarouselPlugin />
         </div>
       </div>
       <div className="flex justify-evenly gap-5 mt-5">
-        <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg flex flex-col">
+        <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 h-60 rounded-lg flex flex-col">
           <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl text-left mt-3 ml-4 font-custom">
             Your average pain level
           </h2>
@@ -408,7 +408,7 @@ function Dashboard({ migraines }: DashboardProps) {
             <PainRadialChart score={Math.round(averagePainLevel(migraines))} />
           </div>
         </div>
-        <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg p-4 flex flex-col">
+        <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 h-60 rounded-lg p-4 flex flex-col">
           <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl mb-4 font-custom">
             Your most common symptoms
           </h2>
@@ -438,7 +438,7 @@ function Dashboard({ migraines }: DashboardProps) {
             })}
           </ul>
         </div>
-        <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg p-4 flex flex-col">
+        <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 h-60 rounded-lg p-4 flex flex-col">
           <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl mb-4 font-custom">
             Your most common triggers
           </h2>
@@ -470,7 +470,7 @@ function Dashboard({ migraines }: DashboardProps) {
         </div>
       </div>
       <div className="flex flex-grow gap-4">
-        <div className="bg-card-lightModeSecondary dark:bg-card-dashboard shadow-md shadow-gray-500 w-1/4 mt-5 rounded-lg flex flex-col">
+        <div className="bg-card-lightModeSecondary dark:bg-card-dashboard shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/4 mt-3 rounded-lg flex flex-col">
           <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-2xl p-7 text-left font-custom">
             Analytics
           </h2>
@@ -487,7 +487,7 @@ function Dashboard({ migraines }: DashboardProps) {
             </Link>
           </div>
         </div>
-        <div className="bg-card-lightMode dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 w-3/4 mt-5 rounded-lg relative">
+        <div className="bg-card-lightMode dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-3/4 mt-3 rounded-lg relative">
           <h2 className="text-card-darkModePrimary dark:text-card-lightMode text-2xl absolute top-0 left-0 p-7 font-custom">
             Weather
           </h2>

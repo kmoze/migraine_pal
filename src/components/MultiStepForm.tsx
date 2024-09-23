@@ -32,8 +32,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/select';
-import { Toast } from './ui/toast';
-import { toast, useToast } from '@/hooks/use-toast';
+import { toast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
   date: z.date({
@@ -244,6 +243,105 @@ function MultiStepForm({
                                 onChange={(value) => field.onChange(value)}
                                 value={field.value}
                                 isMulti
+                                className="dark:text-card-dashboard"
+                                styles={{
+                                  control: (base, state) => {
+                                    const isDarkMode =
+                                      document.documentElement.classList.contains(
+                                        'dark'
+                                      );
+                                    return {
+                                      ...base,
+                                      backgroundColor: isDarkMode
+                                        ? state.isFocused
+                                          ? '#333'
+                                          : '#222'
+                                        : state.isFocused
+                                        ? '#f5f5f5'
+                                        : '#fff',
+                                      borderColor: isDarkMode
+                                        ? state.isFocused
+                                          ? '#555'
+                                          : '#444'
+                                        : state.isFocused
+                                        ? '#ccc'
+                                        : '#ddd',
+                                      color: isDarkMode ? '#fff' : '#000', // Non-dark mode text color set to black
+                                    };
+                                  },
+                                  menu: (base) => {
+                                    const isDarkMode =
+                                      document.documentElement.classList.contains(
+                                        'dark'
+                                      );
+                                    return {
+                                      ...base,
+                                      backgroundColor: isDarkMode
+                                        ? '#333'
+                                        : '#fff',
+                                      color: isDarkMode ? '#fff' : '#000', // Non-dark mode text color set to black
+                                    };
+                                  },
+                                  option: (base, { isFocused, isSelected }) => {
+                                    const isDarkMode =
+                                      document.documentElement.classList.contains(
+                                        'dark'
+                                      );
+                                    return {
+                                      ...base,
+                                      backgroundColor: isDarkMode
+                                        ? isFocused
+                                          ? '#444'
+                                          : isSelected
+                                          ? '#555'
+                                          : '#333'
+                                        : isFocused
+                                        ? '#3f3f3f'
+                                        : isSelected
+                                        ? '#ccc'
+                                        : '#fff',
+                                      color:
+                                        isFocused || isSelected
+                                          ? '#fff'
+                                          : isDarkMode
+                                          ? '#ccc'
+                                          : '#000', // Non-dark mode text color set to black
+                                    };
+                                  },
+                                  singleValue: (base) => {
+                                    const isDarkMode =
+                                      document.documentElement.classList.contains(
+                                        'dark'
+                                      );
+                                    return {
+                                      ...base,
+                                      color: isDarkMode ? '#fff' : '#000', // Non-dark mode text color set to black
+                                    };
+                                  },
+                                  placeholder: (base) => {
+                                    const isDarkMode =
+                                      document.documentElement.classList.contains(
+                                        'dark'
+                                      );
+                                    return {
+                                      ...base,
+                                      color: isDarkMode ? '#aaa' : '#000', // Non-dark mode text color set to black
+                                    };
+                                  },
+                                  clearIndicator: (base, state) => {
+                                    const isDarkMode =
+                                      document.documentElement.classList.contains(
+                                        'dark'
+                                      );
+                                    return {
+                                      ...base,
+                                      color: isDarkMode ? '#fff' : '#000', // Keep the 'x' visible
+                                      '&:hover': {
+                                        color: isDarkMode ? '#A39A92' : '#555', // Red in dark mode, gray in light mode when hovered
+                                      },
+                                    };
+                                  },
+                                }}
                               />
                             </div>
                           )}
@@ -282,6 +380,150 @@ function MultiStepForm({
                                 onChange={(value) => field.onChange(value)}
                                 value={field.value}
                                 isMulti
+                                // className="dark:text-card-dashboard"
+                                className={`${
+                                  document.documentElement.classList.contains(
+                                    'dark'
+                                  )
+                                    ? 'dark:text-card-dashboard'
+                                    : 'bg-white text-black'
+                                }`}
+                                styles={{
+                                  control: (base, state) => {
+                                    const isDarkMode =
+                                      document.documentElement.classList.contains(
+                                        'dark'
+                                      );
+                                    return {
+                                      ...base,
+                                      backgroundColor: isDarkMode
+                                        ? state.isFocused
+                                          ? '#333'
+                                          : '#222'
+                                        : state.isFocused
+                                        ? '#f5f5f5'
+                                        : '#fff',
+                                      borderColor: isDarkMode
+                                        ? state.isFocused
+                                          ? '#555'
+                                          : '#444'
+                                        : state.isFocused
+                                        ? '#ccc'
+                                        : '#ddd',
+                                      color: isDarkMode ? '#fff' : '#000', // Non-dark mode text color set to black
+                                    };
+                                  },
+                                  menu: (base) => {
+                                    const isDarkMode =
+                                      document.documentElement.classList.contains(
+                                        'dark'
+                                      );
+                                    return {
+                                      ...base,
+                                      backgroundColor: isDarkMode
+                                        ? '#333'
+                                        : '#fff',
+                                      color: isDarkMode ? '#fff' : '#000', // Non-dark mode text color set to black
+                                    };
+                                  },
+                                  option: (base, { isFocused, isSelected }) => {
+                                    const isDarkMode =
+                                      document.documentElement.classList.contains(
+                                        'dark'
+                                      );
+                                    return {
+                                      ...base,
+                                      backgroundColor: isDarkMode
+                                        ? isFocused
+                                          ? '#444'
+                                          : isSelected
+                                          ? '#555'
+                                          : '#333'
+                                        : isFocused
+                                        ? '#3f3f3f'
+                                        : isSelected
+                                        ? '#ccc'
+                                        : '#fff',
+                                      color:
+                                        isFocused || isSelected
+                                          ? '#fff'
+                                          : isDarkMode
+                                          ? '#ccc'
+                                          : '#000', // Non-dark mode text color set to black
+                                    };
+                                  },
+                                  singleValue: (base) => {
+                                    const isDarkMode =
+                                      document.documentElement.classList.contains(
+                                        'dark'
+                                      );
+                                    return {
+                                      ...base,
+                                      color: isDarkMode ? '#fff' : '#000', // Non-dark mode text color set to black
+                                    };
+                                  },
+                                  placeholder: (base) => {
+                                    const isDarkMode =
+                                      document.documentElement.classList.contains(
+                                        'dark'
+                                      );
+                                    return {
+                                      ...base,
+                                      color: isDarkMode ? '#aaa' : '#000', // Non-dark mode text color set to black
+                                    };
+                                  },
+                                  clearIndicator: (base) => {
+                                    const isDarkMode =
+                                      document.documentElement.classList.contains(
+                                        'dark'
+                                      );
+                                    return {
+                                      ...base,
+                                      color: isDarkMode ? '#fff' : '#000', // Keep the 'x' visible
+                                      '&:hover': {
+                                        color: isDarkMode ? '#A39A92' : '#555', // Red in dark mode, gray in light mode when hovered
+                                      },
+                                    };
+                                  },
+                                }}
+                                // styles={{
+                                //   control: (base, state) => ({
+                                //     ...base,
+                                //     backgroundColor: state.isFocused
+                                //       ? '#333'
+                                //       : '#222',
+                                //     borderColor: state.isFocused
+                                //       ? '#555'
+                                //       : '#444',
+                                //     color: '#fff',
+                                //   }),
+                                //   menu: (base) => ({
+                                //     ...base,
+                                //     backgroundColor: '#333',
+                                //     color: '#fff',
+                                //   }),
+                                //   option: (
+                                //     base,
+                                //     { isFocused, isSelected }
+                                //   ) => ({
+                                //     ...base,
+                                //     backgroundColor: isFocused
+                                //       ? '#444'
+                                //       : isSelected
+                                //       ? '#555'
+                                //       : '#333',
+                                //     color:
+                                //       isFocused || isSelected ? '#fff' : '#ccc',
+                                //   }),
+                                //   singleValue: (base) => ({
+                                //     ...base,
+                                //     color: '#fff',
+                                //   }),
+                                //   placeholder: (base) => ({
+                                //     ...base,
+                                //     color: '#aaa',
+                                //   }),
+                                // }}
                               />
                             </div>
                           )}
@@ -332,7 +574,7 @@ function MultiStepForm({
                 />
               </>
             )}
-            <DialogFooter className="sticky bottom-0 pt-4 bg-white">
+            <DialogFooter className="sticky bottom-0 pt-4 bg-white dark:bg-inherit">
               {step > 1 && (
                 <Button variant="outline" type="button" onClick={prevStep}>
                   Previous
