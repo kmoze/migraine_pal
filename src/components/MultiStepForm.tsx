@@ -542,7 +542,7 @@ function MultiStepForm({
                   variant="outline"
                   type="button"
                   onClick={prevStep}
-                  className="dark:bg-card-darkModePrimary dark:text-card-darkModeTextPrimary dark:hover:bg-card-coolorsPrimary"
+                  className="bg-card-coolorsSecondary hover:bg-card-coolorsAccent text-card-darkModeTextPrimary hover:text-card-darkModeTextPrimary dark:bg-card-darkModePrimary dark:text-card-darkModeTextPrimary dark:hover:bg-card-coolorsPrimary"
                 >
                   Previous
                 </Button>
@@ -551,7 +551,7 @@ function MultiStepForm({
                 <Button
                   type="button"
                   onClick={nextStep}
-                  className="dark:bg-card-darkModePrimary dark:text-card-darkModeTextPrimary dark:hover:bg-card-coolorsPrimary"
+                  className="bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:bg-card-darkModePrimary dark:text-card-darkModeTextPrimary dark:hover:bg-card-coolorsPrimary"
                 >
                   Next
                 </Button>
@@ -565,7 +565,7 @@ function MultiStepForm({
                       description: 'We hope you feel better soon!',
                     });
                   }}
-                  className="dark:bg-card-coolorsSecondary dark:text-card-lightMode dark:hover:bg-card-coolorsAccent"
+                  className="bg-card-darkModeTertiary hover:bg-card-darkModeSecondary dark:bg-card-coolorsSecondary dark:text-card-lightMode dark:hover:bg-card-coolorsAccent"
                 >
                   Log Migraine
                 </Button>

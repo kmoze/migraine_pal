@@ -1,4 +1,6 @@
 import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
 import {
   Sheet,
   SheetClose,
@@ -134,14 +136,21 @@ export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
         {/* <SheetFooter>
           <SheetClose asChild></SheetClose>
         </SheetFooter> */}
-        <div className="mt-4">
-          {/* Dark Mode Toggle */}
-          <button
-            onClick={toggleDarkMode}
-            className="bg-gray-200 text-black py-2 px-4 rounded-md"
+        <div className="flex items-center space-x-2 mt-8">
+          <Switch
+            id="dark-mode-toggle"
+            checked={darkMode}
+            onCheckedChange={toggleDarkMode}
+            className={`inline-flex items-center cursor-pointer ${
+              darkMode ? 'dark:bg-card-coolorsPrimary' : 'bg-card-lightMode'
+            }`}
+          ></Switch>
+          <Label
+            htmlFor="dark-mode-toggle"
+            className="dark:text-card-lightMode text-card-lightMode"
           >
             {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-          </button>
+          </Label>
         </div>
       </SheetContent>
     </Sheet>
