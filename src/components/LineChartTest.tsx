@@ -28,8 +28,8 @@ function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
   return (
     <Card className="w-1/2 bg-gray-200 border-none">
       <CardHeader>
-        <CardTitle>Lorem, ipsum dolor.</CardTitle>
-        <CardDescription>Lorem ipsum dolor sit.</CardDescription>
+        <CardTitle>Days without a migraine</CardTitle>
+        <CardDescription>Comparison from day to day</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer

@@ -13,6 +13,10 @@ export default {
         'custom-gradient':
           'linear-gradient(to right, hsl(74deg 3.14% 76.22%), hsl(37.5deg 9.82% 85.03%))',
       },
+      fontFamily: {
+        custom: ['Comfortaa'],
+        customText: ['Sarabun'],
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

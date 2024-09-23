@@ -359,11 +359,11 @@ function Dashboard({ migraines }: DashboardProps) {
     <div className="h-full flex flex-col w-full p-4 bg-custom-gradient">
       <div className="flex items-start gap-5">
         <div className="bg-card-coolorsPrimary shadow-lg shadow-gray-500 w-3/4 h-56 rounded-xl p-2 bg-opacity-95">
-          <h2 className="text-white text-3xl pt-3 pl-3 pb-3">
+          <h2 className="text-white text-3xl pt-3 pl-3 pb-3 font-custom">
             Welcome to MigrainePal 👋🏻
           </h2>
-          <div className="flex justify-around gap-5">
-            <h4 className="text-white text-2xl p-10 w-1/4 bg-blue-700 bg-opacity-45 mt-2 rounded-lg text-left">
+          <div className="flex justify-around gap-2">
+            <h4 className="text-white text-2xl py-8 px-4 w-1/4 bg-blue-700 bg-opacity-45 mt-2 rounded-lg text-left font-customText">
               {mostRecentDay(migraines, mostRecentMonth(migraines)) === 0 ? (
                 <>Your last migraine was today.</>
               ) : mostRecentDay(migraines, mostRecentMonth(migraines)) === 1 ? (
@@ -380,13 +380,17 @@ function Dashboard({ migraines }: DashboardProps) {
                 </>
               )}
             </h4>
-            <h4 className="text-white text-xl p-8 w-1/3 bg-blue-500 bg-opacity-45 mt-2 rounded-lg">
+            <h4 className="text-white text-xl py-6 px-4 w-1/3 bg-blue-500 bg-opacity-45 mt-2 rounded-lg font-customText">
               There are some new weather updates that might be of use. Check
               them out below.
             </h4>
-            <h4 className="text-white text-xl p-8 w-1/3 bg-sky-500 bg-opacity-45 mt-2 rounded-lg">
+            <h4 className="text-white text-xl py-5 px-4 w-1/3 bg-sky-500 bg-opacity-45 mt-2 rounded-lg font-customText">
               <Lightbulb className="inline-block mb-2 h-7 w-7 text-yellow-500" />{' '}
-              <span className="text-gray-200"> Daily tip from us: </span> <br />
+              <span className="text-gray-200 font-customText">
+                {' '}
+                Daily tip from us:{' '}
+              </span>{' '}
+              <br />
               Hydrate well to reduce headaches during high humidity.
             </h4>
           </div>
@@ -397,7 +401,7 @@ function Dashboard({ migraines }: DashboardProps) {
       </div>
       <div className="flex justify-evenly gap-5 mt-5">
         <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg flex flex-col">
-          <h2 className="text-white text-xl text-left mt-2 ml-4">
+          <h2 className="text-white text-xl text-left mt-3 ml-4 font-custom">
             Your average pain level
           </h2>
           <div className="flex items-center justify-center">
@@ -405,7 +409,7 @@ function Dashboard({ migraines }: DashboardProps) {
           </div>
         </div>
         <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg p-4 flex flex-col">
-          <h2 className="text-white text-2xl mb-4">
+          <h2 className="text-white text-xl mb-4 font-custom">
             Your most common symptoms
           </h2>
           <ul className="flex flex-col space-y-2 h-full justify-evenly">
@@ -416,7 +420,7 @@ function Dashboard({ migraines }: DashboardProps) {
               return (
                 <li
                   key={index}
-                  className={`capitalize py-2 px-4 rounded-3xl text-white ${
+                  className={`capitalize py-2 px-4 rounded-3xl text-white font-customText ${
                     widths[index]
                   }
                   ${
@@ -435,7 +439,7 @@ function Dashboard({ migraines }: DashboardProps) {
           </ul>
         </div>
         <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg p-4 flex flex-col">
-          <h2 className="text-white text-2xl mb-4">
+          <h2 className="text-white text-xl mb-4 font-custom">
             Your most common triggers
           </h2>
           <ul className="flex flex-col space-y-2 h-full justify-evenly">
@@ -446,7 +450,7 @@ function Dashboard({ migraines }: DashboardProps) {
               return (
                 <li
                   key={index}
-                  className={`capitalize py-2 px-4 rounded-3xl text-white ${
+                  className={`capitalize py-2 px-4 rounded-3xl text-white font-customText ${
                     widths[index]
                   }
                       ${
@@ -467,9 +471,11 @@ function Dashboard({ migraines }: DashboardProps) {
       </div>
       <div className="flex flex-grow gap-4">
         <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/4 mt-5 rounded-lg flex flex-col">
-          <h2 className="text-white text-2xl p-7 text-left">Analytics</h2>
+          <h2 className="text-white text-2xl p-7 text-left font-custom">
+            Analytics
+          </h2>
           <div className="flex flex-col items-center justify-center">
-            <h2 className="text-gray-200 mx-16 mt-10 mb-7 text-xl">
+            <h2 className="text-gray-200 mx-16 mt-10 mb-7 text-xl font-customText">
               See the impact your migraines have on your life in easily
               digestible charts and graphs.
             </h2>
@@ -482,7 +488,7 @@ function Dashboard({ migraines }: DashboardProps) {
           </div>
         </div>
         <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-3/4 mt-5 rounded-lg relative">
-          <h2 className="text-white text-2xl absolute top-0 left-0 p-7">
+          <h2 className="text-white text-2xl absolute top-0 left-0 p-7 font-custom">
             Weather
           </h2>
           <div className="flex items-center h-full">
@@ -496,7 +502,7 @@ function Dashboard({ migraines }: DashboardProps) {
                     {loading ? (
                       <p className="text-white text-lg">Loading...</p>
                     ) : (
-                      <p className="text-white text-xl">
+                      <p className="text-white text-xl font-customText">
                         {weatherData
                           ? humidityAnalysis(weatherData)
                           : 'Sorry, there seems to be an error...'}
@@ -513,7 +519,7 @@ function Dashboard({ migraines }: DashboardProps) {
                     {loading ? (
                       <p className="text-white text-lg">Loading...</p>
                     ) : (
-                      <p className="text-white text-xl">
+                      <p className="text-white text-xl font-customText">
                         {weatherData
                           ? tempChange(
                               tempAndPressureChangeAnalysis(weatherData) || {}
@@ -534,7 +540,7 @@ function Dashboard({ migraines }: DashboardProps) {
                     {loading ? (
                       <p className="text-white text-lg">Loading...</p>
                     ) : (
-                      <p className="text-white text-xl">
+                      <p className="text-white text-xl font-customText">
                         {weatherData
                           ? pressureChange(
                               tempAndPressureChangeAnalysis(weatherData) || {}
@@ -551,7 +557,9 @@ function Dashboard({ migraines }: DashboardProps) {
                     {loading ? (
                       <p className="text-white text-lg">Loading...</p>
                     ) : (
-                      <p className="text-white text-xl">None detected</p>
+                      <p className="text-white text-xl font-customText">
+                        None detected
+                      </p>
                     )}
                     <CloudLightning className="h-6 w-6 text-orange-500" />
                   </div>

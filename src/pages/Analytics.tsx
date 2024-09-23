@@ -252,7 +252,7 @@ function Analytics({ migraines }: AnalyticsProps) {
     <>
       <div className="h-full w-full flex flex-col p-4 bg-custom-gradient gap-2">
         <div className="flex items-center gap-4">
-          <h2 className="text-2xl flex-shrink-0">Analytics</h2>
+          <h2 className="text-3xl flex-shrink-0 font-custom">Analytics</h2>
           <ToggleGroupButtons
             allMigraines={() =>
               setDateRange({ startDate: null, endDate: null })

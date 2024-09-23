@@ -93,7 +93,7 @@ export function PainRadialChart({ score }: { score: number }) {
                           y={(viewBox.cy || 0) + 10}
                           className="fill-muted-foreground text-lg "
                         >
-                          /69
+                          /10
                         </tspan>
                       </text>
                     );

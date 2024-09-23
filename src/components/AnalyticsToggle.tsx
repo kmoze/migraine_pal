@@ -12,7 +12,7 @@ export function ToggleGroupButtons({
   last3Months,
 }: ToggleGroupButtonsProps) {
   return (
-    <ToggleGroup type="single" defaultValue="bold">
+    <ToggleGroup type="single" defaultValue="bold" className="ml-5">
       <ToggleGroupItem value="bold" aria-label="Toggle bold">
         <button onClick={last3Months}>Last 3 months</button>
       </ToggleGroupItem>
