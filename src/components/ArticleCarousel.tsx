@@ -67,16 +67,18 @@ export function CarouselPlugin() {
                   className="absolute inset-0 bg-cover bg-center"
                   style={{ backgroundImage: `url(${article.img})` }}
                 />
-                <div className="absolute inset-0 bg-gray-800 opacity-90" />
+                <div className="absolute inset-0 bg-card-lightMode opacity-90 dark:bg-card-coolorsPrimary" />
                 <CardContent className="relative flex flex-col items-center p-10 text-center">
-                  <h2 className="text-lg font-semibold mb-2 max-h-7">
+                  <h2 className="text-lg font-semibold mb-2 max-h-7 text-card-coolorsPrimary dark:text-card-darkModeTextPrimary">
                     {article.title}
                   </h2>
-                  <p className="mb-4">{article.description}</p>
+                  <p className="mb-4 text-card-coolorsPrimary dark:text-card-darkModeTextPrimary">
+                    {article.description}
+                  </p>
                   <a
                     href={article.link}
                     target="_blank"
-                    className="px-4 py-2 bg-blue-800 text-white rounded hover:bg-blue-900"
+                    className="bg-card-lightModeTertiary text-card-coolorsPrimary dark:bg-card-darkModePrimary dark:text-card-darkModeTextPrimary dark:hover:bg-card-darkModeSecondary px-4 py-2 rounded hover:bg-card-lightModeSecondary"
                   >
                     Read Article
                   </a>

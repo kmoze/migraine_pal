@@ -61,8 +61,6 @@ function App() {
     }
   }
 
-  console.log(migraines);
-
   return (
     <>
       <div className="flex h-screen">

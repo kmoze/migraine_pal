@@ -356,14 +356,14 @@ function Dashboard({ migraines }: DashboardProps) {
   }
 
   return (
-    <div className="h-full flex flex-col w-full p-4 bg-custom-gradient">
+    <div className="h-full flex flex-col w-full p-4 bg-card-darkModeTextPrimary dark:bg-card-darkModeOther">
       <div className="flex items-start gap-5">
-        <div className="bg-card-coolorsPrimary shadow-lg shadow-gray-500 w-3/4 h-56 rounded-xl p-2 bg-opacity-95">
-          <h2 className="text-white text-3xl pt-3 pl-3 pb-3 font-custom">
+        <div className="bg-card-lightMode shadow-md shadow-gray-500 w-3/4 h-56 rounded-xl p-2 bg-opacity-55 dark:bg-card-darkModePrimary">
+          <h2 className="text-card-coolorsPrimary text-3xl pt-3 pl-3 pb-3 font-custom dark:text-card-darkModeTextPrimary">
             Welcome to MigrainePal 👋🏻
           </h2>
           <div className="flex justify-around gap-2">
-            <h4 className="text-white text-2xl py-8 px-4 w-1/4 bg-blue-700 bg-opacity-45 mt-2 rounded-lg text-left font-customText">
+            <h4 className="text-card-coolorsPrimary text-2xl py-8 px-4 w-1/4 bg-card-lightMode mt-2 rounded-lg text-left font-customText dark:bg-card-darkModeSecondary dark:text-card-darkModeTextPrimary">
               {mostRecentDay(migraines, mostRecentMonth(migraines)) === 0 ? (
                 <>Your last migraine was today.</>
               ) : mostRecentDay(migraines, mostRecentMonth(migraines)) === 1 ? (
@@ -380,13 +380,13 @@ function Dashboard({ migraines }: DashboardProps) {
                 </>
               )}
             </h4>
-            <h4 className="text-white text-xl py-6 px-4 w-1/3 bg-blue-500 bg-opacity-45 mt-2 rounded-lg font-customText">
+            <h4 className="text-card-coolorsPrimary bg-card-lightModeSecondary dark:bg-card-darkModeTertiary dark:text-card-darkModeTextPrimary text-xl py-6 px-4 w-1/3 mt-2 rounded-lg font-customText">
               There are some new weather updates that might be of use. Check
               them out below.
             </h4>
-            <h4 className="text-white text-xl py-5 px-4 w-1/3 bg-sky-500 bg-opacity-45 mt-2 rounded-lg font-customText">
+            <h4 className="text-card-coolorsPrimary text-xl py-5 px-4 w-1/3 bg-card-lightModeTertiary dark:bg-card-darkModeOther dark:text-card-darkModeTextPrimary mt-2 rounded-lg font-customText">
               <Lightbulb className="inline-block mb-2 h-7 w-7 text-yellow-500" />{' '}
-              <span className="text-gray-200 font-customText">
+              <span className="text-card-coolorsPrimary font-customText dark:text-card-darkModeTextPrimary">
                 {' '}
                 Daily tip from us:{' '}
               </span>{' '}
@@ -395,21 +395,21 @@ function Dashboard({ migraines }: DashboardProps) {
             </h4>
           </div>
         </div>
-        <div className="bg-card-coolorsSecondary shadow-lg shadow-gray-500 p-2 rounded-lg text-white h-56 w-1/4 flex items-center justify-center">
+        <div className="bg-card-lightModeSecondary text-white dark:bg-card-darkModePrimary shadow-lg shadow-gray-500 p-2 rounded-lg  h-56 w-1/4 flex items-center justify-center">
           <CarouselPlugin />
         </div>
       </div>
       <div className="flex justify-evenly gap-5 mt-5">
-        <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg flex flex-col">
-          <h2 className="text-white text-xl text-left mt-3 ml-4 font-custom">
+        <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg flex flex-col">
+          <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl text-left mt-3 ml-4 font-custom">
             Your average pain level
           </h2>
           <div className="flex items-center justify-center">
             <PainRadialChart score={Math.round(averagePainLevel(migraines))} />
           </div>
         </div>
-        <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg p-4 flex flex-col">
-          <h2 className="text-white text-xl mb-4 font-custom">
+        <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg p-4 flex flex-col">
+          <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl mb-4 font-custom">
             Your most common symptoms
           </h2>
           <ul className="flex flex-col space-y-2 h-full justify-evenly">
@@ -420,17 +420,17 @@ function Dashboard({ migraines }: DashboardProps) {
               return (
                 <li
                   key={index}
-                  className={`capitalize py-2 px-4 rounded-3xl text-white font-customText ${
+                  className={`capitalize py-2 px-4 rounded-3xl text-card-coolorsPrimary dark:text-card-darkModeTextPrimary font-customText ${
                     widths[index]
                   }
                   ${
                     isTop
-                      ? 'text-xl bg-gray-900'
+                      ? 'text-xl bg-card-lightModeTertiary dark:bg-card-darkModePrimary dark:shadow-none'
                       : isThird
-                      ? 'text-sm bg-gray-700'
-                      : 'text-lg bg-gray-800'
+                      ? 'text-sm bg-blue-300 dark:bg-card-darkModeSecondary dark:shadow-none'
+                      : 'text-lg bg-card-lightMode dark:bg-card-darkModeOther dark:shadow-none'
                   }
-                  shadow-sm shadow-gray-700`}
+                  drop-shadow-md`}
                 >
                   {symptom}
                 </li>
@@ -438,8 +438,8 @@ function Dashboard({ migraines }: DashboardProps) {
             })}
           </ul>
         </div>
-        <div className="bg-card-coolorsAccent shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg p-4 flex flex-col">
-          <h2 className="text-white text-xl mb-4 font-custom">
+        <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/3 h-60 rounded-lg p-4 flex flex-col">
+          <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl mb-4 font-custom">
             Your most common triggers
           </h2>
           <ul className="flex flex-col space-y-2 h-full justify-evenly">
@@ -450,17 +450,17 @@ function Dashboard({ migraines }: DashboardProps) {
               return (
                 <li
                   key={index}
-                  className={`capitalize py-2 px-4 rounded-3xl text-white font-customText ${
+                  className={`capitalize py-2 px-4 rounded-3xl text-card-coolorsPrimary dark:text-card-darkModeTextPrimary font-customText ${
                     widths[index]
                   }
-                      ${
-                        isTop
-                          ? 'text-xl bg-gray-900'
-                          : isThird
-                          ? 'text-sm bg-gray-700'
-                          : 'text-lg bg-gray-800'
-                      }
-                      shadow-sm shadow-gray-700`}
+                  ${
+                    isTop
+                      ? 'text-xl bg-card-lightModeTertiary dark:bg-card-darkModePrimary dark:shadow-none'
+                      : isThird
+                      ? 'text-sm bg-blue-300 dark:bg-card-darkModeSecondary dark:shadow-none'
+                      : 'text-lg bg-card-lightMode dark:bg-card-darkModeOther dark:shadow-none'
+                  }
+                  drop-shadow-md`}
                 >
                   {trigger}
                 </li>
@@ -470,39 +470,41 @@ function Dashboard({ migraines }: DashboardProps) {
         </div>
       </div>
       <div className="flex flex-grow gap-4">
-        <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-1/4 mt-5 rounded-lg flex flex-col">
-          <h2 className="text-white text-2xl p-7 text-left font-custom">
+        <div className="bg-card-lightModeSecondary dark:bg-card-dashboard shadow-md shadow-gray-500 w-1/4 mt-5 rounded-lg flex flex-col">
+          <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-2xl p-7 text-left font-custom">
             Analytics
           </h2>
           <div className="flex flex-col items-center justify-center">
-            <h2 className="text-gray-200 mx-16 mt-10 mb-7 text-xl font-customText">
+            <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary mx-16 mt-10 mb-7 text-xl font-customText">
               See the impact your migraines have on your life in easily
               digestible charts and graphs.
             </h2>
             <Link to="/analytics">
-              <Button className="text-md p-5 rounded-md bg-card-coolorsSecondary hover:bg-card-coolorsAccent flex items-center">
+              <Button className="text-md p-5 rounded-md bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:bg-card-lightMode dark:hover:bg-card-lightModeSecondary flex items-center">
                 Go to Analytics
                 <MoveRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
           </div>
         </div>
-        <div className="bg-card-coolorsPrimary shadow-md shadow-gray-500 w-3/4 mt-5 rounded-lg relative">
-          <h2 className="text-white text-2xl absolute top-0 left-0 p-7 font-custom">
+        <div className="bg-card-lightMode dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 w-3/4 mt-5 rounded-lg relative">
+          <h2 className="text-card-darkModePrimary dark:text-card-lightMode text-2xl absolute top-0 left-0 p-7 font-custom">
             Weather
           </h2>
           <div className="flex items-center h-full">
             <div className="flex flex-col flex-grow">
               <div className="flex gap-2 mx-8">
-                <div className="flex flex-col w-1/2 font-medium leading-none border p-5 rounded-md">
-                  <h2 className="text-white text-md mb-4">
+                <div className="flex flex-col w-1/2 font-medium leading-none border border-card-coolorsPrimary dark:border-gray-400 p-5 rounded-md">
+                  <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-md mb-4">
                     Humidity Forecast:
                   </h2>
                   <div className="flex items-center gap-1 justify-center">
                     {loading ? (
-                      <p className="text-white text-lg">Loading...</p>
+                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-lg">
+                        Loading...
+                      </p>
                     ) : (
-                      <p className="text-white text-xl font-customText">
+                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText">
                         {weatherData
                           ? humidityAnalysis(weatherData)
                           : 'Sorry, there seems to be an error...'}
@@ -511,15 +513,17 @@ function Dashboard({ migraines }: DashboardProps) {
                     <ThermometerSun className="h-6 w-6 text-red-500" />
                   </div>
                 </div>
-                <div className="flex flex-col w-1/2 font-medium leading-none border p-5 rounded-md">
-                  <h2 className="text-white text-md mb-4">
+                <div className="flex flex-col w-1/2 font-medium leading-none border border-card-coolorsPrimary dark:border-gray-400 p-5 rounded-md">
+                  <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-md mb-4">
                     Temperature Change Forecast:
                   </h2>
                   <div className="flex items-center gap-1 justify-center">
                     {loading ? (
-                      <p className="text-white text-lg">Loading...</p>
+                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-lg">
+                        Loading...
+                      </p>
                     ) : (
-                      <p className="text-white text-xl font-customText">
+                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText">
                         {weatherData
                           ? tempChange(
                               tempAndPressureChangeAnalysis(weatherData) || {}
@@ -532,15 +536,17 @@ function Dashboard({ migraines }: DashboardProps) {
                 </div>
               </div>
               <div className="flex gap-2 mx-8 mt-4">
-                <div className="flex flex-col w-1/2 font-medium leading-none border p-5 rounded-md">
-                  <h2 className="text-white text-md mb-4">
+                <div className="flex flex-col w-1/2 font-medium leading-none border border-card-coolorsPrimary dark:border-gray-400 p-5 rounded-md">
+                  <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-md mb-4">
                     Barometric Change Forecast:
                   </h2>
                   <div className="flex items-center gap-1 justify-center">
                     {loading ? (
-                      <p className="text-white text-lg">Loading...</p>
+                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-lg">
+                        Loading...
+                      </p>
                     ) : (
-                      <p className="text-white text-xl font-customText">
+                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText">
                         {weatherData
                           ? pressureChange(
                               tempAndPressureChangeAnalysis(weatherData) || {}
@@ -551,13 +557,17 @@ function Dashboard({ migraines }: DashboardProps) {
                     <Gauge className="h-7 w-7 text-yellow-400" />
                   </div>
                 </div>
-                <div className="flex flex-col w-1/2 font-medium leading-none border p-5 rounded-md">
-                  <h2 className="text-white text-md mb-4">Storm Forecast:</h2>
+                <div className="flex flex-col w-1/2 font-medium leading-none border border-card-coolorsPrimary dark:border-gray-400 p-5 rounded-md">
+                  <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-md mb-4">
+                    Storm Forecast:
+                  </h2>
                   <div className="flex items-center gap-1 justify-center">
                     {loading ? (
-                      <p className="text-white text-lg">Loading...</p>
+                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-lg">
+                        Loading...
+                      </p>
                     ) : (
-                      <p className="text-white text-xl font-customText">
+                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText">
                         None detected
                       </p>
                     )}

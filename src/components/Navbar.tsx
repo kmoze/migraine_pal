@@ -56,7 +56,7 @@ function Navbar({
         <div>
           <Button
             onClick={openDialog}
-            className="mt-6 w-full text-lg mb-10 py-6 rounded-md bg-[hsl(var(--button-primary))] hover:bg-[hsl(var(--button-primary-hover))]"
+            className="mt-6 w-full text-lg mb-10 py-6 rounded-md dark:bg-card-darkModePrimary dark:text-card-darkModeTextPrimary dark:hover:bg-card-darkModeSecondary bg-[hsl(var(--button-primary))] hover:bg-[hsl(var(--button-primary-hover))]"
           >
             Log Migraine
           </Button>

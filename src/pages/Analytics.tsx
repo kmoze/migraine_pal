@@ -250,7 +250,7 @@ function Analytics({ migraines }: AnalyticsProps) {
 
   return (
     <>
-      <div className="h-full w-full flex flex-col p-4 bg-custom-gradient gap-2">
+      <div className="h-full w-full flex flex-col p-4 bg-card-lightMode dark:bg-card-dashboard gap-2">
         <div className="flex items-center gap-4">
           <h2 className="text-3xl flex-shrink-0 font-custom">Analytics</h2>
           <ToggleGroupButtons
@@ -276,7 +276,7 @@ function Analytics({ migraines }: AnalyticsProps) {
           />
         </div>
         <div className="flex gap-2">
-          <Card className="flex flex-col w-1/2 bg-gray-200 border-none">
+          <Card className="flex flex-col w-1/2 bg-gray-200 dark:bg-card-darkModePrimary border-none">
             <CardHeader className="items-center pb-0">
               <CardTitle>Pain Levels</CardTitle>
               <CardDescription>
@@ -318,7 +318,7 @@ function Analytics({ migraines }: AnalyticsProps) {
           <LineChartTest daysWithoutMigraine={daysWithoutMigraine} />
         </div>
         <div className="flex gap-5">
-          <Card className="flex flex-col w-1/3 bg-gray-200 border-none">
+          <Card className="flex flex-col w-1/3 bg-gray-200 dark:bg-card-darkModePrimary border-none">
             <CardHeader className="items-center pb-0">
               <CardTitle>Most common symptoms</CardTitle>
               <CardDescription>
@@ -350,7 +350,7 @@ function Analytics({ migraines }: AnalyticsProps) {
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col w-1/3 bg-gray-200 border-none">
+          <Card className="flex flex-col w-1/3 bg-gray-200 dark:bg-card-darkModePrimary border-none">
             <CardHeader className="items-center pb-0">
               <CardTitle>Most common triggers</CardTitle>
               <CardDescription>

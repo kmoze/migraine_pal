@@ -26,7 +26,7 @@ const chartConfig = {} satisfies ChartConfig;
 
 function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
   return (
-    <Card className="w-1/2 bg-gray-200 border-none">
+    <Card className="w-1/2 bg-gray-200 dark:bg-card-darkModePrimary border-none">
       <CardHeader>
         <CardTitle>Days without a migraine</CardTitle>
         <CardDescription>Comparison from day to day</CardDescription>
@@ -54,8 +54,8 @@ function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
               tickMargin={8}
             />
             <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent indicator="line" />}
+              cursor={true}
+              content={<ChartTooltipContent indicator="dashed" />}
             />
             <Line
               dataKey="days_without"

@@ -60,7 +60,7 @@ export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
           Settings
         </Button>
       </SheetTrigger>
-      <SheetContent side={'left'} className="bg-gray-700">
+      <SheetContent side={'left'} className="bg-gray-700 border-gray-300">
         <SheetHeader>
           <div className="flex justify-between items-center">
             <SheetTitle className="text-xl text-white">
@@ -74,7 +74,7 @@ export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
           </div>
           <SheetDescription className="text-white">
             {mostRecentMigraine ? (
-              <div className="border p-2 rounded-md">
+              <div className="border p-2 rounded-md dark:border-card-darkModeTextPrimary">
                 <p className="text-gray-300">
                   Date:{' '}
                   <span className="text-white">
@@ -111,7 +111,7 @@ export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
             <Button
               onClick={onDelete}
               disabled={!mostRecentMigraine} // Disable button if no recent migraine
-              className={`w-full mt-4 p-2 rounded-sm ${
+              className={`w-full mt-4 p-2 rounded-sm dark:text-card-darkModeTextPrimary ${
                 !mostRecentMigraine
                   ? 'bg-gray-400 cursor-not-allowed'
                   : 'bg-red-500 hover:bg-red-600'
@@ -128,7 +128,7 @@ export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
           {/* Dark Mode Toggle */}
           <button
             onClick={toggleDarkMode}
-            className="bg-gray-200 dark:bg-gray-800 text-black dark:text-white py-2 px-4 rounded-md"
+            className="bg-gray-200 text-black py-2 px-4 rounded-md"
           >
             {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
           </button>

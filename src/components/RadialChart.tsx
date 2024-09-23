@@ -55,9 +55,9 @@ export function RadialChart({ score }: { score: number }) {
   };
 
   return (
-    <Card className="flex w-full flex-col bg-card-coolorsPrimary border-2 p-4">
+    <Card className="flex w-full flex-col bg-card-lightMode border-card-darkModePrimary dark:border-card-lightMode border dark:bg-card-coolorsPrimary p-4">
       <CardHeader className="items-center pb-0">
-        <CardTitle className="text-white font-customText text-xl">
+        <CardTitle className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary font-customText text-xl">
           Based on forecasted weather
         </CardTitle>
       </CardHeader>

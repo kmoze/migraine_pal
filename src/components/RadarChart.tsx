@@ -26,7 +26,7 @@ const chartConfig = {} satisfies ChartConfig;
 
 export function RadarChartComponent({ durationFreqData }: RadarChartProps) {
   return (
-    <Card className="w-1/3 bg-gray-200 border-none">
+    <Card className="w-1/3 bg-gray-200 dark:bg-card-darkModePrimary border-none">
       <CardHeader className="items-center">
         <CardTitle>Migraine Duration Frequency</CardTitle>
         <CardDescription>
