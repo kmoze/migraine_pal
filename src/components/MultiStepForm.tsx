@@ -486,44 +486,6 @@ function MultiStepForm({
                                     };
                                   },
                                 }}
-                                // styles={{
-                                //   control: (base, state) => ({
-                                //     ...base,
-                                //     backgroundColor: state.isFocused
-                                //       ? '#333'
-                                //       : '#222',
-                                //     borderColor: state.isFocused
-                                //       ? '#555'
-                                //       : '#444',
-                                //     color: '#fff',
-                                //   }),
-                                //   menu: (base) => ({
-                                //     ...base,
-                                //     backgroundColor: '#333',
-                                //     color: '#fff',
-                                //   }),
-                                //   option: (
-                                //     base,
-                                //     { isFocused, isSelected }
-                                //   ) => ({
-                                //     ...base,
-                                //     backgroundColor: isFocused
-                                //       ? '#444'
-                                //       : isSelected
-                                //       ? '#555'
-                                //       : '#333',
-                                //     color:
-                                //       isFocused || isSelected ? '#fff' : '#ccc',
-                                //   }),
-                                //   singleValue: (base) => ({
-                                //     ...base,
-                                //     color: '#fff',
-                                //   }),
-                                //   placeholder: (base) => ({
-                                //     ...base,
-                                //     color: '#aaa',
-                                //   }),
-                                // }}
                               />
                             </div>
                           )}
@@ -576,12 +538,21 @@ function MultiStepForm({
             )}
             <DialogFooter className="sticky bottom-0 pt-4 bg-white dark:bg-inherit">
               {step > 1 && (
-                <Button variant="outline" type="button" onClick={prevStep}>
+                <Button
+                  variant="outline"
+                  type="button"
+                  onClick={prevStep}
+                  className="dark:bg-card-darkModePrimary dark:text-card-darkModeTextPrimary dark:hover:bg-card-coolorsPrimary"
+                >
                   Previous
                 </Button>
               )}
               {step < 5 && (
-                <Button type="button" onClick={nextStep}>
+                <Button
+                  type="button"
+                  onClick={nextStep}
+                  className="dark:bg-card-darkModePrimary dark:text-card-darkModeTextPrimary dark:hover:bg-card-coolorsPrimary"
+                >
                   Next
                 </Button>
               )}
@@ -594,6 +565,7 @@ function MultiStepForm({
                       description: 'We hope you feel better soon!',
                     });
                   }}
+                  className="dark:bg-card-coolorsSecondary dark:text-card-lightMode dark:hover:bg-card-coolorsAccent"
                 >
                   Log Migraine
                 </Button>
