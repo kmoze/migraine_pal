@@ -35,12 +35,7 @@ interface MyDocumentProps {
 }
 
 // Create a Document component
-function MyDocument({
-  title,
-  data,
-  daysWithout,
-  durationFreq,
-}: MyDocumentProps) {
+function MyDocument({ title, daysWithout, durationFreq }: MyDocumentProps) {
   const getHighestDaysWithout = (
     days: { date: string; days_without: number }[]
   ) => {

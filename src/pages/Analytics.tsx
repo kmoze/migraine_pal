@@ -298,7 +298,11 @@ function Analytics({ migraines }: AnalyticsProps) {
           >
             {/* Not sure what this error is but it works... */}
             {({ loading }: { loading: boolean }) =>
-              loading ? 'Loading document...' : 'Download PDF'
+              loading ? (
+                <button>Loading document...</button>
+              ) : (
+                <button>Download PDF</button>
+              )
             }
           </PDFDownloadLink>
         </div>
