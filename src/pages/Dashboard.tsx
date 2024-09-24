@@ -399,7 +399,7 @@ function Dashboard({ migraines }: DashboardProps) {
           <CarouselPlugin />
         </div>
       </div>
-      <div className="flex justify-evenly gap-5 mt-5">
+      <div className="flex justify-evenly gap-5 mt-3">
         <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 h-60 rounded-lg flex flex-col">
           <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl text-left mt-3 ml-4 font-custom">
             Your average pain level
