@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
 import Analytics from './pages/Analytics';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { Toaster } from './components/ui/toaster';
 
 const supabase = createClient(
@@ -61,15 +62,21 @@ function App() {
     }
   }
 
+  const location = useLocation();
+  const showNavbar = location.pathname !== '/login';
+
   return (
     <>
       <div className="flex h-screen">
-        <Navbar
-          getMigraines={getMigraines}
-          deleteMostRecentMigraine={deleteMostRecentMigraine}
-          mostRecentMigraine={mostRecentMigraine}
-        />
+        {showNavbar && (
+          <Navbar
+            getMigraines={getMigraines}
+            deleteMostRecentMigraine={deleteMostRecentMigraine}
+            mostRecentMigraine={mostRecentMigraine}
+          />
+        )}
         <Routes>
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<Dashboard migraines={migraines} />} />
           <Route
             path="/analytics"

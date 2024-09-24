@@ -64,10 +64,12 @@ function Navbar({
             onDelete={deleteMostRecentMigraine}
             mostRecentMigraine={mostRecentMigraine}
           />
-          <Button className="text-base mb-10 w-1/2 bg-foreground rounded-sm flex items-center justify-start gap-2 pl-4 ml-4">
-            <ArrowLeftStartOnRectangleIcon className="h-5 w-5" />
-            <div className="flex-1 text-center">Log out</div>
-          </Button>
+          <Link to={'/login'}>
+            <Button className="text-base mb-10 w-1/2 bg-foreground rounded-sm flex items-center justify-start gap-2 pl-4 ml-4">
+              <ArrowLeftStartOnRectangleIcon className="h-5 w-5" />
+              <div className="flex-1 text-center">Log out</div>
+            </Button>
+          </Link>
         </div>
       </div>
       <MultiStepForm
