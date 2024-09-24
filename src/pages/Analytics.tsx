@@ -257,8 +257,6 @@ function Analytics({ migraines }: AnalyticsProps) {
 
   let durationFreqData = durationFrequency(filteredMigraines);
 
-  console.log(durationFreqData);
-
   return (
     <>
       <div className="h-full w-full flex flex-col p-4 bg-card-lightMode dark:bg-card-dashboard gap-2">
@@ -292,6 +290,7 @@ function Analytics({ migraines }: AnalyticsProps) {
                 data={data}
                 daysWithout={daysWithoutMigraine}
                 durationFreq={durationFreqData}
+                dateRanges={dateRange}
               />
             }
             fileName="report.pdf"

@@ -1,4 +1,5 @@
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { format } from 'date-fns';
 
 // Define styles for the document
 const styles = StyleSheet.create({
@@ -25,6 +26,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontWeight: 'bold',
   },
+  dateRange: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginBottom: 5,
+  },
 });
 
 interface MyDocumentProps {
@@ -35,7 +41,12 @@ interface MyDocumentProps {
 }
 
 // Create a Document component
-function MyDocument({ title, daysWithout, durationFreq }: MyDocumentProps) {
+function MyDocument({
+  title,
+  daysWithout,
+  durationFreq,
+  dateRanges,
+}: MyDocumentProps) {
   const getHighestDaysWithout = (
     days: { date: string; days_without: number }[]
   ) => {
@@ -71,9 +82,26 @@ function MyDocument({ title, daysWithout, durationFreq }: MyDocumentProps) {
     return totalFrequency > 0 ? totalDuration / totalFrequency : 0;
   };
 
-  const averageDuration = calculateAverageDuration(durationFreq);
+  function dateRangeConverter(dateRanges: any) {
+    if (!dateRanges.startDate && !dateRanges.endDate) {
+      return 'All time';
+    }
 
-  // console.log(averageDuration);
+    let start = dateRanges.startDate;
+    let startDate = new Date(start);
+    let formatStartDate = format(startDate, 'MMMM do, yyyy');
+
+    let end = dateRanges.endDate;
+    let endDate = new Date(end);
+    let formatEndDate = format(endDate, 'MMMM do, yyyy');
+
+    // return { start: formatStartDate, end: formatEndDate };
+    return `${formatStartDate} - ${formatEndDate}`;
+  }
+
+  const dateConverted = dateRangeConverter(dateRanges);
+
+  const averageDuration = calculateAverageDuration(durationFreq);
 
   const highestDaysWithout = getHighestDaysWithout(daysWithout);
 
@@ -81,8 +109,7 @@ function MyDocument({ title, daysWithout, durationFreq }: MyDocumentProps) {
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <Text style={styles.header}>{title}</Text>
-
+          <Text style={styles.header}>{title} - MigrainePal</Text>
           {/* Display data */}
           {/* {data.map((item, index) => (
             <Text key={index} style={styles.content}>
@@ -96,6 +123,7 @@ function MyDocument({ title, daysWithout, durationFreq }: MyDocumentProps) {
           ))} */}
 
           {/* Display calculated metrics */}
+          <Text style={styles.dateRange}>{`Date Range: ${dateConverted}`}</Text>
           <Text style={styles.summary}>
             {`Average Duration: ${averageDuration.toFixed()} hours`}
           </Text>
