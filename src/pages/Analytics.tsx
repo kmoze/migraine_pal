@@ -13,9 +13,17 @@ import {
   ChartLegend,
   ChartLegendContent,
 } from '@/components/ui/chart';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 
 import { type ChartConfig } from '@/components/ui/chart';
-import { Frown, TrendingUp } from 'lucide-react';
+import { Frown } from 'lucide-react';
 import { XAxis, CartesianGrid, BarChart, Bar, Pie, PieChart } from 'recharts';
 import LineChartTest from '@/components/LineChartTest';
 import RadarChartComponent from '@/components/RadarChart';
@@ -283,6 +291,48 @@ function Analytics({ migraines }: AnalyticsProps) {
               })
             }
           />
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline">Open popover</Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-80">
+              <div className="flex flex-col">
+                <div className="space-y-2">
+                  <h4 className="font-medium leading-none">
+                    Download your migraine report
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    Handy if you want to share your migraine logs with a health
+                    provider or for your own records.
+                  </p>
+                </div>
+                <div className="justify-center flex">
+                  <PDFDownloadLink
+                    document={
+                      <MyDocument
+                        title={title}
+                        data={data}
+                        daysWithout={daysWithoutMigraine}
+                        durationFreq={durationFreqData}
+                        dateRanges={dateRange}
+                        migraines={filteredMigraines}
+                        freqSymptoms={symptomsChartData}
+                        freqTriggers={triggersChartData}
+                      />
+                    }
+                    fileName="report.pdf"
+                  >
+                    {/* Not sure what this error is but it works... */}
+                    {({ loading }: { loading: boolean }) => (
+                      <button className="p-3 bg-card-coolorsPrimary hover:bg-card-darkModePrimary transition-colors duration-300 ease-in-out text-white dark:bg-card-coolorsSecondary dark:hover:bg-card-coolorsAccent rounded-md mt-4 w-52">
+                        Download PDF
+                      </button>
+                    )}
+                  </PDFDownloadLink>
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
           <PDFDownloadLink
             document={
               <MyDocument
@@ -299,13 +349,13 @@ function Analytics({ migraines }: AnalyticsProps) {
             fileName="report.pdf"
           >
             {/* Not sure what this error is but it works... */}
-            {({ loading }: { loading: boolean }) =>
+            {/* {({ loading }: { loading: boolean }) =>
               loading ? (
                 <button>Loading document...</button>
               ) : (
                 <button>Download PDF</button>
               )
-            }
+            } */}
           </PDFDownloadLink>
         </div>
         <div className="flex gap-2">
