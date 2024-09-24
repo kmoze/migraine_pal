@@ -16,7 +16,7 @@ import { Cog6ToothIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 
-import profile from '../assets/profilePic.jpg';
+import profile from '../assets/FDC030EB-E9C5-463E-B234-6F5FA6FB828C_1_105_c.jpeg';
 
 import { Sun, Moon } from 'lucide-react';
 
@@ -170,15 +170,13 @@ export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
           <div className="flex flex-col">
             <h2 className="text-xl text-white font-customText">Kier M.</h2>
             <p className="text-lg text-gray-400 font-light">User since 2019</p>
-            <p className="text-gray-400 mt-4 font-extralight">
-              Nationality: 🇨🇦
-            </p>
+            <p className="text-lg text-gray-400 font-light">kier@gmail.com</p>
           </div>
           <Avatar>
             <AvatarImage
               src={profile}
               alt="profile picture"
-              className="w-14 h-14"
+              className="w-12 h-16"
             />
             <AvatarFallback>KM</AvatarFallback>
           </Avatar>

@@ -16,4 +16,5 @@ export const triggerOptions = [
   { value: 'poor sleep', label: 'Poor sleep' },
   { value: 'physical exertion', label: 'Physical exertion' },
   { value: 'alcohol', label: 'Alcohol' },
+  { value: 'weather patterns', label: 'Weather Patterns' },
 ];
