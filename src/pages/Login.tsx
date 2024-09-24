@@ -1,5 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import migraine from '../assets/headache_3d.webp';
+import styles from './login.module.css';
 
 function Login() {
   return (
@@ -13,7 +15,11 @@ function Login() {
         </Link>
       </div>
       <div className="flex w-1/2 flex-col justify-center items-center">
-        <p className="text-white">Placeholder for image</p>
+        <img
+          className={styles.migraineImg}
+          src={migraine}
+          alt="migraine graphic"
+        />
       </div>
     </div>
   );
