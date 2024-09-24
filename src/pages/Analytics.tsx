@@ -259,9 +259,9 @@ function Analytics({ migraines }: AnalyticsProps) {
 
   return (
     <>
-      <div className="h-full w-full flex flex-col p-4 bg-card-lightMode dark:bg-card-dashboard gap-2">
-        <div className="flex items-center gap-4">
-          <h2 className="text-3xl flex-shrink-0 font-custom">Analytics</h2>
+      <div className="h-full w-full flex flex-col p-6 bg-card-lightMode dark:bg-card-dashboard gap-3">
+        <div className="flex items-center gap-5">
+          <h2 className="text-3xl font-custom ml-2">Analytics</h2>
           <ToggleGroupButtons
             allMigraines={() =>
               setDateRange({ startDate: null, endDate: null })
@@ -312,7 +312,7 @@ function Analytics({ migraines }: AnalyticsProps) {
           <Card className="flex flex-col w-1/2 bg-card-lightModeOther dark:bg-card-darkModePrimary border-none">
             <CardHeader className="items-center pb-0">
               <CardTitle>Pain Levels</CardTitle>
-              <CardDescription className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary">
+              <CardDescription className="text-muted-foreground dark:text-card-darkModeTextPrimary">
                 Hover over the chart to see pain levels
               </CardDescription>
             </CardHeader>

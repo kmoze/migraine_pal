@@ -1,4 +1,3 @@
-import { TrendingUp } from 'lucide-react';
 import { CartesianGrid, LabelList, Line, LineChart, XAxis } from 'recharts';
 
 import {
@@ -29,7 +28,7 @@ function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
     <Card className="w-1/2 bg-card-lightModeOther dark:bg-card-darkModePrimary border-none">
       <CardHeader>
         <CardTitle>Days without a migraine</CardTitle>
-        <CardDescription className="dark:text-card-darkModeTextPrimary">
+        <CardDescription className="text-muted-foreground dark:text-card-darkModeTextPrimary">
           Comparison from day to day
         </CardDescription>
       </CardHeader>
