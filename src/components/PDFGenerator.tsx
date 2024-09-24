@@ -5,41 +5,58 @@ const styles = StyleSheet.create({
   page: {
     padding: 30,
     fontFamily: 'Helvetica',
-    backgroundColor: '#f4f4f4', // Light gray background for a clean look
+    backgroundColor: '#f4f4f4',
   },
   section: {
-    marginBottom: 20,
+    marginBottom: 25,
   },
   header: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: '#004c8b',
     textAlign: 'center',
-    color: '#004c8b', // Accent color for header
   },
   dateRange: {
-    fontSize: 14,
-    marginBottom: 10,
-    color: '#333', // Dark gray for better readability
+    fontSize: 12,
+    marginBottom: 30,
+    color: '#333',
+    textAlign: 'center',
+    fontFamily: 'Helvetica-Oblique',
   },
   summary: {
-    fontSize: 12,
-    marginBottom: 8,
-    color: '#555', // Medium gray for text
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 15,
+    color: '#333',
+    backgroundColor: '#e6f7ff', // Light blue background for each item
+    padding: 5, // Padding around text
+    width: 250,
+    borderRadius: 5, // Rounded corners
   },
   listItem: {
-    fontSize: 12,
-    marginBottom: 4,
+    fontSize: 14,
+    marginBottom: 10,
     paddingLeft: 10,
-    borderLeft: '2px solid #0077b6', // Accent border for list items
+    borderLeft: '2px solid #0077b6',
     color: '#333',
   },
   title: {
     fontSize: 16,
     fontWeight: 'bold',
     marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 15,
     color: '#0077b6',
+  },
+  callToAction: {
+    fontSize: 11,
+    fontWeight: 'light',
+    marginTop: 30,
+  },
+  highlightedText: {
+    fontSize: 22,
+    fontWeight: 'hairline',
   },
 });
 
@@ -176,7 +193,6 @@ function MyDocument({
   const averagePainLevel = averagePain(migraines);
 
   const topSymptoms = top3Symptoms(freqSymptoms);
-  console.log(topSymptoms);
 
   const topTriggers = top3Triggers(freqTriggers);
 
@@ -185,16 +201,24 @@ function MyDocument({
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
           <Text style={styles.header}>{title} - MigrainePal</Text>
-          {/* Display calculated metrics */}
-          <Text style={styles.dateRange}>{`Date Range: ${dateConverted}`}</Text>
+          <Text style={styles.dateRange}>{dateConverted}</Text>
           <Text style={styles.summary}>
-            {`Average Duration: ${averageDuration.toFixed()} hours`}
+            Average duration:{' '}
+            <Text style={styles.highlightedText}>
+              {`${averageDuration.toFixed()}`} hours
+            </Text>
           </Text>
           <Text style={styles.summary}>
-            {`Longest stretch of days without a migraine: ${highestDaysWithout}`}
+            Most days without a migraine:{' '}
+            <Text style={styles.highlightedText}>
+              {`${highestDaysWithout}`}
+            </Text>
           </Text>
           <Text style={styles.summary}>
-            {`Average pain level: ${averagePainLevel}/10`}
+            Average pain level:{' '}
+            <Text style={styles.highlightedText}>
+              {`${averagePainLevel}/10`}
+            </Text>
           </Text>
           <Text style={styles.title}>Top 3 symptoms:</Text>
           {topSymptoms.map((symptom, index) => (
@@ -208,6 +232,10 @@ function MyDocument({
               {`${index + 1}. ${capitalizeFirstLetter(symptom.term)}`}
             </Text>
           ))}
+          <Text style={styles.callToAction}>
+            Bring this report to your next Doctor's appointment to discuss it
+            with a health professional.
+          </Text>
         </View>
       </Page>
     </Document>
