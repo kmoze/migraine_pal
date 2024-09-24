@@ -105,10 +105,6 @@ function Analytics({ migraines }: AnalyticsProps) {
     'Additional details...',
     'Further analysis...',
   ];
-  // --------------------------------------------------------- //
-  // --------------------------------------------------------- //
-  // --------------------------------------------------------- //
-  // Date filtering experiment
 
   const initialDateRange: DateRange = {
     startDate: getStartDateThreeMonthsAgo(),
@@ -138,11 +134,6 @@ function Analytics({ migraines }: AnalyticsProps) {
 
   let symptomsChartData = frequencyCounter(filteredMigraines, 'symptoms');
   let triggersChartData = frequencyCounter(filteredMigraines, 'triggers');
-
-  // End of date filtering experiment code
-  // --------------------------------------------------------- //
-  // --------------------------------------------------------- //
-  // --------------------------------------------------------- //
 
   function frequencyCounter(
     objectsArray: Migraine[],
@@ -236,7 +227,7 @@ function Analytics({ migraines }: AnalyticsProps) {
     const durationCount = migraineData.reduce<DurationFrequency>(
       (acc, migraine) => {
         const { duration } = migraine;
-        acc[duration] = (acc[duration] || 0) + 1; // Increment the count for the duration
+        acc[duration] = (acc[duration] || 0) + 1;
         return acc;
       },
       {}

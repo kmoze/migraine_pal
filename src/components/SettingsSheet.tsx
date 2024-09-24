@@ -30,15 +30,14 @@ interface Migraine {
 }
 
 interface SheetDemoProps {
-  onDelete: () => void; // onDelete is a function with no parameters and no return value
-  mostRecentMigraine: Migraine | null; // mostRecentMigraine can either be a Migraine object or null
+  onDelete: () => void;
+  mostRecentMigraine: Migraine | null;
 }
 
 export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    // Apply dark mode class based on the initial state
     if (darkMode) {
       document.documentElement.classList.add('dark');
     } else {
