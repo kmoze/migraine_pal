@@ -26,10 +26,12 @@ const chartConfig = {} satisfies ChartConfig;
 
 function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
   return (
-    <Card className="w-1/2 bg-gray-200 dark:bg-card-darkModePrimary border-none">
+    <Card className="w-1/2 bg-card-lightModeOther dark:bg-card-darkModePrimary border-none">
       <CardHeader>
         <CardTitle>Days without a migraine</CardTitle>
-        <CardDescription>Comparison from day to day</CardDescription>
+        <CardDescription className="dark:text-card-darkModeTextPrimary">
+          Comparison from day to day
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer
@@ -79,12 +81,10 @@ function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium leading-none">
-          Lorem ipsum dolor sit amet.
-        </div>
-        <div className="leading-none text-muted-foreground">
-          Lorem, ipsum dolor sit amet consectetur adipisicing.
+      <CardFooter className="flex-col items-start gap-4 text-sm">
+        <div className="leading-none text-muted-foreground mt-4">
+          Ideally as your migraines improve, you'll have more days in between
+          incidents.
         </div>
       </CardFooter>
     </Card>

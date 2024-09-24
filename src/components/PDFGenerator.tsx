@@ -1,65 +1,6 @@
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { format } from 'date-fns';
 
-const styles = StyleSheet.create({
-  page: {
-    padding: 30,
-    fontFamily: 'Helvetica',
-    backgroundColor: '#f4f4f4',
-  },
-  section: {
-    marginBottom: 25,
-  },
-  header: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#004c8b',
-    textAlign: 'center',
-  },
-  dateRange: {
-    fontSize: 12,
-    marginBottom: 30,
-    color: '#333',
-    textAlign: 'center',
-    fontFamily: 'Helvetica-Oblique',
-  },
-  summary: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 15,
-    color: '#333',
-    backgroundColor: '#e6f7ff', // Light blue background for each item
-    padding: 5, // Padding around text
-    width: 250,
-    borderRadius: 5, // Rounded corners
-  },
-  listItem: {
-    fontSize: 14,
-    marginBottom: 10,
-    paddingLeft: 10,
-    borderLeft: '2px solid #0077b6',
-    color: '#333',
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 15,
-    color: '#0077b6',
-  },
-  callToAction: {
-    fontSize: 11,
-    fontWeight: 'light',
-    marginTop: 30,
-  },
-  highlightedText: {
-    fontSize: 22,
-    fontWeight: 'hairline',
-  },
-});
-
 interface Migraine {
   id: number;
   date: Date;
@@ -241,5 +182,64 @@ function MyDocument({
     </Document>
   );
 }
+
+const styles = StyleSheet.create({
+  page: {
+    padding: 30,
+    fontFamily: 'Helvetica',
+    backgroundColor: '#f4f4f4',
+  },
+  section: {
+    marginBottom: 25,
+  },
+  header: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#004c8b',
+    textAlign: 'center',
+  },
+  dateRange: {
+    fontSize: 12,
+    marginBottom: 30,
+    color: '#333',
+    textAlign: 'center',
+    fontFamily: 'Helvetica-Oblique',
+  },
+  summary: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 15,
+    color: '#333',
+    backgroundColor: '#e6f7ff', // Light blue background for each item
+    padding: 5, // Padding around text
+    width: 250,
+    borderRadius: 5, // Rounded corners
+  },
+  listItem: {
+    fontSize: 14,
+    marginBottom: 10,
+    paddingLeft: 10,
+    borderLeft: '2px solid #0077b6',
+    color: '#333',
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 15,
+    color: '#0077b6',
+  },
+  callToAction: {
+    fontSize: 11,
+    fontWeight: 'light',
+    marginTop: 30,
+  },
+  highlightedText: {
+    fontSize: 22,
+    fontWeight: 'hairline',
+  },
+});
 
 export default MyDocument;

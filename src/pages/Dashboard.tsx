@@ -363,7 +363,7 @@ function Dashboard({ migraines }: DashboardProps) {
             Welcome to MigrainePal, Kier 👋🏻
           </h2>
           <div className="flex justify-around gap-2">
-            <h4 className="text-card-coolorsPrimary text-2xl py-8 px-4 w-1/4 bg-card-lightMode mt-2 rounded-lg text-left font-customText dark:bg-card-darkModeSecondary dark:text-card-darkModeTextPrimary">
+            <h4 className="text-card-coolorsPrimary text-2xl py-8 px-4 w-1/4 bg-card-lightModeDashboard mt-2 rounded-lg text-left font-customText dark:bg-card-darkModeSecondary dark:text-card-darkModeTextPrimary">
               {mostRecentDay(migraines, mostRecentMonth(migraines)) === 0 ? (
                 <>Your last migraine was today.</>
               ) : mostRecentDay(migraines, mostRecentMonth(migraines)) === 1 ? (

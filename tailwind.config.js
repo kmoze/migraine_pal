@@ -31,6 +31,8 @@ export default {
           lightModeSecondary: 'hsl(198, 33%, 76%)',
           lightModeTertiary: 'hsl(187, 100%, 91%)',
           lightModeOther: 'hsl(201, 100%, 81%)',
+          lightModeDashboard: 'hsl(201, 43%, 81%)',
+          lightModeRadar: 'hsl(180,100%,93.7%)',
           darkModePrimary: 'hsl(231, 12%, 21%)',
           darkModeTextPrimary: 'hsl(111, 24%, 94%)',
           darkModeSecondary: 'hsl(244, 16%, 18%)',

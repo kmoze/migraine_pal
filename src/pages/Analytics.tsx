@@ -309,11 +309,11 @@ function Analytics({ migraines }: AnalyticsProps) {
           </PDFDownloadLink>
         </div>
         <div className="flex gap-2">
-          <Card className="flex flex-col w-1/2 bg-gray-200 dark:bg-card-darkModePrimary border-none">
+          <Card className="flex flex-col w-1/2 bg-card-lightModeOther dark:bg-card-darkModePrimary border-none">
             <CardHeader className="items-center pb-0">
               <CardTitle>Pain Levels</CardTitle>
-              <CardDescription>
-                Hover over the chart to see the pain levels
+              <CardDescription className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary">
+                Hover over the chart to see pain levels
               </CardDescription>
             </CardHeader>
             <CardContent className="flex-1 pb-0">
@@ -339,23 +339,19 @@ function Analytics({ migraines }: AnalyticsProps) {
               </ChartContainer>
             </CardContent>
             <CardFooter className="flex-col gap-2 text-sm">
-              <div className="flex items-center gap-2 font-medium leading-none">
-                Lorem ipsum dolor sit amet consectetur.{' '}
-                <TrendingUp className="h-4 w-4" />
-              </div>
-              <div className="flex items-center gap-2 leading-none text-muted-foreground">
-                Lorem, ipsum dolor.
+              <div className="leading-none text-muted-foreground mt-4">
+                See how your pain has been historically.
               </div>
             </CardFooter>
           </Card>
           <LineChartTest daysWithoutMigraine={daysWithoutMigraine} />
         </div>
         <div className="flex gap-5">
-          <Card className="flex flex-col w-1/3 bg-gray-200 dark:bg-card-darkModePrimary border-none">
+          <Card className="flex flex-col w-1/3 bg-card-lightModeTertiary dark:bg-card-darkModePrimary border-none">
             <CardHeader className="items-center pb-0">
               <CardTitle>Most common symptoms</CardTitle>
-              <CardDescription>
-                Hover over the chart to see the frequency
+              <CardDescription className="dark:text-card-darkModeTextPrimary">
+                Hover to see the frequency of each symptom.
               </CardDescription>
             </CardHeader>
             <CardContent className="flex-1 pb-0">
@@ -375,19 +371,17 @@ function Analytics({ migraines }: AnalyticsProps) {
               </ChartContainer>
             </CardContent>
             <CardFooter className="flex-col gap-2 text-sm">
-              <div className="flex items-center gap-2 font-medium leading-none">
-                Lorem ipsum dolor sit amet. <TrendingUp className="h-4 w-4" />
-              </div>
-              <div className="leading-none text-muted-foreground">
-                Lorem ipsum dolor sit amet consectetur adipisicing.
+              <div className="leading-none text-muted-foreground text-sm w-full">
+                Keep these in mind for when discussing your migraines with your
+                doctor.
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col w-1/3 bg-gray-200 dark:bg-card-darkModePrimary border-none">
+          <Card className="flex flex-col w-1/3 bg-card-lightModeTertiary dark:bg-card-darkModePrimary border-none">
             <CardHeader className="items-center pb-0">
               <CardTitle>Most common triggers</CardTitle>
-              <CardDescription>
-                Hover over the chart to see the frequency
+              <CardDescription className="dark:text-card-darkModeTextPrimary">
+                Hover to see the frequency of each trigger.
               </CardDescription>
             </CardHeader>
             <CardContent className="flex-1 pb-0">
@@ -407,11 +401,8 @@ function Analytics({ migraines }: AnalyticsProps) {
               </ChartContainer>
             </CardContent>
             <CardFooter className="flex-col gap-2 text-sm">
-              <div className="flex items-center gap-2 font-medium leading-none">
-                Lorem ipsum dolor sit amet. <TrendingUp className="h-4 w-4" />
-              </div>
-              <div className="leading-none text-muted-foreground">
-                Lorem ipsum dolor sit amet consectetur adipisicing.
+              <div className="leading-none text-muted-foreground w-3/4 mt-2">
+                Are there any triggers here that may be preventable?
               </div>
             </CardFooter>
           </Card>

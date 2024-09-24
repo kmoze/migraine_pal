@@ -22,10 +22,10 @@ export function PainRadialChart({ score }: { score: number }) {
   };
 
   const getEndAngle = (score: number) => {
-    if (score <= 1) return 30; // 25% of the circle
-    if (score <= 2) return 60; // 25% of the circle
-    if (score <= 3) return 90; // 25% of the circle
-    if (score <= 4) return 110; // 25% of the circle
+    if (score <= 1) return 30;
+    if (score <= 2) return 60;
+    if (score <= 3) return 90;
+    if (score <= 4) return 110;
     if (score <= 5) return 175;
     if (score <= 6) return 200;
     if (score <= 7) return 230;

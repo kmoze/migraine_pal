@@ -26,11 +26,11 @@ const chartConfig = {} satisfies ChartConfig;
 
 export function RadarChartComponent({ durationFreqData }: RadarChartProps) {
   return (
-    <Card className="w-1/3 bg-gray-200 dark:bg-card-darkModePrimary border-none">
+    <Card className="w-1/3 bg-card-lightModeRadar dark:bg-card-darkModePrimary border-none">
       <CardHeader className="items-center">
         <CardTitle>Migraine Duration Frequency</CardTitle>
-        <CardDescription>
-          Showing the duration of your migraines and how often
+        <CardDescription className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary">
+          Displaying the duration of your migraines. Hover to see frequency.
         </CardDescription>
       </CardHeader>
       <CardContent className="pb-0">
@@ -55,12 +55,8 @@ export function RadarChartComponent({ durationFreqData }: RadarChartProps) {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          Lorem ipsum dolor sit amet consectetur.
-          <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="flex items-center gap-2 leading-none text-muted-foreground">
-          Lorem, ipsum dolor.
+        <div className="flex items-center gap-2 mt-8 leading-none text-muted-foreground">
+          Get a sense of how long your migraines are lasting.
         </div>
       </CardFooter>
     </Card>
