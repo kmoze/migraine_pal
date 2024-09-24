@@ -28,6 +28,7 @@ import { XAxis, CartesianGrid, BarChart, Bar, Pie, PieChart } from 'recharts';
 import LineChartTest from '@/components/LineChartTest';
 import RadarChartComponent from '@/components/RadarChart';
 import { ToggleGroupButtons } from '@/components/AnalyticsToggle';
+import InsightsSheet from '@/components/InsightsSheet';
 
 // PDF Generation Experiment
 import { PDFDownloadLink } from '@react-pdf/renderer';
@@ -186,6 +187,8 @@ function Analytics({ migraines }: AnalyticsProps) {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   });
 
+  console.log(sortedMigraines);
+
   const barChartDateFormat = filteredMigraines
     .slice()
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
@@ -284,6 +287,7 @@ function Analytics({ migraines }: AnalyticsProps) {
               }
             />
           </div>
+          <InsightsSheet sorted={sortedMigraines} />
           <Popover>
             <PopoverTrigger asChild>
               <Button className="text-md dark:bg-card-lightMode dark:text-card-dashboard dark:hover:bg-card-lightModeSecondary bg-card-coolorsSecondary hover:bg-card-coolorsAccent">

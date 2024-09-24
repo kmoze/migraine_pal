@@ -161,6 +161,10 @@ function MyDocument({
               {`${averagePainLevel}/10`}
             </Text>
           </Text>
+          <Text style={styles.summary}>
+            Total migraines logged:{' '}
+            <Text style={styles.highlightedText}>{`${migraines.length}`}</Text>
+          </Text>
           <Text style={styles.title}>Top 3 symptoms:</Text>
           {topSymptoms.map((symptom, index) => (
             <Text key={index} style={styles.listItem}>
