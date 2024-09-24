@@ -10,10 +10,10 @@ function Login() {
       <div className="w-1/2 flex flex-col justify-center items-center">
         <h2 className="text-4xl text-white font-custom">MigrainePal</h2>
         <Link to={'/'}>
-          <Button className="relative bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:text-card-lightMode px-20 mt-5 group">
-            Log In
+          <Button className="relative text-lg bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:text-card-lightMode px-20 py-5 mt-5 group">
+            Login
             <span className="absolute right-5 top-1/2 transform -translate-y-1/2 transition-transform duration-500 ease-in-out group-hover:translate-x-2">
-              <ArrowRight w-5 h-5 />
+              <ArrowRight w-6 h-6 />
             </span>
           </Button>
         </Link>

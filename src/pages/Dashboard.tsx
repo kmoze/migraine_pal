@@ -480,9 +480,11 @@ function Dashboard({ migraines }: DashboardProps) {
               digestible charts and graphs.
             </h2>
             <Link to="/analytics">
-              <Button className="text-md p-5 rounded-md bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:bg-card-lightMode dark:hover:bg-card-lightModeSecondary flex items-center">
+              <Button className="group text-md p-5 rounded-md bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:bg-card-lightMode dark:hover:bg-card-lightModeSecondary flex items-center">
                 Go to Analytics
-                <MoveRight className="ml-2 h-5 w-5" />
+                <span className="right-5 transform-translate-y transition-transform duration-500 ease-in-out group-hover:translate-x-2 ml-3 mr-2">
+                  <MoveRight w-5 h-5 />
+                </span>
               </Button>
             </Link>
           </div>
