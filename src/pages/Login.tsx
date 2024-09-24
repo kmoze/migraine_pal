@@ -7,7 +7,7 @@ function Login() {
       <div className="w-1/2 flex flex-col justify-center items-center">
         <h2 className="text-4xl text-white font-custom">MigrainePal</h2>
         <Link to={'/'}>
-          <Button className="bg-card-coolorsSecondary hover:bg-card-coolorsAccent px-20 mt-5">
+          <Button className="bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:text-card-lightMode px-20 mt-5">
             Log In
           </Button>
         </Link>
