@@ -12,25 +12,25 @@ export function ToggleGroupButtons({
   last3Months,
 }: ToggleGroupButtonsProps) {
   return (
-    <ToggleGroup type="single" defaultValue="bold" className="ml-5">
+    <ToggleGroup type="single" defaultValue="3-months">
       <ToggleGroupItem
-        value="bold"
+        value="3-months"
         aria-label="Toggle bold"
-        className="bg-card-coolorsPrimary text-card-darkModeTextPrimary hover:bg-card-darkModePrimary hover:text-card-darkModeTextPrimary"
+        className="bg-card-coolorsPrimary text-card-darkModeTextPrimary hover:bg-card-darkModePrimary hover:text-card-darkModeTextPrimary mr-3"
       >
         <button onClick={last3Months}>Last 3 months</button>
       </ToggleGroupItem>
       <ToggleGroupItem
-        value="italic"
+        value="current-month"
         aria-label="Toggle italic"
-        className="bg-card-coolorsPrimary text-card-darkModeTextPrimary hover:bg-card-darkModePrimary hover:text-card-darkModeTextPrimary "
+        className="bg-card-coolorsPrimary text-card-darkModeTextPrimary hover:bg-card-darkModePrimary hover:text-card-darkModeTextPrimary mr-3"
       >
         <button onClick={currentMonth}>Current month</button>
       </ToggleGroupItem>
       <ToggleGroupItem
-        value="strikethrough"
+        value="all-time"
         aria-label="Toggle strikethrough"
-        className="bg-card-coolorsPrimary text-card-darkModeTextPrimary hover:bg-card-darkModePrimary hover:text-card-darkModeTextPrimary "
+        className="bg-card-coolorsPrimary text-card-darkModeTextPrimary hover:bg-card-darkModePrimary hover:text-card-darkModeTextPrimary mr-3"
       >
         <button onClick={allMigraines}>All time</button>
       </ToggleGroupItem>

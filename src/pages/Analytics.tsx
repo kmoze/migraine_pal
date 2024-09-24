@@ -268,32 +268,36 @@ function Analytics({ migraines }: AnalyticsProps) {
   return (
     <>
       <div className="h-full w-full flex flex-col p-6 bg-card-lightMode dark:bg-card-dashboard gap-3">
-        <div className="flex items-center gap-5">
-          <h2 className="text-3xl font-custom ml-2">Analytics</h2>
-          <ToggleGroupButtons
-            allMigraines={() =>
-              setDateRange({ startDate: null, endDate: null })
-            }
-            currentMonth={() =>
-              setDateRange({
-                startDate: new Date(
-                  new Date().getFullYear(),
-                  new Date().getMonth(),
-                  1
-                ), // First day of the current month
-                endDate: new Date(), // Current date
-              })
-            }
-            last3Months={() =>
-              setDateRange({
-                startDate: subMonths(new Date(), 3),
-                endDate: new Date(),
-              })
-            }
-          />
+        <div className="flex justify-between">
+          <div className="flex space-x-20">
+            <h2 className="text-3xl font-custom mr-0">Analytics</h2>
+            <ToggleGroupButtons
+              allMigraines={() =>
+                setDateRange({ startDate: null, endDate: null })
+              }
+              currentMonth={() =>
+                setDateRange({
+                  startDate: new Date(
+                    new Date().getFullYear(),
+                    new Date().getMonth(),
+                    1
+                  ), // First day of the current month
+                  endDate: new Date(), // Current date
+                })
+              }
+              last3Months={() =>
+                setDateRange({
+                  startDate: subMonths(new Date(), 3),
+                  endDate: new Date(),
+                })
+              }
+            />
+          </div>
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="outline">Open popover</Button>
+              <Button className="text-md dark:bg-card-lightMode dark:text-card-dashboard dark:hover:bg-card-lightModeSecondary bg-card-coolorsSecondary hover:bg-card-coolorsAccent">
+                Export
+              </Button>
             </PopoverTrigger>
             <PopoverContent className="w-80">
               <div className="flex flex-col">
@@ -327,7 +331,7 @@ function Analytics({ migraines }: AnalyticsProps) {
                       // <button className="p-3 bg-card-coolorsPrimary hover:bg-card-darkModePrimary transition-colors duration-300 ease-in-out text-white dark:bg-card-coolorsSecondary dark:hover:bg-card-coolorsAccent rounded-md mt-4 w-52">
                       //   Download PDF
                       // </button>
-                      <Button className="relative text-lg bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:text-card-lightMode px-16 py-5 mt-5 group">
+                      <Button className="relative text-lg bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:text-white dark:text-card-lightMode px-16 py-5 mt-5 group">
                         Download PDF
                         <span className="absolute right-3 top-3 transform -translate-y-1/4 transition-transform duration-500 ease-in-out group-hover:translate-y-0">
                           <Download w-5 h-5 />
@@ -339,30 +343,6 @@ function Analytics({ migraines }: AnalyticsProps) {
               </div>
             </PopoverContent>
           </Popover>
-          <PDFDownloadLink
-            document={
-              <MyDocument
-                title={title}
-                data={data}
-                daysWithout={daysWithoutMigraine}
-                durationFreq={durationFreqData}
-                dateRanges={dateRange}
-                migraines={filteredMigraines}
-                freqSymptoms={symptomsChartData}
-                freqTriggers={triggersChartData}
-              />
-            }
-            fileName="report.pdf"
-          >
-            {/* Not sure what this error is but it works... */}
-            {/* {({ loading }: { loading: boolean }) =>
-              loading ? (
-                <button>Loading document...</button>
-              ) : (
-                <button>Download PDF</button>
-              )
-            } */}
-          </PDFDownloadLink>
         </div>
         <div className="flex gap-2">
           <Card className="flex flex-col w-1/2 shadow-md shadow-slate-400 bg-card-lightModeOther dark:shadow-md dark:shadow-slate-950 dark:bg-card-darkModePrimary border-none">
