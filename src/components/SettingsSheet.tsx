@@ -10,10 +10,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { toast } from '@/hooks/use-toast';
 import { Cog6ToothIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
+
+import profile from '../assets/profilePic.jpg';
 
 import { Sun, Moon } from 'lucide-react';
 
@@ -163,6 +166,23 @@ export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
               </>
             )}
           </Label>
+        </div>
+        <div className="p-5 bg-card-coolorsPrimary rounded-sm flex justify-between w-full mt-96">
+          <div className="flex flex-col">
+            <h2 className="text-xl text-white font-customText">Kier M.</h2>
+            <p className="text-lg text-gray-400 font-light">User since 2019</p>
+            <p className="text-gray-400 mt-4 font-extralight">
+              Nationality: 🇨🇦
+            </p>
+          </div>
+          <Avatar>
+            <AvatarImage
+              src={profile}
+              alt="profile picture"
+              className="w-14 h-14"
+            />
+            <AvatarFallback>KM</AvatarFallback>
+          </Avatar>
         </div>
       </SheetContent>
     </Sheet>
