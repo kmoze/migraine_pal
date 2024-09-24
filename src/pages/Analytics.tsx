@@ -326,7 +326,7 @@ function Analytics({ migraines }: AnalyticsProps) {
                     }
                     fileName="report.pdf"
                   >
-                    {/* Not sure what this error is but it works... */}
+                    {/* Not sure what these errors are but it works... */}
                     {({ loading }: { loading: boolean }) => (
                       // <button className="p-3 bg-card-coolorsPrimary hover:bg-card-darkModePrimary transition-colors duration-300 ease-in-out text-white dark:bg-card-coolorsSecondary dark:hover:bg-card-coolorsAccent rounded-md mt-4 w-52">
                       //   Download PDF

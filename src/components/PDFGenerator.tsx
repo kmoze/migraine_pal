@@ -237,8 +237,9 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   highlightedText: {
-    fontSize: 22,
-    fontWeight: 'hairline',
+    fontSize: 16,
+    marginLeft: 10,
+    color: '#808080',
   },
 });
 
