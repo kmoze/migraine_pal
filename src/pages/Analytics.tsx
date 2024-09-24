@@ -262,8 +262,8 @@ function Analytics({ migraines }: AnalyticsProps) {
   return (
     <>
       <div className="h-full w-full flex flex-col p-6 bg-card-lightMode dark:bg-card-dashboard gap-3">
-        <div className="flex justify-between">
-          <div className="flex space-x-20">
+        <div className="flex justify-between items-center">
+          <div className="flex space-x-20 items-center">
             <h2 className="text-3xl font-custom mr-0">Analytics</h2>
             <ToggleGroupButtons
               allMigraines={() =>
@@ -287,57 +287,55 @@ function Analytics({ migraines }: AnalyticsProps) {
               }
             />
           </div>
-          <InsightsSheet sorted={sortedMigraines} />
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button className="text-md dark:bg-card-lightMode dark:text-card-dashboard dark:hover:bg-card-lightModeSecondary bg-card-coolorsSecondary hover:bg-card-coolorsAccent">
-                Export
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-80">
-              <div className="flex flex-col">
-                <div className="space-y-2">
-                  <h4 className="font-medium leading-none">
-                    Download your migraine report
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    Handy if you want to share your migraine logs with a health
-                    provider or for your own records.
-                  </p>
+          <div className="flex items-center space-x-4">
+            <InsightsSheet sorted={sortedMigraines} />
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button className="text-md dark:bg-card-lightMode dark:text-card-dashboard dark:hover:bg-card-lightModeSecondary bg-card-coolorsSecondary hover:bg-card-coolorsAccent">
+                  Export
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-80">
+                <div className="flex flex-col">
+                  <div className="space-y-2">
+                    <h4 className="font-medium leading-none">
+                      Download your migraine report
+                    </h4>
+                    <p className="text-sm text-muted-foreground">
+                      Handy if you want to share your migraine logs with a
+                      health provider or for your own records.
+                    </p>
+                  </div>
+                  <div className="justify-center flex">
+                    <PDFDownloadLink
+                      document={
+                        <MyDocument
+                          title={title}
+                          data={data}
+                          daysWithout={daysWithoutMigraine}
+                          durationFreq={durationFreqData}
+                          dateRanges={dateRange}
+                          migraines={filteredMigraines}
+                          freqSymptoms={symptomsChartData}
+                          freqTriggers={triggersChartData}
+                        />
+                      }
+                      fileName="report.pdf"
+                    >
+                      {({ loading }: { loading: boolean }) => (
+                        <Button className="relative text-lg bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:text-white dark:text-card-lightMode px-16 py-5 mt-5 group">
+                          Download PDF
+                          <span className="absolute right-3 top-3 transform -translate-y-1/4 transition-transform duration-500 ease-in-out group-hover:translate-y-0">
+                            <Download w-5 h-5 />
+                          </span>
+                        </Button>
+                      )}
+                    </PDFDownloadLink>
+                  </div>
                 </div>
-                <div className="justify-center flex">
-                  <PDFDownloadLink
-                    document={
-                      <MyDocument
-                        title={title}
-                        data={data}
-                        daysWithout={daysWithoutMigraine}
-                        durationFreq={durationFreqData}
-                        dateRanges={dateRange}
-                        migraines={filteredMigraines}
-                        freqSymptoms={symptomsChartData}
-                        freqTriggers={triggersChartData}
-                      />
-                    }
-                    fileName="report.pdf"
-                  >
-                    {/* Not sure what these errors are but it works... */}
-                    {({ loading }: { loading: boolean }) => (
-                      // <button className="p-3 bg-card-coolorsPrimary hover:bg-card-darkModePrimary transition-colors duration-300 ease-in-out text-white dark:bg-card-coolorsSecondary dark:hover:bg-card-coolorsAccent rounded-md mt-4 w-52">
-                      //   Download PDF
-                      // </button>
-                      <Button className="relative text-lg bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:text-white dark:text-card-lightMode px-16 py-5 mt-5 group">
-                        Download PDF
-                        <span className="absolute right-3 top-3 transform -translate-y-1/4 transition-transform duration-500 ease-in-out group-hover:translate-y-0">
-                          <Download w-5 h-5 />
-                        </span>
-                      </Button>
-                    )}
-                  </PDFDownloadLink>
-                </div>
-              </div>
-            </PopoverContent>
-          </Popover>
+              </PopoverContent>
+            </Popover>
+          </div>
         </div>
         <div className="flex gap-2">
           <Card className="flex flex-col w-1/2 shadow-md shadow-slate-400 bg-card-lightModeOther dark:shadow-md dark:shadow-slate-950 dark:bg-card-darkModePrimary border-none">

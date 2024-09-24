@@ -6,6 +6,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { Button } from './ui/button';
+import { Calendar, ChartNoAxesGantt } from 'lucide-react';
 
 function InsightsSheet({ sorted }) {
   function calculateAveragePain(data, month, year) {
@@ -53,8 +55,11 @@ function InsightsSheet({ sorted }) {
 
   return (
     <Sheet>
-      <SheetTrigger className="bg-card-coolorsSecondary text-white px-2 py-1 rounded-sm">
-        Monthly Insights
+      <SheetTrigger>
+        <Button className="bg-card-coolorsSecondary hover:bg-card-coolorsAccent text-white px-2 py-1">
+          Monthly Insights
+          <ChartNoAxesGantt className="h-5 w-5 ml-2" />
+        </Button>
       </SheetTrigger>
       <SheetContent
         side={'top'}
