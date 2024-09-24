@@ -1,35 +1,45 @@
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { format } from 'date-fns';
 
-// Define styles for the document
 const styles = StyleSheet.create({
   page: {
-    flexDirection: 'row',
-    backgroundColor: '#E4E4E4',
+    padding: 30,
+    fontFamily: 'Helvetica',
+    backgroundColor: '#f4f4f4', // Light gray background for a clean look
   },
   section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
-  },
-  header: {
-    fontSize: 24,
-    textAlign: 'center',
     marginBottom: 20,
   },
-  content: {
-    fontSize: 12,
-    marginBottom: 10,
-  },
-  summary: {
-    fontSize: 14,
-    marginTop: 20,
+  header: {
+    fontSize: 20,
     fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+    color: '#004c8b', // Accent color for header
   },
   dateRange: {
+    fontSize: 14,
+    marginBottom: 10,
+    color: '#333', // Dark gray for better readability
+  },
+  summary: {
+    fontSize: 12,
+    marginBottom: 8,
+    color: '#555', // Medium gray for text
+  },
+  listItem: {
+    fontSize: 12,
+    marginBottom: 4,
+    paddingLeft: 10,
+    borderLeft: '2px solid #0077b6', // Accent border for list items
+    color: '#333',
+  },
+  title: {
+    fontSize: 16,
     fontWeight: 'bold',
-    fontSize: 18,
-    marginBottom: 5,
+    marginTop: 10,
+    marginBottom: 10,
+    color: '#0077b6',
   },
 });
 
@@ -42,6 +52,12 @@ interface Migraine {
   duration: number;
 }
 
+interface TermFrequency {
+  term: string;
+  frequency: number;
+  fill: string;
+}
+
 interface MyDocumentProps {
   title: string;
   data: string[];
@@ -49,6 +65,8 @@ interface MyDocumentProps {
   durationFreq: { duration: string; frequency: number }[];
   dateRanges: { startDate: Date | null; endDate: Date | null };
   migraines: Migraine[];
+  freqSymptoms: TermFrequency[];
+  freqTriggers: TermFrequency[];
 }
 
 // Create a Document component
@@ -58,6 +76,8 @@ function MyDocument({
   durationFreq,
   dateRanges,
   migraines,
+  freqSymptoms,
+  freqTriggers,
 }: MyDocumentProps) {
   const getHighestDaysWithout = (
     days: { date: string; days_without: number }[]
@@ -122,6 +142,31 @@ function MyDocument({
     return parseFloat(averagePain.toFixed());
   }
 
+  function top3Symptoms(freqSymptoms: TermFrequency[]) {
+    const sortedSymptoms = freqSymptoms.sort(
+      (a, b) => b.frequency - a.frequency
+    );
+
+    const top3Symptoms = sortedSymptoms.slice(0, 3);
+
+    return top3Symptoms;
+  }
+
+  function top3Triggers(freqTriggers: TermFrequency[]) {
+    const sortedTriggers = freqTriggers.sort(
+      (a, b) => b.frequency - a.frequency
+    );
+
+    const top3Triggers = sortedTriggers.slice(0, 3);
+
+    return top3Triggers;
+  }
+
+  function capitalizeFirstLetter(term: string): string {
+    if (!term) return term;
+    return term.charAt(0).toUpperCase() + term.slice(1);
+  }
+
   const dateConverted = dateRangeConverter(dateRanges);
 
   const averageDuration = calculateAverageDuration(durationFreq);
@@ -130,23 +175,16 @@ function MyDocument({
 
   const averagePainLevel = averagePain(migraines);
 
+  const topSymptoms = top3Symptoms(freqSymptoms);
+  console.log(topSymptoms);
+
+  const topTriggers = top3Triggers(freqTriggers);
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
           <Text style={styles.header}>{title} - MigrainePal</Text>
-          {/* Display data */}
-          {/* {data.map((item, index) => (
-            <Text key={index} style={styles.content}>
-              {`Duration: ${item}, Frequency: ${item}`}
-            </Text>
-          ))}
-          {daysWithout.map((item, index) => (
-            <Text key={index} style={styles.content}>
-              {`Date: ${item.date}, Days Without: ${item.days_without}`}
-            </Text>
-          ))} */}
-
           {/* Display calculated metrics */}
           <Text style={styles.dateRange}>{`Date Range: ${dateConverted}`}</Text>
           <Text style={styles.summary}>
@@ -158,6 +196,18 @@ function MyDocument({
           <Text style={styles.summary}>
             {`Average pain level: ${averagePainLevel}/10`}
           </Text>
+          <Text style={styles.title}>Top 3 symptoms:</Text>
+          {topSymptoms.map((symptom, index) => (
+            <Text key={index} style={styles.listItem}>
+              {`${index + 1}. ${capitalizeFirstLetter(symptom.term)}`}
+            </Text>
+          ))}
+          <Text style={styles.title}>Top 3 triggers:</Text>
+          {topTriggers.map((symptom, index) => (
+            <Text key={index} style={styles.listItem}>
+              {`${index + 1}. ${capitalizeFirstLetter(symptom.term)}`}
+            </Text>
+          ))}
         </View>
       </Page>
     </Document>
