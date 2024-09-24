@@ -33,11 +33,22 @@ const styles = StyleSheet.create({
   },
 });
 
+interface Migraine {
+  id: number;
+  date: Date;
+  symptoms: string[];
+  triggers: string[];
+  pain: number;
+  duration: number;
+}
+
 interface MyDocumentProps {
   title: string;
   data: string[];
   daysWithout: { date: string; days_without: number }[];
   durationFreq: { duration: string; frequency: number }[];
+  dateRanges: { startDate: Date | null; endDate: Date | null };
+  migraines: Migraine[];
 }
 
 // Create a Document component
@@ -46,6 +57,7 @@ function MyDocument({
   daysWithout,
   durationFreq,
   dateRanges,
+  migraines,
 }: MyDocumentProps) {
   const getHighestDaysWithout = (
     days: { date: string; days_without: number }[]
@@ -95,8 +107,19 @@ function MyDocument({
     let endDate = new Date(end);
     let formatEndDate = format(endDate, 'MMMM do, yyyy');
 
-    // return { start: formatStartDate, end: formatEndDate };
     return `${formatStartDate} - ${formatEndDate}`;
+  }
+
+  function averagePain(migraines: Migraine[]) {
+    if (migraines.length === 0) return 0;
+
+    const totalPain = migraines.reduce(
+      (sum, migraine) => sum + migraine.pain,
+      0
+    );
+    const averagePain = totalPain / migraines.length;
+
+    return parseFloat(averagePain.toFixed());
   }
 
   const dateConverted = dateRangeConverter(dateRanges);
@@ -104,6 +127,8 @@ function MyDocument({
   const averageDuration = calculateAverageDuration(durationFreq);
 
   const highestDaysWithout = getHighestDaysWithout(daysWithout);
+
+  const averagePainLevel = averagePain(migraines);
 
   return (
     <Document>
@@ -129,6 +154,9 @@ function MyDocument({
           </Text>
           <Text style={styles.summary}>
             {`Longest stretch of days without a migraine: ${highestDaysWithout}`}
+          </Text>
+          <Text style={styles.summary}>
+            {`Average pain level: ${averagePainLevel}/10`}
           </Text>
         </View>
       </Page>

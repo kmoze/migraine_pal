@@ -131,6 +131,8 @@ function Analytics({ migraines }: AnalyticsProps) {
   let symptomsChartData = frequencyCounter(filteredMigraines, 'symptoms');
   let triggersChartData = frequencyCounter(filteredMigraines, 'triggers');
 
+  console.log(symptomsChartData);
+
   // End of date filtering experiment code
   // --------------------------------------------------------- //
   // --------------------------------------------------------- //
@@ -291,6 +293,7 @@ function Analytics({ migraines }: AnalyticsProps) {
                 daysWithout={daysWithoutMigraine}
                 durationFreq={durationFreqData}
                 dateRanges={dateRange}
+                migraines={filteredMigraines}
               />
             }
             fileName="report.pdf"
