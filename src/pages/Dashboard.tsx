@@ -360,7 +360,7 @@ function Dashboard({ migraines }: DashboardProps) {
       <div className="flex items-start gap-5">
         <div className="bg-card-lightMode shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-3/4 h-56 rounded-xl p-2 bg-opacity-55 dark:bg-card-darkModePrimary">
           <h2 className="text-card-coolorsPrimary text-3xl pt-3 pl-3 pb-3 font-custom dark:text-card-darkModeTextPrimary">
-            Welcome to MigrainePal 👋🏻
+            Welcome to MigrainePal, Kier 👋🏻
           </h2>
           <div className="flex justify-around gap-2">
             <h4 className="text-card-coolorsPrimary text-2xl py-8 px-4 w-1/4 bg-card-lightMode mt-2 rounded-lg text-left font-customText dark:bg-card-darkModeSecondary dark:text-card-darkModeTextPrimary">

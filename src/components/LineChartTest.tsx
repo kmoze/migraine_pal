@@ -81,7 +81,7 @@ function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 font-medium leading-none">
-          Lorem ipsum dolor sit amet. <TrendingUp className="h-4 w-4" />
+          Lorem ipsum dolor sit amet.
         </div>
         <div className="leading-none text-muted-foreground">
           Lorem, ipsum dolor sit amet consectetur adipisicing.

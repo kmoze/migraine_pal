@@ -15,6 +15,8 @@ import { Cog6ToothIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 
+import { Sun, Moon } from 'lucide-react';
+
 interface Migraine {
   id: number;
   date: Date;
@@ -66,7 +68,7 @@ export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
       <SheetContent side={'left'} className="bg-gray-700 border-gray-300">
         <SheetHeader>
           <div className="flex justify-between items-center">
-            <SheetTitle className="text-xl text-white">
+            <SheetTitle className="text-lg text-white">
               Delete most recent migraine
             </SheetTitle>
             <SheetClose asChild>
@@ -147,9 +149,19 @@ export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
           ></Switch>
           <Label
             htmlFor="dark-mode-toggle"
-            className="dark:text-card-lightMode text-card-lightMode"
+            className="dark:text-card-lightMode text-card-lightMode mt-1"
           >
-            {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            {darkMode ? (
+              <>
+                Switch to Light Mode{' '}
+                <Sun className="inline-block h-5 w-5 mb-1 text-yellow-200 fill-current" />
+              </>
+            ) : (
+              <>
+                Switch to Dark Mode{' '}
+                <Moon className="inline-block h-5 w-4 mb-1 text-card-dashboard fill-current" />
+              </>
+            )}
           </Label>
         </div>
       </SheetContent>

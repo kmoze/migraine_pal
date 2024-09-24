@@ -38,7 +38,7 @@ function Navbar({
   return (
     <>
       <div className="w-1/6 h-full flex flex-col justify-between bg-card-coolorsPrimary text-white p-4">
-        <h2 className="text-4xl text-left mt-4">MigrainePal</h2>
+        <h2 className="text-3xl text-center mt-4 font-custom">MigrainePal</h2>
         <div className="flex-grow flex flex-col items-center">
           <Button className="mt-10 w-10/12 bg-foreground text-base flex items-center justify-start gap-2 pl-4">
             <Squares2X2Icon className="h-5 w-5" />
