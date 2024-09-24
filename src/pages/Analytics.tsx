@@ -309,7 +309,7 @@ function Analytics({ migraines }: AnalyticsProps) {
           </PDFDownloadLink>
         </div>
         <div className="flex gap-2">
-          <Card className="flex flex-col w-1/2 bg-card-lightModeOther dark:bg-card-darkModePrimary border-none">
+          <Card className="flex flex-col w-1/2 shadow-md shadow-slate-400 bg-card-lightModeOther dark:shadow-md dark:shadow-slate-950 dark:bg-card-darkModePrimary border-none">
             <CardHeader className="items-center pb-0">
               <CardTitle>Pain Levels</CardTitle>
               <CardDescription className="text-muted-foreground dark:text-card-darkModeTextPrimary">
@@ -347,7 +347,7 @@ function Analytics({ migraines }: AnalyticsProps) {
           <LineChartTest daysWithoutMigraine={daysWithoutMigraine} />
         </div>
         <div className="flex gap-5">
-          <Card className="flex flex-col w-1/3 bg-card-lightModeTertiary dark:bg-card-darkModePrimary border-none">
+          <Card className="flex flex-col w-1/3 shadow-md shadow-slate-400 bg-card-lightModeTertiary dark:shadow-md dark:shadow-slate-950 dark:bg-card-darkModePrimary border-none">
             <CardHeader className="items-center pb-0">
               <CardTitle>Most common symptoms</CardTitle>
               <CardDescription className="dark:text-card-darkModeTextPrimary">
@@ -377,7 +377,7 @@ function Analytics({ migraines }: AnalyticsProps) {
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col w-1/3 bg-card-lightModeTertiary dark:bg-card-darkModePrimary border-none">
+          <Card className="flex flex-col w-1/3 shadow-md shadow-slate-400 bg-card-lightModeTertiary dark:shadow-md dark:shadow-slate-950 dark:bg-card-darkModePrimary border-none">
             <CardHeader className="items-center pb-0">
               <CardTitle>Most common triggers</CardTitle>
               <CardDescription className="dark:text-card-darkModeTextPrimary">

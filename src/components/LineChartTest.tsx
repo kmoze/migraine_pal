@@ -25,7 +25,7 @@ const chartConfig = {} satisfies ChartConfig;
 
 function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
   return (
-    <Card className="w-1/2 bg-card-lightModeOther dark:bg-card-darkModePrimary border-none">
+    <Card className="w-1/2 shadow-md shadow-slate-400 bg-card-lightModeOther dark:shadow-md dark:shadow-slate-950 dark:bg-card-darkModePrimary border-none">
       <CardHeader>
         <CardTitle>Days without a migraine</CardTitle>
         <CardDescription className="text-muted-foreground dark:text-card-darkModeTextPrimary">
