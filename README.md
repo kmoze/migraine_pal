@@ -1,5 +1,6 @@
 # MigrainePal
 
+>[!NOTE]
 > MigrainePal is a tracking tool that enables users to log their migraine attacks, receive detailed analytics and insights about them all with the goal of providing the end user with a deeper understanding of their migraine condition.
 
 ## Features
