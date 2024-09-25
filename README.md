@@ -1,50 +1,60 @@
-# React + TypeScript + Vite
+## MigrainePal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> MigrainePal is a tracking tool that enables users to log their migraine attacks, receive detailed analytics and insights about them all with the goal of providing the end user with a deeper understanding of their migraine condition.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Log migraines through a multi-step form
+- Receive detailed weather warnings that alert you to migraine-triggering weather patterns
+- Analytics dashboard to easily see key data points regarding your migraines and the impact they have on your life
+- Filter the analytics by date ranges to hone in on specific time frames
+- Export a PDF report to provide to healthcare professionals to discuss your progress or concerning trends
+- Dark mode toggle to provide some temporary relief from bright screen if you're actively suffering from a migraine
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [React]
+- [TypeScript]
+- [Tailwind CSS]
+- [Supabase]
+- [Recharts]
+- [Shadcn/ui]
+- [Zod]
+- [React-pdf]
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Install the dependencies and devDependencies and start the server.
+
+```sh
+cd project_name
+npm install
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Supabase
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+###### Sign up for Supabase and create a table schema that replicates the schema in the multi-step form code so that the form input is mapped to the DB's table.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+###### You'll need to create a **'Project API Key'** within Supabase as well as a **'Project URL'**.
+
+## OpenWeather
+
+###### Sign up to [OpenWeather] and generate an API key (for the only free service they offer). That's all you need to do!
+
+---
+
+###### Everything should be running and working well.
+
+###### Slack me if you have any questions 😃
+
+[//]: # "These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax"
+[React]: http://react.dev
+[TypeScript]: http://www.typescriptlang.org/
+[Tailwind CSS]: http://tailwindcss.com/
+[Supabase]: http://supabase.com/
+[Recharts]: http://recharts.org/en-US/
+[Shadcn/ui]: http://ui.shadcn.com/
+[Zod]: http://zod.dev/
+[React-pdf]: http://react-pdf.org/
+[OpenWeather]: http://openweathermap.org/
