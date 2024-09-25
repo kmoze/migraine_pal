@@ -16,7 +16,6 @@
 - [React]
 - [TypeScript]
 - [Tailwind CSS]
-- <a href="http://tailwindcss.com/" target="_blank">Tailwind CSS</a>
 - [Supabase]
 - [Recharts]
 - [Shadcn/ui]
