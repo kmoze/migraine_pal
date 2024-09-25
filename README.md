@@ -34,17 +34,17 @@ npm run dev
 
 ## Supabase
 
-###### Sign up for Supabase and create a table schema that replicates the schema in the multi-step form code so that the form input is mapped to the DB's table.
+Sign up for Supabase and create a table schema that replicates the schema in the multi-step form code so that the form input is mapped to the DB's table.
 
-###### You'll need to create a **'Project API Key'** within Supabase as well as a **'Project URL'**.
+You'll need to create a **'Project API Key'** within Supabase as well as a **'Project URL'**.
 
 ## OpenWeather
 
-###### Sign up to [OpenWeather] and generate an API key (for the only free service they offer). That's all you need to do!
+Sign up to [OpenWeather] and generate an API key (for the only free service they offer). That's all you need to do!
 
 ---
 
-###### Everything should be running and working well.
+Everything should be running and working well.
 
 ###### Slack me if you have any questions 😃
 
