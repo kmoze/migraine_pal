@@ -24,7 +24,7 @@ import { type ChartConfig } from '@/components/ui/chart';
 import { Frown, Download } from 'lucide-react';
 import { XAxis, CartesianGrid, BarChart, Bar, Pie, PieChart } from 'recharts';
 import RadarChartComponent from '@/components/RadarChart';
-import { ToggleGroupButtons } from '@/components/AnalyticsToggle';
+import { DateRangeToggle } from '@/components/AnalyticsDateRangeToggle';
 import InsightsSheet from '@/components/InsightsSheet';
 
 // PDF Generation Experiment
@@ -263,7 +263,7 @@ function Analytics({ migraines }: AnalyticsProps) {
         <div className="flex justify-between items-center">
           <div className="flex space-x-20 items-center">
             <h2 className="text-3xl font-custom mr-0">Analytics</h2>
-            <ToggleGroupButtons
+            <DateRangeToggle
               allMigraines={() =>
                 setDateRange({ startDate: null, endDate: null })
               }

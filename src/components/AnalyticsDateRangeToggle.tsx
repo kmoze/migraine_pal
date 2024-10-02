@@ -6,7 +6,7 @@ interface ToggleGroupButtonsProps {
   last3Months: () => void;
 }
 
-export function ToggleGroupButtons({
+export function DateRangeToggle({
   allMigraines,
   currentMonth,
   last3Months,
