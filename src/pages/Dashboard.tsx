@@ -12,7 +12,6 @@ import {
   Lightbulb,
   PartyPopper,
   Sparkles,
-  ZapOff,
   MoveRight,
   CloudLightning,
 } from 'lucide-react';
@@ -257,37 +256,32 @@ function Dashboard({ migraines }: DashboardProps) {
   function migraineProbability() {
     let score = 0;
 
-    if (
-      pressureChange(tempAndPressureChangeAnalysis(weatherData)) ===
-      'No distinct changes'
-    ) {
+    // Ensure weatherData is not null or undefined
+    if (!weatherData) {
+      return score; // Early return or handle the error as needed
+    }
+
+    // Get the analysis and ensure it's defined
+    const analysis: TempChanges =
+      tempAndPressureChangeAnalysis(weatherData) || {}; // Use a default empty object
+
+    // Get the pressure change status
+    const pressureStatus = pressureChange(analysis);
+    if (pressureStatus === 'No distinct changes') {
       score += 10;
-    } else if (
-      pressureChange(tempAndPressureChangeAnalysis(weatherData)) ===
-      'Potential changes incoming'
-    ) {
+    } else if (pressureStatus === 'Potential changes incoming') {
       score += 30;
-    } else if (
-      pressureChange(tempAndPressureChangeAnalysis(weatherData)) ===
-      'Noticeable changes incoming'
-    ) {
+    } else if (pressureStatus === 'Noticeable changes incoming') {
       score += 50;
     }
 
-    if (
-      tempChange(tempAndPressureChangeAnalysis(weatherData)) ===
-      'No distinct changes'
-    ) {
+    // Get the temperature change status
+    const tempStatus = tempChange(analysis);
+    if (tempStatus === 'No distinct changes') {
       score += 10;
-    } else if (
-      tempChange(tempAndPressureChangeAnalysis(weatherData)) ===
-      'Potential changes incoming'
-    ) {
+    } else if (tempStatus === 'Potential changes incoming') {
       score += 30;
-    } else if (
-      tempChange(tempAndPressureChangeAnalysis(weatherData)) ===
-      'Noticeable changes incoming'
-    ) {
+    } else if (tempStatus === 'Noticeable changes incoming') {
       score += 50;
     }
 
