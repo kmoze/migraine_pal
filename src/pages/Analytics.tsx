@@ -27,7 +27,6 @@ import RadarChartComponent from '@/components/RadarChart';
 import { DateRangeToggle } from '@/components/AnalyticsDateRangeToggle';
 import InsightsSheet from '@/components/InsightsSheet';
 
-// PDF Generation Experiment
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import MyDocument from '@/components/PDFGenerator';
 
@@ -107,7 +106,7 @@ function Analytics({ migraines }: AnalyticsProps) {
 
   const initialDateRange: DateRange = {
     startDate: getStartDateThreeMonthsAgo(),
-    endDate: new Date(), // Current date as end date
+    endDate: new Date(),
   };
 
   const [dateRange, setDateRange] = useState<DateRange>(initialDateRange);
@@ -118,7 +117,7 @@ function Analytics({ migraines }: AnalyticsProps) {
     { startDate, endDate }: DateRange
   ) {
     if (!startDate && !endDate) {
-      return migraines; // All-time: no filtering
+      return migraines;
     }
     return migraines.filter((migraine) => {
       const migraineDate = new Date(migraine.date);
@@ -271,8 +270,8 @@ function Analytics({ migraines }: AnalyticsProps) {
                     new Date().getFullYear(),
                     new Date().getMonth(),
                     1
-                  ), // First day of the current month
-                  endDate: new Date(), // Current date
+                  ),
+                  endDate: new Date(),
                 })
               }
               last3Months={() =>
