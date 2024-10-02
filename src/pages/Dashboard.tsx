@@ -3,7 +3,7 @@ import { CarouselPlugin } from '@/components/ArticleCarousel';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { RadialChart } from '@/components/RadialChart';
-import { PainRadialChart } from '@/components/PainRadialChart';
+import { AvgPainRadialChart } from '@/components/AvgPainRadialChart';
 
 import {
   ThermometerSun,
@@ -399,7 +399,9 @@ function Dashboard({ migraines }: DashboardProps) {
             Your average pain level
           </h2>
           <div className="flex items-center justify-center">
-            <PainRadialChart score={Math.round(averagePainLevel(migraines))} />
+            <AvgPainRadialChart
+              score={Math.round(averagePainLevel(migraines))}
+            />
           </div>
         </div>
         <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 h-60 rounded-lg p-4 flex flex-col">
