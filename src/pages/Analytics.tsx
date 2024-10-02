@@ -23,7 +23,7 @@ import {
 import { type ChartConfig } from '@/components/ui/chart';
 import { Frown, Download } from 'lucide-react';
 import { XAxis, CartesianGrid, BarChart, Bar, Pie, PieChart } from 'recharts';
-import RadarChartComponent from '@/components/RadarChart';
+import { MigraineDurationFreqChart } from '@/components/MigraineDurationFreqChart';
 import { DateRangeToggle } from '@/components/AnalyticsDateRangeToggle';
 import InsightsSheet from '@/components/InsightsSheet';
 
@@ -430,7 +430,7 @@ function Analytics({ migraines }: AnalyticsProps) {
               </div>
             </CardFooter>
           </Card>
-          <RadarChartComponent durationFreqData={durationFreqData} />
+          <MigraineDurationFreqChart durationFreqData={durationFreqData} />
         </div>
       </div>
     </>

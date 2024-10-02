@@ -14,7 +14,7 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 
-interface RadarChartProps {
+interface MigraineDurationFreqChartProps {
   durationFreqData: { duration: string; frequency: number }[];
 }
 
@@ -22,7 +22,9 @@ export const description = 'A radar chart with dots';
 
 const chartConfig = {} satisfies ChartConfig;
 
-export function RadarChartComponent({ durationFreqData }: RadarChartProps) {
+export function MigraineDurationFreqChart({
+  durationFreqData,
+}: MigraineDurationFreqChartProps) {
   return (
     <Card className="w-1/3 shadow-md shadow-slate-400 bg-card-lightModeRadar dark:shadow-md dark:shadow-slate-950 dark:bg-card-darkModePrimary border-none">
       <CardHeader className="items-center">
@@ -61,4 +63,4 @@ export function RadarChartComponent({ durationFreqData }: RadarChartProps) {
   );
 }
 
-export default RadarChartComponent;
+export default MigraineDurationFreqChart;
