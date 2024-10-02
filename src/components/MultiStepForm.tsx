@@ -226,7 +226,7 @@ function MultiStepForm({
                 <FormField
                   control={form.control}
                   name="symptoms"
-                  render={({ field }) => (
+                  render={() => (
                     <FormItem>
                       <FormLabel>Select your symptoms</FormLabel>
                       <FormControl>
@@ -328,7 +328,7 @@ function MultiStepForm({
                                       color: isDarkMode ? '#aaa' : '#000', // Non-dark mode text color set to black
                                     };
                                   },
-                                  clearIndicator: (base, state) => {
+                                  clearIndicator: (base) => {
                                     const isDarkMode =
                                       document.documentElement.classList.contains(
                                         'dark'
@@ -363,7 +363,7 @@ function MultiStepForm({
                 <FormField
                   control={form.control}
                   name="triggers"
-                  render={({ field }) => (
+                  render={() => (
                     <FormItem>
                       <FormLabel>Select your triggers (if any)</FormLabel>
                       <FormControl>
