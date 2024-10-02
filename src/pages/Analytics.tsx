@@ -23,7 +23,6 @@ import {
 import { type ChartConfig } from '@/components/ui/chart';
 import { Frown, Download } from 'lucide-react';
 import { XAxis, CartesianGrid, BarChart, Bar, Pie, PieChart } from 'recharts';
-import LineChartTest from '@/components/LineChartTest';
 import RadarChartComponent from '@/components/RadarChart';
 import { ToggleGroupButtons } from '@/components/AnalyticsToggle';
 import InsightsSheet from '@/components/InsightsSheet';
@@ -34,6 +33,7 @@ import MyDocument from '@/components/PDFGenerator';
 
 import { format, subMonths } from 'date-fns';
 import { useState } from 'react';
+import DaysWithoutMigraineChart from '@/components/DaysWithoutMigraineChart';
 
 interface Migraine {
   id: number;
@@ -371,7 +371,7 @@ function Analytics({ migraines }: AnalyticsProps) {
               </div>
             </CardFooter>
           </Card>
-          <LineChartTest daysWithoutMigraine={daysWithoutMigraine} />
+          <DaysWithoutMigraineChart daysWithoutMigraine={daysWithoutMigraine} />
         </div>
         <div className="flex gap-5">
           <Card className="flex flex-col w-1/3 shadow-md shadow-slate-400 bg-card-lightModeTertiary dark:shadow-md dark:shadow-slate-950 dark:bg-card-darkModePrimary border-none">

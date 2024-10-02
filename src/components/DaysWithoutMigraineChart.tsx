@@ -17,13 +17,15 @@ import {
 
 export const description = 'A line chart with a label';
 
-interface LineChartTestProps {
+interface DaysWithoutMigraineChartProps {
   daysWithoutMigraine: { date: string; days_without: number }[];
 }
 
 const chartConfig = {} satisfies ChartConfig;
 
-function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
+function DaysWithoutMigraineChart({
+  daysWithoutMigraine,
+}: DaysWithoutMigraineChartProps) {
   return (
     <Card className="w-1/2 shadow-md shadow-slate-400 bg-card-lightModeOther dark:shadow-md dark:shadow-slate-950 dark:bg-card-darkModePrimary border-none">
       <CardHeader>
@@ -90,4 +92,4 @@ function LineChartTest({ daysWithoutMigraine }: LineChartTestProps) {
   );
 }
 
-export default LineChartTest;
+export default DaysWithoutMigraineChart;
