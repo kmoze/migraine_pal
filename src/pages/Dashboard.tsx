@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { WeatherRadialChart } from '@/components/WeatherRadialChart';
 import { AvgPainRadialChart } from '@/components/AvgPainRadialChart';
+import { useQuery } from '@tanstack/react-query';
 
 import {
   ThermometerSun,
@@ -108,28 +109,55 @@ function averagePainLevel(migraineData: Migraine[]) {
 }
 
 function Dashboard({ migraines }: DashboardProps) {
-  const [weatherData, setWeatherData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // Using useEffect and 2 states
+  // const [weatherData, setWeatherData] = useState(null);
+  // const [loading, setLoading] = useState(true);
 
-  async function fetchWeatherData() {
-    try {
+  // async function fetchWeatherData() {
+  //   try {
+  //     const response = await fetch(BASE_URL);
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch weather');
+  //     }
+  //     const data = await response.json();
+
+  //     setWeatherData(data);
+  //     setLoading(false);
+  //   } catch (err) {
+  //     console.log(err);
+  //     setLoading(false);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   fetchWeatherData();
+  // }, []);
+
+  // Using Tanstack Query - Removal of useEffect and states
+  const {
+    isPending,
+    isError,
+    data: weatherData,
+    error,
+  } = useQuery({
+    queryKey: ['weatherData'],
+    queryFn: async () => {
       const response = await fetch(BASE_URL);
       if (!response.ok) {
         throw new Error('Failed to fetch weather');
       }
-      const data = await response.json();
+      return response.json();
+    },
+  });
 
-      setWeatherData(data);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-      setLoading(false);
-    }
+  if (isPending) {
+    return <span>Loading...</span>;
   }
 
-  useEffect(() => {
-    fetchWeatherData();
-  }, []);
+  // Handling errors
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
 
   function humidityAnalysis(array: WeatherData): string {
     let list = array.list;
@@ -497,17 +525,11 @@ function Dashboard({ migraines }: DashboardProps) {
                     Humidity Forecast:
                   </h2>
                   <div className="flex items-center gap-1 justify-center">
-                    {loading ? (
-                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-lg">
-                        Loading...
-                      </p>
-                    ) : (
-                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText">
-                        {weatherData
-                          ? humidityAnalysis(weatherData)
-                          : 'Sorry, there seems to be an error...'}
-                      </p>
-                    )}
+                    <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText">
+                      {weatherData
+                        ? humidityAnalysis(weatherData)
+                        : 'Sorry, there seems to be an error...'}
+                    </p>
                     <ThermometerSun className="h-6 w-6 text-red-500" />
                   </div>
                 </div>
@@ -516,19 +538,13 @@ function Dashboard({ migraines }: DashboardProps) {
                     Temperature Change Forecast:
                   </h2>
                   <div className="flex items-center gap-1 justify-center">
-                    {loading ? (
-                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-lg">
-                        Loading...
-                      </p>
-                    ) : (
-                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText">
-                        {weatherData
-                          ? tempChange(
-                              tempAndPressureChangeAnalysis(weatherData) || {}
-                            )
-                          : 'Sorry, there seems to be an error...'}
-                      </p>
-                    )}
+                    <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText">
+                      {weatherData
+                        ? tempChange(
+                            tempAndPressureChangeAnalysis(weatherData) || {}
+                          )
+                        : 'Sorry, there seems to be an error...'}
+                    </p>
                     <TrendingUpDown className="h-6 w-6 text-purple-400" />
                   </div>
                 </div>
@@ -539,19 +555,13 @@ function Dashboard({ migraines }: DashboardProps) {
                     Barometric Change Forecast:
                   </h2>
                   <div className="flex items-center gap-1 justify-center">
-                    {loading ? (
-                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-lg">
-                        Loading...
-                      </p>
-                    ) : (
-                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText">
-                        {weatherData
-                          ? pressureChange(
-                              tempAndPressureChangeAnalysis(weatherData) || {}
-                            )
-                          : 'Sorry, there seems to be an error...'}
-                      </p>
-                    )}
+                    <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText">
+                      {weatherData
+                        ? pressureChange(
+                            tempAndPressureChangeAnalysis(weatherData) || {}
+                          )
+                        : 'Sorry, there seems to be an error...'}
+                    </p>
                     <Gauge className="h-7 w-7 text-yellow-400" />
                   </div>
                 </div>
@@ -560,15 +570,9 @@ function Dashboard({ migraines }: DashboardProps) {
                     Storm Forecast:
                   </h2>
                   <div className="flex items-center gap-1 justify-center">
-                    {loading ? (
-                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-lg">
-                        Loading...
-                      </p>
-                    ) : (
-                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText">
-                        None detected
-                      </p>
-                    )}
+                    <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText">
+                      None detected
+                    </p>
                     <CloudLightning className="h-6 w-6 text-orange-500" />
                   </div>
                 </div>
