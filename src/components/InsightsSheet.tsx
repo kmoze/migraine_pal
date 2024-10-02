@@ -7,10 +7,25 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Button } from './ui/button';
-import { Calendar, ChartNoAxesGantt } from 'lucide-react';
+import { ChartNoAxesGantt } from 'lucide-react';
 
-function InsightsSheet({ sorted }) {
-  function calculateAveragePain(data, month, year) {
+interface Migraine {
+  id: number;
+  date: Date;
+  symptoms: string[];
+  triggers: string[];
+  pain: number;
+  duration: number;
+}
+
+interface InsightsSheetProps {
+  sorted: Migraine[]; // Specify that sorted is an array of Migraine objects
+}
+
+function InsightsSheet({ sorted }: InsightsSheetProps) {
+  console.log(sorted);
+
+  function calculateAveragePain(data: Migraine[], month: number, year: number) {
     const filteredData = data.filter((item) => {
       const date = new Date(item.date);
       return date.getMonth() === month && date.getFullYear() === year;
@@ -25,7 +40,11 @@ function InsightsSheet({ sorted }) {
   const augustAverage = calculateAveragePain(sorted, 7, 2024);
   const septemberAverage = calculateAveragePain(sorted, 8, 2024); //
 
-  function calculateAverageDuration(data, month, year) {
+  function calculateAverageDuration(
+    data: Migraine[],
+    month: number,
+    year: number
+  ) {
     const filteredData = data.filter((item) => {
       const date = new Date(item.date);
       return date.getMonth() === month && date.getFullYear() === year;
@@ -43,7 +62,11 @@ function InsightsSheet({ sorted }) {
   const augustAverageDuration = calculateAverageDuration(sorted, 7, 2024);
   const septemberAverageDuration = calculateAverageDuration(sorted, 8, 2024);
 
-  function getMonthlyMigraineCount(data, month, year) {
+  function getMonthlyMigraineCount(
+    data: Migraine[],
+    month: number,
+    year: number
+  ) {
     return data.filter((item) => {
       const date = new Date(item.date);
       return date.getMonth() === month && date.getFullYear() === year;

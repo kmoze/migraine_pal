@@ -185,8 +185,6 @@ function Analytics({ migraines }: AnalyticsProps) {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   });
 
-  console.log(sortedMigraines);
-
   const barChartDateFormat = filteredMigraines
     .slice()
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
