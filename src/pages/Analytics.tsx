@@ -14,8 +14,6 @@ import {
   ChartLegendContent,
 } from '@/components/ui/chart';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
   Popover,
   PopoverContent,
@@ -23,7 +21,7 @@ import {
 } from '@/components/ui/popover';
 
 import { type ChartConfig } from '@/components/ui/chart';
-import { Frown, ArrowDown, Download } from 'lucide-react';
+import { Frown, Download } from 'lucide-react';
 import { XAxis, CartesianGrid, BarChart, Bar, Pie, PieChart } from 'recharts';
 import LineChartTest from '@/components/LineChartTest';
 import RadarChartComponent from '@/components/RadarChart';
@@ -323,7 +321,7 @@ function Analytics({ migraines }: AnalyticsProps) {
                       fileName="report.pdf"
                     >
                       {({ loading }: { loading: boolean }) => (
-                        <Button className="relative text-lg bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:text-white dark:text-card-lightMode px-16 py-5 mt-5 group">
+                        <Button className="relative text-lg bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:text-card-lightMode px-16 py-5 mt-5 group">
                           Download PDF
                           <span className="absolute right-3 top-3 transform -translate-y-1/4 transition-transform duration-500 ease-in-out group-hover:translate-y-0">
                             <Download w-5 h-5 />

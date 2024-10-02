@@ -24,7 +24,7 @@
     "@radix-ui/react-toast": "^1.2.1",
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-toggle-group": "^1.1.0",
-    "@react-pdf/renderer": "^4.0.0",
+    "@react-pdf/renderer": "^3.4.4",
     "@supabase/supabase-js": "^2.45.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
