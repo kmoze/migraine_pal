@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { CarouselPlugin } from '@/components/ArticleCarousel';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -109,6 +108,31 @@ function averagePainLevel(migraineData: Migraine[]) {
 }
 
 function Dashboard({ migraines }: DashboardProps) {
+  // Using Tanstack Query - Removal of useEffect and states
+  const {
+    isPending,
+    isError,
+    data: weatherData,
+    error,
+  } = useQuery({
+    queryKey: ['weatherData'],
+    queryFn: async () => {
+      const response = await fetch(BASE_URL);
+      if (!response.ok) {
+        throw new Error('Failed to fetch weather');
+      }
+      return response.json();
+    },
+  });
+
+  if (isPending) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
+
   // Using useEffect and 2 states
   // const [weatherData, setWeatherData] = useState(null);
   // const [loading, setLoading] = useState(true);
@@ -132,32 +156,6 @@ function Dashboard({ migraines }: DashboardProps) {
   // useEffect(() => {
   //   fetchWeatherData();
   // }, []);
-
-  // Using Tanstack Query - Removal of useEffect and states
-  const {
-    isPending,
-    isError,
-    data: weatherData,
-    error,
-  } = useQuery({
-    queryKey: ['weatherData'],
-    queryFn: async () => {
-      const response = await fetch(BASE_URL);
-      if (!response.ok) {
-        throw new Error('Failed to fetch weather');
-      }
-      return response.json();
-    },
-  });
-
-  if (isPending) {
-    return <span>Loading...</span>;
-  }
-
-  // Handling errors
-  if (isError) {
-    return <span>Error: {error.message}</span>;
-  }
 
   function humidityAnalysis(array: WeatherData): string {
     let list = array.list;
