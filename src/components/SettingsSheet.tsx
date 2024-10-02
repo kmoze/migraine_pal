@@ -116,17 +116,13 @@ export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
               <p>Most recent migraine already deleted.</p>
             )}
             <Button
-              // onClick={onDelete}
               onClick={() => {
-                // Call the onDelete function
                 onDelete();
-
-                // Trigger the toast notification
                 toast({
                   title: 'Migraine successfully deleted',
                 });
               }}
-              disabled={!mostRecentMigraine} // Disable button if no recent migraine
+              disabled={!mostRecentMigraine}
               className={`w-full mt-4 p-2 rounded-sm dark:text-card-darkModeTextPrimary ${
                 !mostRecentMigraine
                   ? 'bg-gray-400 cursor-not-allowed'
@@ -137,9 +133,6 @@ export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
             </Button>
           </SheetDescription>
         </SheetHeader>
-        {/* <SheetFooter>
-          <SheetClose asChild></SheetClose>
-        </SheetFooter> */}
         <div className="flex items-center space-x-2 mt-8">
           <Switch
             id="dark-mode-toggle"

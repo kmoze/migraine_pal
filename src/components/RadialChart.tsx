@@ -6,14 +6,7 @@ import {
   RadialBarChart,
 } from 'recharts';
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartConfig, ChartContainer } from '@/components/ui/chart';
 
 export const description = 'A radial chart with text';
@@ -43,7 +36,7 @@ export function RadialChart({ score }: { score: number }) {
   const chartData = [
     {
       browser: 'safari',
-      visitors: getBarLength(score), // Dynamically adjust the bar length
+      visitors: getBarLength(score),
       fill: getBarColor(score),
     },
   ];
@@ -105,7 +98,6 @@ export function RadialChart({ score }: { score: number }) {
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          {/* Optional: Add additional text here */}
                           Migraine possibility
                         </tspan>
                       </text>
