@@ -39,13 +39,11 @@ function App() {
           new Date(b.date).getTime() - new Date(a.date).getTime()
       ) || [];
     setMigraines(sortedData);
-    // setMigraines(data || []);
     if (sortedData.length > 0) {
-      setMostRecentMigraine(sortedData[0]); // Set the most recent log
+      setMostRecentMigraine(sortedData[0]);
     }
   }
 
-  // Experimenting with deletion function
   async function deleteMostRecentMigraine() {
     if (mostRecentMigraine) {
       const { error } = await supabase
@@ -57,7 +55,7 @@ function App() {
         setMigraines((prev) =>
           prev.filter((migraine) => migraine.id !== mostRecentMigraine.id)
         );
-        setMostRecentMigraine(null); // Clear the most recent migraine after deletion
+        setMostRecentMigraine(null);
       }
     }
   }
