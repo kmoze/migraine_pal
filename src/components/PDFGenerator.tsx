@@ -216,10 +216,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 15,
     color: '#333',
-    backgroundColor: '#e6f7ff', // Light blue background for each item
-    padding: 5, // Padding around text
+    backgroundColor: '#e6f7ff',
+    padding: 5,
     width: 250,
-    borderRadius: 5, // Rounded corners
+    borderRadius: 5,
   },
   listItem: {
     fontSize: 14,

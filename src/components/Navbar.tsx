@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Button } from './ui/button';
 import {
-  Cog6ToothIcon,
   Squares2X2Icon,
   ArrowLeftStartOnRectangleIcon,
   ChartBarSquareIcon,
