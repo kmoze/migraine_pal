@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { CarouselPlugin } from '@/components/ArticleCarousel';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { RadialChart } from '@/components/RadialChart';
+import { WeatherRadialChart } from '@/components/WeatherRadialChart';
 import { AvgPainRadialChart } from '@/components/AvgPainRadialChart';
 
 import {
@@ -576,7 +576,7 @@ function Dashboard({ migraines }: DashboardProps) {
             </div>
             <div className="p-10">
               {weatherData !== null ? (
-                <RadialChart score={migraineProbability()} />
+                <WeatherRadialChart score={migraineProbability()} />
               ) : (
                 <div>Loading...</div>
               )}

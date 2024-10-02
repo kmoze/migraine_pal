@@ -13,7 +13,7 @@ export const description = 'A radial chart with text';
 
 const chartConfig = {} satisfies ChartConfig;
 
-export function RadialChart({ score }: { score: number }) {
+export function WeatherRadialChart({ score }: { score: number }) {
   const getBarLength = (score: number) => {
     // Adjust the length range as needed
     if (score <= 50) return 20;
