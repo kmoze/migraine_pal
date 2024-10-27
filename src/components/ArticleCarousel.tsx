@@ -35,12 +35,6 @@ const articles = [
     img: healthCentralImg,
   },
   {
-    title: 'Exploring migraines',
-    description: 'Your official guide',
-    link: 'https://www.medicalnewstoday.com/articles/148373',
-    img: medicalNewsTodayImg,
-  },
-  {
     title: 'Atogepant: Migraine drug',
     description: 'New drug for NHS use',
     link: 'https://www.bbc.co.uk/news/health-68780240',
@@ -55,7 +49,7 @@ export function CarouselPlugin() {
     <Carousel
       plugins={[plugin.current]}
       className="w-full max-w-xs"
-      onMouseEnter={() => plugin.current.stop()} // Wrap with an anonymous function
+      onMouseEnter={() => plugin.current.stop()}
       onMouseLeave={() => plugin.current.play()}
     >
       <CarouselContent>
@@ -68,8 +62,8 @@ export function CarouselPlugin() {
                   style={{ backgroundImage: `url(${article.img})` }}
                 />
                 <div className="absolute inset-0 bg-card-lightMode opacity-90 dark:bg-card-coolorsPrimary" />
-                <CardContent className="relative flex flex-col items-center p-10 text-center">
-                  <h2 className="text-lg font-semibold mb-2 max-h-7 text-card-coolorsPrimary dark:text-card-darkModeTextPrimary">
+                <CardContent className="relative flex flex-col items-center lg:p-5 p-10 text-center">
+                  <h2 className="text-lg lg:text-base lg:mb-5 font-semibold mb-2 max-h-7 text-card-coolorsPrimary dark:text-card-darkModeTextPrimary">
                     {article.title}
                   </h2>
                   <p className="mb-4 text-card-coolorsPrimary dark:text-card-darkModeTextPrimary">

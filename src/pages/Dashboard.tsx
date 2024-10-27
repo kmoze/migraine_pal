@@ -393,7 +393,7 @@ function Dashboard({ migraines }: DashboardProps) {
               </h4>
             </div>
           </div>
-          <div className="bg-card-lightModeSecondary text-white dark:bg-card-darkModePrimary shadow-lg shadow-gray-500 dark:shadow-md dark:shadow-slate-950 p-2 rounded-lg  h-56 w-1/4 flex items-center justify-center">
+          <div className="bg-card-lightModeSecondary text-white dark:bg-card-darkModePrimary shadow-lg shadow-gray-500 dark:shadow-md dark:shadow-slate-950 p-2 rounded-lg h-56 w-1/4 flex items-center justify-center">
             <CarouselPlugin />
           </div>
         </div>
