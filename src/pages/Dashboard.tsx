@@ -425,8 +425,8 @@ function Dashboard({ migraines }: DashboardProps) {
                     isTop
                       ? 'text-xl bg-card-lightModeTertiary dark:bg-card-darkModePrimary dark:shadow-none'
                       : isThird
-                      ? 'text-sm bg-blue-300 dark:bg-card-darkModeSecondary dark:shadow-none'
-                      : 'text-lg bg-card-lightMode dark:bg-card-darkModeOther dark:shadow-none'
+                      ? 'text-sm bg-blue-300 lg:w-1/2 dark:bg-card-darkModeSecondary dark:shadow-none'
+                      : 'text-lg bg-card-lightMode lg:w-2/3 dark:bg-card-darkModeOther dark:shadow-none'
                   }
                   drop-shadow-md`}
                 >
@@ -455,8 +455,8 @@ function Dashboard({ migraines }: DashboardProps) {
                     isTop
                       ? 'text-xl bg-card-lightModeTertiary dark:bg-card-darkModePrimary dark:shadow-none'
                       : isThird
-                      ? 'text-sm bg-blue-300 dark:bg-card-darkModeSecondary dark:shadow-none'
-                      : 'text-lg bg-card-lightMode dark:bg-card-darkModeOther dark:shadow-none'
+                      ? 'text-sm bg-blue-300 lg:w-1/2 dark:bg-card-darkModeSecondary dark:shadow-none'
+                      : 'text-lg bg-card-lightMode lg:w-2/3 dark:bg-card-darkModeOther dark:shadow-none'
                   }
                   drop-shadow-md`}
                 >
