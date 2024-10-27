@@ -133,30 +133,6 @@ function Dashboard({ migraines }: DashboardProps) {
     return <span>Error: {error.message}</span>;
   }
 
-  // Using useEffect and 2 states
-  // const [weatherData, setWeatherData] = useState(null);
-  // const [loading, setLoading] = useState(true);
-
-  // async function fetchWeatherData() {
-  //   try {
-  //     const response = await fetch(BASE_URL);
-  //     if (!response.ok) {
-  //       throw new Error('Failed to fetch weather');
-  //     }
-  //     const data = await response.json();
-
-  //     setWeatherData(data);
-  //     setLoading(false);
-  //   } catch (err) {
-  //     console.log(err);
-  //     setLoading(false);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   fetchWeatherData();
-  // }, []);
-
   function humidityAnalysis(array: WeatherData): string {
     let list = array.list;
     let over70 = [];
