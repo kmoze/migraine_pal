@@ -358,8 +358,8 @@ function Dashboard({ migraines }: DashboardProps) {
           <h2 className="text-card-coolorsPrimary text-3xl pt-3 pl-3 pb-3 font-custom dark:text-card-darkModeTextPrimary">
             Welcome to MigrainePal, Kier 👋🏻
           </h2>
-          <div className="flex justify-around gap-2">
-            <h4 className="text-card-coolorsPrimary text-2xl py-8 px-4 w-1/4 bg-card-lightModeDashboard mt-2 rounded-lg text-left font-customText dark:bg-card-darkModeSecondary dark:text-card-darkModeTextPrimary">
+          <div className="flex justify-around gap-2 1440-1600:max-h-36 lg:max-h-32">
+            <h4 className="text-card-coolorsPrimary 1440-1600:text-lg lg:text-sm text-2xl py-8 px-4 w-1/4 bg-card-lightModeDashboard mt-2 rounded-lg text-left font-customText dark:bg-card-darkModeSecondary dark:text-card-darkModeTextPrimary">
               {mostRecentDay(migraines, mostRecentMonth(migraines)) === 0 ? (
                 <>Your last migraine was today.</>
               ) : mostRecentDay(migraines, mostRecentMonth(migraines)) === 1 ? (
@@ -376,11 +376,11 @@ function Dashboard({ migraines }: DashboardProps) {
                 </>
               )}
             </h4>
-            <h4 className="text-card-coolorsPrimary bg-card-lightModeSecondary dark:bg-card-darkModeTertiary dark:text-card-darkModeTextPrimary text-xl py-6 px-4 w-1/3 mt-2 rounded-lg font-customText">
+            <h4 className="text-card-coolorsPrimary 1440-1600:text-lg lg:text-sm bg-card-lightModeSecondary dark:bg-card-darkModeTertiary dark:text-card-darkModeTextPrimary text-xl py-6 px-4 w-1/3 mt-2 rounded-lg font-customText">
               There are some new weather updates that might be of use. Check
               them out below.
             </h4>
-            <h4 className="text-card-coolorsPrimary text-xl py-5 px-4 w-1/3 bg-card-lightModeTertiary dark:bg-card-darkModeOther dark:text-card-darkModeTextPrimary mt-2 rounded-lg font-customText">
+            <h4 className="text-card-coolorsPrimary 1440-1600:text-lg lg:text-sm text-xl py-5 px-4 w-1/3 bg-card-lightModeTertiary dark:bg-card-darkModeOther dark:text-card-darkModeTextPrimary mt-2 rounded-lg font-customText">
               <Lightbulb className="inline-block mb-2 h-7 w-7 text-yellow-500" />{' '}
               <span className="text-card-coolorsPrimary font-customText dark:text-card-darkModeTextPrimary">
                 {' '}
