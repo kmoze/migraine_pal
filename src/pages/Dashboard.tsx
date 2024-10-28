@@ -493,8 +493,8 @@ function Dashboard({ migraines }: DashboardProps) {
             <h2 className="text-card-darkModePrimary dark:text-card-lightMode text-2xl absolute top-0 left-0 p-7 font-custom">
               Weather
             </h2>
-            <div className="flex items-center h-full">
-              <div className="flex flex-col flex-grow">
+            <div className="flex items-center h-full w-full">
+              <div className="flex flex-col">
                 <div className="flex gap-2 mx-8">
                   <div className="flex flex-col w-1/2 font-medium leading-none border border-card-coolorsPrimary dark:border-gray-400 p-5 rounded-md">
                     <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-md mb-4">
@@ -554,7 +554,7 @@ function Dashboard({ migraines }: DashboardProps) {
                   </div>
                 </div>
               </div>
-              <div className="p-10">
+              <div className="mr-3">
                 {weatherData !== null ? (
                   <WeatherRadialChart score={migraineProbability()} />
                 ) : (
