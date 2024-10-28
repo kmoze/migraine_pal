@@ -49,7 +49,7 @@ export function AvgPainRadialChart({ score }: { score: number }) {
   ];
 
   return (
-    <Card className="flex w-1/2 flex-col bg-transparent border-none shadow-none">
+    <Card className="flex w-full flex-col bg-transparent border-none shadow-none">
       <CardContent className="pb-0">
         <ChartContainer
           config={chartConfig}
@@ -84,7 +84,7 @@ export function AvgPainRadialChart({ score }: { score: number }) {
                         <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
-                          className="fill-foreground text-7xl font-bold"
+                          className="fill-foreground text-7xl lg:text-6xl font-bold"
                         >
                           {Math.round(score)}
                         </tspan>
