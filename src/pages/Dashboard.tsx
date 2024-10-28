@@ -475,12 +475,12 @@ function Dashboard({ migraines }: DashboardProps) {
               Analytics
             </h2>
             <div className="flex flex-col items-center justify-center">
-              <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary mx-16 mt-10 mb-7 text-xl font-customText">
+              <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary mx-16 mt-10 mb-7 lg:mt-0 lg:mb-5 lg:text-base lg:w-3/4 text-xl font-customText">
                 See the impact your migraines have on your life in easily
                 digestible charts and graphs.
               </h2>
               <Link to="/analytics">
-                <Button className="group text-md p-5 rounded-md bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:bg-card-lightMode dark:hover:bg-card-lightModeSecondary flex items-center">
+                <Button className="group lg:w-full lg:text-sm text-md p-5 rounded-md bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:bg-card-lightMode dark:hover:bg-card-lightModeSecondary flex items-center">
                   Go to Analytics
                   <span className="right-5 transform-translate-y transition-transform duration-500 ease-in-out group-hover:translate-x-2 ml-3 mr-2">
                     <MoveRight w-5 h-5 />
