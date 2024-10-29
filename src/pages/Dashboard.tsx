@@ -491,11 +491,11 @@ function Dashboard({ migraines }: DashboardProps) {
               </Link>
             </div>
           </div>
-          <div className="bg-card-lightMode dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-3/4 mt-3 rounded-lg relative">
+          <div className="bg-card-lightMode  dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-3/4 mt-3 rounded-lg relative">
             <h2 className="text-card-darkModePrimary lg:hidden dark:text-card-lightMode text-2xl absolute top-0 left-0 p-7 font-custom">
               Weather
             </h2>
-            <div className="flex items-center h-full w-full">
+            <div className="flex items-center justify-center h-full w-full">
               <div className="flex flex-col">
                 <div className="flex gap-2 lg:gap-0.5 lg:mx-4 mx-8">
                   <div className="flex flex-col w-1/2 font-medium leading-none border border-card-coolorsPrimary dark:border-gray-400 p-3 justify-center rounded-md">
