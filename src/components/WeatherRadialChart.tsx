@@ -48,13 +48,13 @@ export function WeatherRadialChart({ score }: { score: number }) {
   };
 
   return (
-    <Card className="flex w-full flex-col bg-card-lightMode border-card-darkModePrimary dark:border-card-lightMode border dark:bg-card-coolorsPrimary p-4">
+    <Card className="flex w-full flex-col bg-card-lightMode border-card-darkModePrimary dark:border-card-lightMode border dark:bg-card-coolorsPrimary p-0">
       <CardHeader className="items-center pb-0">
         <CardTitle className="text-card-darkModePrimary lg:text-base lg:w-full dark:text-card-darkModeTextPrimary font-customText text-xl">
           Based on forecasted weather
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex-1 pb-0">
+      <CardContent className="p-0 flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
           className="mx-auto aspect-square max-h-[250px]"
