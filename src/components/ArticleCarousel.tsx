@@ -11,7 +11,6 @@ import { useRef } from 'react';
 
 import natureImg from '../assets/natureLogo.jpg';
 import healthCentralImg from '../assets/HealthCentral_Corporation_Logo.jpg';
-import medicalNewsTodayImg from '../assets/medical-news-today-mnt-logo-vector.png';
 import bbcImg from '../assets/p09xtmrn.jpg';
 import washingtonPostImg from '../assets/the-washington-post3353.jpg';
 
@@ -82,8 +81,8 @@ export function CarouselPlugin() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="ml-4 text-black" />
-      <CarouselNext className="mr-4 text-black" />
+      <CarouselPrevious className="ml-12 text-black" />
+      <CarouselNext className="mr-12 text-black" />
     </Carousel>
   );
 }
