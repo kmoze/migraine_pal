@@ -62,9 +62,9 @@ export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button className="bg-card-coolorsSecondary mt-10 mb-3 w-1/2 text-base bg-foreground rounded-sm flex items-center justify-start gap-2 pl-4 ml-4">
+        <Button className="bg-card-coolorsSecondary text-base mb-4 w-1/2 lg:min-w-fit bg-foreground rounded-sm flex items-center justify-center gap-2 pl-4">
           <Cog6ToothIcon className="h-5 w-5" />
-          Settings
+          <div className="flex-1 text-center">Settings</div>
         </Button>
       </SheetTrigger>
       <SheetContent side={'left'} className="bg-gray-700 border-gray-300">
