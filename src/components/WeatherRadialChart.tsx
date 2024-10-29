@@ -89,7 +89,7 @@ export function WeatherRadialChart({ score }: { score: number }) {
                         <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
-                          className="fill-foreground text-4xl font-bold"
+                          className="fill-foreground text-4xl lg:text-lg font-bold"
                         >
                           {text}
                         </tspan>

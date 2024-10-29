@@ -356,7 +356,7 @@ function Dashboard({ migraines }: DashboardProps) {
       <div className="min-h-screen flex flex-col w-full p-2 bg-card-darkModeTextPrimary dark:bg-card-darkModeOther">
         <div className="flex items-start gap-2 mb-3">
           <div className="bg-card-lightMode shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-3/4 h-56 rounded-xl p-2 bg-opacity-55 dark:bg-card-darkModePrimary">
-            <h2 className="text-card-coolorsPrimary text-3xl pt-3 pl-3 pb-3 font-custom dark:text-card-darkModeTextPrimary">
+            <h2 className="text-card-coolorsPrimary lg:text-xl text-3xl pt-3 pl-3 pb-3 font-custom dark:text-card-darkModeTextPrimary">
               Welcome to MigrainePal, Kier 👋🏻
             </h2>
             <div className="flex justify-around gap-2 1440-1600:max-h-36 lg:max-h-32">
@@ -400,7 +400,7 @@ function Dashboard({ migraines }: DashboardProps) {
         <div className="flex-grow flex flex-col overflow-y-auto">
           <div className="flex justify-evenly gap-5">
             <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 rounded-lg flex flex-col">
-              <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl text-left mt-3 ml-4 font-custom">
+              <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl lg:text-base text-left mt-3 ml-4 font-custom">
                 Your average pain level
               </h2>
               <div className="flex items-center justify-center">
@@ -410,7 +410,7 @@ function Dashboard({ migraines }: DashboardProps) {
               </div>
             </div>
             <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 h-60 rounded-lg p-4 flex flex-col">
-              <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl mb-4 font-custom">
+              <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl lg:text-base mb-4 font-custom">
                 Your most common symptoms
               </h2>
               <ul className="flex flex-col space-y-2 h-full justify-evenly">
@@ -426,10 +426,10 @@ function Dashboard({ migraines }: DashboardProps) {
                       }
                   ${
                     isTop
-                      ? 'text-xl bg-card-lightModeTertiary dark:bg-card-darkModePrimary dark:shadow-none'
+                      ? 'text-xl lg:text-lg bg-card-lightModeTertiary dark:bg-card-darkModePrimary dark:shadow-none'
                       : isThird
-                      ? 'text-sm bg-blue-300 lg:w-1/2 dark:bg-card-darkModeSecondary dark:shadow-none'
-                      : 'text-lg bg-card-lightMode lg:w-2/3 dark:bg-card-darkModeOther dark:shadow-none'
+                      ? 'text-sm lg:text-xs bg-blue-300 lg:w-1/2 dark:bg-card-darkModeSecondary dark:shadow-none'
+                      : 'text-lg lg:text-base bg-card-lightMode lg:w-2/3 dark:bg-card-darkModeOther dark:shadow-none'
                   }
                   drop-shadow-md`}
                     >
@@ -440,7 +440,7 @@ function Dashboard({ migraines }: DashboardProps) {
               </ul>
             </div>
             <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 h-60 rounded-lg p-4 flex flex-col">
-              <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl mb-4 font-custom">
+              <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl lg:text-base mb-4 font-custom">
                 Your most common triggers
               </h2>
               <ul className="flex flex-col space-y-2 h-full justify-evenly">
@@ -456,10 +456,10 @@ function Dashboard({ migraines }: DashboardProps) {
                       }
                   ${
                     isTop
-                      ? 'text-xl bg-card-lightModeTertiary dark:bg-card-darkModePrimary dark:shadow-none'
+                      ? 'text-xl lg:text-lg bg-card-lightModeTertiary dark:bg-card-darkModePrimary dark:shadow-none'
                       : isThird
-                      ? 'text-sm bg-blue-300 lg:w-1/2 dark:bg-card-darkModeSecondary dark:shadow-none'
-                      : 'text-lg bg-card-lightMode lg:w-2/3 dark:bg-card-darkModeOther dark:shadow-none'
+                      ? 'text-sm lg:text-xs bg-blue-300 lg:w-1/2 dark:bg-card-darkModeSecondary dark:shadow-none'
+                      : 'text-lg lg:text-base bg-card-lightMode lg:w-2/3 dark:bg-card-darkModeOther dark:shadow-none'
                   }
                   drop-shadow-md`}
                     >
@@ -492,7 +492,7 @@ function Dashboard({ migraines }: DashboardProps) {
             </div>
           </div>
           <div className="bg-card-lightMode dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-3/4 mt-3 rounded-lg relative">
-            <h2 className="text-card-darkModePrimary dark:text-card-lightMode text-2xl absolute top-0 left-0 p-7 font-custom">
+            <h2 className="text-card-darkModePrimary lg:hidden dark:text-card-lightMode text-2xl absolute top-0 left-0 p-7 font-custom">
               Weather
             </h2>
             <div className="flex items-center h-full w-full">
