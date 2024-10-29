@@ -256,7 +256,7 @@ function Analytics({ migraines }: AnalyticsProps) {
 
   return (
     <>
-      <div className="h-full w-full flex flex-col p-6 bg-card-lightMode dark:bg-card-dashboard gap-3">
+      <div className="min-h-screen w-full flex flex-col p-3 bg-card-lightMode dark:bg-card-dashboard gap-2 overflow-auto">
         <div className="flex justify-between items-center">
           <div className="flex space-x-20 items-center">
             <h2 className="text-3xl font-custom mr-0">Analytics</h2>
@@ -370,7 +370,7 @@ function Analytics({ migraines }: AnalyticsProps) {
           </Card>
           <DaysWithoutMigraineChart daysWithoutMigraine={daysWithoutMigraine} />
         </div>
-        <div className="flex gap-5">
+        <div className="flex gap-3">
           <Card className="flex flex-col w-1/3 shadow-md shadow-slate-400 bg-card-lightModeTertiary dark:shadow-md dark:shadow-slate-950 dark:bg-card-darkModePrimary border-none">
             <CardHeader className="items-center pb-0">
               <CardTitle>Most common symptoms</CardTitle>
