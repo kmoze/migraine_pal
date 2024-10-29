@@ -353,77 +353,84 @@ function Dashboard({ migraines }: DashboardProps) {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col w-full p-2 bg-card-darkModeTextPrimary dark:bg-card-darkModeOther">
-        <div className="flex items-start gap-2 mb-3">
-          <div className="bg-card-lightMode shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-3/4 h-52 rounded-xl p-2 bg-opacity-55 dark:bg-card-darkModePrimary">
-            <h2 className="text-card-coolorsPrimary lg:text-xl text-3xl pt-3 pl-3 pb-1 font-custom dark:text-card-darkModeTextPrimary">
-              Welcome to MigrainePal, Kier 👋🏻
-            </h2>
-            <div className="flex justify-around gap-2 1440-1600:max-h-36 lg:max-h-32">
-              <h4 className="text-card-coolorsPrimary 1440-1600:text-xl 2xl:text-lg lg:text-sm text-2xl py-8 px-4 w-1/4 bg-card-lightModeDashboard mt-2 rounded-lg text-left font-customText dark:bg-card-darkModeSecondary dark:text-card-darkModeTextPrimary">
-                {mostRecentDay(migraines, mostRecentMonth(migraines)) === 0 ? (
-                  <>Your last migraine was today.</>
-                ) : mostRecentDay(migraines, mostRecentMonth(migraines)) ===
-                  1 ? (
-                  <>
-                    Your last migraine was yesterday{' '}
-                    <Sparkles className="inline-block mb-2 text-yellow-500 h-7 w-7" />
-                  </>
-                ) : (
-                  <>
-                    Your last migraine was{' '}
-                    {mostRecentDay(migraines, mostRecentMonth(migraines))} days
-                    ago{' '}
-                    <PartyPopper className="inline-block mb-2 text-green-500 h-7 w-7" />
-                  </>
-                )}
-              </h4>
-              <h4 className="text-card-coolorsPrimary 1440-1600:text-lg 2xl:text-lg lg:text-sm bg-card-lightModeSecondary dark:bg-card-darkModeTertiary dark:text-card-darkModeTextPrimary text-xl py-6 px-4 w-1/3 mt-2 rounded-lg font-customText">
-                There are some new weather updates that might be of use. Check
-                them out below.
-              </h4>
-              <h4 className="text-card-coolorsPrimary 1440-1600:text-lg 2xl:text-lg lg:text-sm text-xl py-5 px-4 w-1/3 bg-card-lightModeTertiary dark:bg-card-darkModeOther dark:text-card-darkModeTextPrimary mt-2 rounded-lg font-customText">
-                <Lightbulb className="inline-block mb-2 h-7 w-7 text-yellow-500" />{' '}
-                <span className="text-card-coolorsPrimary font-customText dark:text-card-darkModeTextPrimary">
-                  {' '}
-                  Daily tip from us:{' '}
-                </span>{' '}
-                <br />
-                Hydrate well to reduce headaches during high humidity.
-              </h4>
-            </div>
-          </div>
-          <div className="bg-card-lightModeSecondary text-white dark:bg-card-darkModePrimary shadow-lg shadow-gray-500 dark:shadow-md dark:shadow-slate-950 p-2 rounded-lg h-52 w-1/4 flex items-center justify-center">
-            <CarouselPlugin />
-          </div>
-        </div>
-        <div className="flex-grow flex flex-col overflow-y-auto">
-          <div className="flex flex-grow justify-evenly gap-2">
-            <div className="bg-card-lightModeOther  dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 rounded-lg flex flex-col">
-              <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl lg:text-base text-left mt-3 ml-4 font-custom">
-                Your average pain level
+      <div className="flex items-center justify-center min-h-screen lg:hidden">
+        <p className="text-xl ml-10 text-gray-800 dark:text-gray-100">
+          Please use a desktop device to view your dashboard.
+        </p>
+      </div>
+      <div className="hidden lg:block">
+        <div className="min-h-screen flex flex-col w-full p-3 bg-card-darkModeTextPrimary dark:bg-card-darkModeOther">
+          <div className="flex items-start gap-2 mb-3">
+            <div className="bg-card-lightMode shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-3/4 h-52 rounded-xl p-2 bg-opacity-55 dark:bg-card-darkModePrimary">
+              <h2 className="text-card-coolorsPrimary lg:text-xl text-3xl pt-3 pl-3 pb-1 font-custom dark:text-card-darkModeTextPrimary">
+                Welcome to MigrainePal, Kier 👋🏻
               </h2>
-              <div className="flex items-center justify-center">
-                <AvgPainRadialChart
-                  score={Math.round(averagePainLevel(migraines))}
-                />
+              <div className="flex justify-around gap-2 1440-1600:max-h-36 lg:max-h-32">
+                <h4 className="text-card-coolorsPrimary 1440-1600:text-xl 2xl:text-lg lg:text-sm text-2xl py-8 px-4 w-1/4 bg-card-lightModeDashboard mt-2 rounded-lg text-left font-customText dark:bg-card-darkModeSecondary dark:text-card-darkModeTextPrimary">
+                  {mostRecentDay(migraines, mostRecentMonth(migraines)) ===
+                  0 ? (
+                    <>Your last migraine was today.</>
+                  ) : mostRecentDay(migraines, mostRecentMonth(migraines)) ===
+                    1 ? (
+                    <>
+                      Your last migraine was yesterday{' '}
+                      <Sparkles className="inline-block mb-2 text-yellow-500 h-7 w-7" />
+                    </>
+                  ) : (
+                    <>
+                      Your last migraine was{' '}
+                      {mostRecentDay(migraines, mostRecentMonth(migraines))}{' '}
+                      days ago{' '}
+                      <PartyPopper className="inline-block mb-2 text-green-500 h-7 w-7" />
+                    </>
+                  )}
+                </h4>
+                <h4 className="text-card-coolorsPrimary 1440-1600:text-lg 2xl:text-lg lg:text-sm bg-card-lightModeSecondary dark:bg-card-darkModeTertiary dark:text-card-darkModeTextPrimary text-xl py-6 px-4 w-1/3 mt-2 rounded-lg font-customText">
+                  There are some new weather updates that might be of use. Check
+                  them out below.
+                </h4>
+                <h4 className="text-card-coolorsPrimary 1440-1600:text-lg 2xl:text-lg lg:text-sm text-xl py-5 px-4 w-1/3 bg-card-lightModeTertiary dark:bg-card-darkModeOther dark:text-card-darkModeTextPrimary mt-2 rounded-lg font-customText">
+                  <Lightbulb className="inline-block mb-2 h-7 w-7 text-yellow-500" />{' '}
+                  <span className="text-card-coolorsPrimary font-customText dark:text-card-darkModeTextPrimary">
+                    {' '}
+                    Daily tip from us:{' '}
+                  </span>{' '}
+                  <br />
+                  Hydrate well to reduce headaches during high humidity.
+                </h4>
               </div>
             </div>
-            <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 rounded-lg p-4 flex flex-grow flex-col">
-              <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl lg:text-base mb-4 font-custom">
-                Your most common symptoms
-              </h2>
-              <ul className="flex flex-col space-y-2 h-full justify-evenly">
-                {mode(migraines, 'symptoms').map((symptom, index) => {
-                  const widths = ['w-3/4', 'w-1/2', 'w-1/3']; // Dynamically change width based on index
-                  const isTop = index === 0;
-                  const isThird = index === 2;
-                  return (
-                    <li
-                      key={index}
-                      className={`capitalize py-2 px-4 rounded-3xl text-card-coolorsPrimary dark:text-card-darkModeTextPrimary font-customText ${
-                        widths[index]
-                      }
+            <div className="bg-card-lightModeSecondary text-white dark:bg-card-darkModePrimary shadow-lg shadow-gray-500 dark:shadow-md dark:shadow-slate-950 p-2 rounded-lg h-52 w-1/4 flex items-center justify-center">
+              <CarouselPlugin />
+            </div>
+          </div>
+          <div className="flex-grow flex flex-col overflow-y-auto">
+            <div className="flex flex-grow justify-evenly gap-2">
+              <div className="bg-card-lightModeOther  dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 rounded-lg flex flex-col">
+                <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl lg:text-base text-left mt-3 ml-4 font-custom">
+                  Your average pain level
+                </h2>
+                <div className="flex items-center justify-center">
+                  <AvgPainRadialChart
+                    score={Math.round(averagePainLevel(migraines))}
+                  />
+                </div>
+              </div>
+              <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 rounded-lg p-4 flex flex-grow flex-col">
+                <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl lg:text-base mb-4 font-custom">
+                  Your most common symptoms
+                </h2>
+                <ul className="flex flex-col space-y-2 h-full justify-evenly">
+                  {mode(migraines, 'symptoms').map((symptom, index) => {
+                    const widths = ['w-3/4', 'w-1/2', 'w-1/3']; // Dynamically change width based on index
+                    const isTop = index === 0;
+                    const isThird = index === 2;
+                    return (
+                      <li
+                        key={index}
+                        className={`capitalize py-2 px-4 rounded-3xl text-card-coolorsPrimary dark:text-card-darkModeTextPrimary font-customText ${
+                          widths[index]
+                        }
                   ${
                     isTop
                       ? 'text-xl lg:text-lg bg-card-lightModeTertiary dark:bg-card-darkModePrimary dark:shadow-none'
@@ -432,28 +439,28 @@ function Dashboard({ migraines }: DashboardProps) {
                       : 'text-lg lg:text-base bg-card-lightMode lg:w-2/3 dark:bg-card-darkModeOther dark:shadow-none'
                   }
                   drop-shadow-md`}
-                    >
-                      {symptom}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-            <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 rounded-lg p-4 flex flex-grow flex-col">
-              <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl lg:text-base mb-4 font-custom">
-                Your most common triggers
-              </h2>
-              <ul className="flex flex-col space-y-2 h-full justify-evenly">
-                {mode(migraines, 'triggers').map((trigger, index) => {
-                  const widths = ['w-3/4', 'w-1/2', 'w-1/3']; // Dynamically change width based on index
-                  const isTop = index === 0;
-                  const isThird = index === 2;
-                  return (
-                    <li
-                      key={index}
-                      className={`capitalize py-2 px-4 rounded-3xl text-card-coolorsPrimary dark:text-card-darkModeTextPrimary font-customText ${
-                        widths[index]
-                      }
+                      >
+                        {symptom}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+              <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 rounded-lg p-4 flex flex-grow flex-col">
+                <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl lg:text-base mb-4 font-custom">
+                  Your most common triggers
+                </h2>
+                <ul className="flex flex-col space-y-2 h-full justify-evenly">
+                  {mode(migraines, 'triggers').map((trigger, index) => {
+                    const widths = ['w-3/4', 'w-1/2', 'w-1/3']; // Dynamically change width based on index
+                    const isTop = index === 0;
+                    const isThird = index === 2;
+                    return (
+                      <li
+                        key={index}
+                        className={`capitalize py-2 px-4 rounded-3xl text-card-coolorsPrimary dark:text-card-darkModeTextPrimary font-customText ${
+                          widths[index]
+                        }
                   ${
                     isTop
                       ? 'text-xl lg:text-lg bg-card-lightModeTertiary dark:bg-card-darkModePrimary dark:shadow-none'
@@ -462,106 +469,107 @@ function Dashboard({ migraines }: DashboardProps) {
                       : 'text-lg lg:text-base bg-card-lightMode lg:w-2/3 dark:bg-card-darkModeOther dark:shadow-none'
                   }
                   drop-shadow-md`}
-                    >
-                      {trigger}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-grow gap-4">
-          <div className="bg-card-lightModeSecondary dark:bg-card-dashboard shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/4 mt-3 rounded-lg flex flex-col">
-            <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-2xl p-7 text-left font-custom">
-              Analytics
-            </h2>
-            <div className="flex flex-col items-center justify-center">
-              <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary mx-16 mt-10 mb-7 lg:mt-0 lg:mb-5 lg:text-base lg:w-3/4 text-xl font-customText">
-                See the impact your migraines have on your life in easily
-                digestible charts and graphs.
-              </h2>
-              <Link to="/analytics">
-                <Button className="group lg:w-full lg:text-sm text-md p-5 rounded-md bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:bg-card-lightMode dark:hover:bg-card-lightModeSecondary flex items-center">
-                  Go to Analytics
-                  <span className="right-5 transform-translate-y transition-transform duration-500 ease-in-out group-hover:translate-x-2 ml-3 mr-2">
-                    <MoveRight w-5 h-5 />
-                  </span>
-                </Button>
-              </Link>
-            </div>
-          </div>
-          <div className="bg-card-lightMode  dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-3/4 mt-3 rounded-lg relative">
-            <h2 className="text-card-darkModePrimary lg:hidden dark:text-card-lightMode text-2xl absolute top-0 left-0 p-7 font-custom">
-              Weather
-            </h2>
-            <div className="flex items-center justify-center h-full w-full">
-              <div className="flex flex-col">
-                <div className="flex gap-2 lg:gap-0.5 lg:mx-4 mx-8">
-                  <div className="flex flex-col w-1/2 font-medium leading-none border border-card-coolorsPrimary dark:border-gray-400 p-3 justify-center rounded-md">
-                    <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-md mb-4 lg:mb-0">
-                      Humidity Forecast:
-                    </h2>
-                    <div className="flex items-center gap-1 justify-center">
-                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText lg:py-3 lg:text-base">
-                        {weatherData
-                          ? humidityAnalysis(weatherData)
-                          : 'Sorry, there seems to be an error...'}
-                      </p>
-                      <ThermometerSun className="h-6 w-6 text-red-500" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col w-1/2 font-medium leading-none border border-card-coolorsPrimary dark:border-gray-400 p-3 justify-center rounded-md">
-                    <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-md mb-4 lg:mb-0 lg:text-sm">
-                      Temperature Change Forecast:
-                    </h2>
-                    <div className="flex items-center gap-1 justify-center">
-                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText lg:py-3 lg:text-base">
-                        {weatherData
-                          ? tempChange(
-                              tempAndPressureChangeAnalysis(weatherData) || {}
-                            )
-                          : 'Sorry, there seems to be an error...'}
-                      </p>
-                      <TrendingUpDown className="h-6 w-6 text-purple-400" />
-                    </div>
-                  </div>
-                </div>
-                <div className="flex gap-2 mx-8 lg:mx-4 lg:gap-0.5 mt-4 lg:mt-2">
-                  <div className="flex flex-col w-1/2 font-medium leading-none border border-card-coolorsPrimary dark:border-gray-400 p-3 justify-center rounded-md">
-                    <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-md mb-4 lg:mb-0 lg:text-sm">
-                      Barometric Change Forecast:
-                    </h2>
-                    <div className="flex items-center gap-1 justify-center">
-                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText lg:py-3 lg:text-base">
-                        {weatherData
-                          ? pressureChange(
-                              tempAndPressureChangeAnalysis(weatherData) || {}
-                            )
-                          : 'Sorry, there seems to be an error...'}
-                      </p>
-                      <Gauge className="h-7 w-7 text-yellow-400" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col w-1/2 font-medium leading-none border border-card-coolorsPrimary dark:border-gray-400 p-3 justify-center rounded-md">
-                    <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-md mb-4 lg:mb-0 lg:text-sm">
-                      Storm Forecast:
-                    </h2>
-                    <div className="flex items-center gap-1 justify-center">
-                      <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText lg:py-3 lg:text-base">
-                        None detected
-                      </p>
-                      <CloudLightning className="h-6 w-6 text-orange-500" />
-                    </div>
-                  </div>
-                </div>
+                      >
+                        {trigger}
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
-              <div className="mr-3">
-                {weatherData !== null ? (
-                  <WeatherRadialChart score={migraineProbability()} />
-                ) : (
-                  <div>Loading...</div>
-                )}
+            </div>
+          </div>
+          <div className="flex flex-grow gap-4">
+            <div className="bg-card-lightModeSecondary dark:bg-card-dashboard shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/4 mt-3 rounded-lg flex flex-col">
+              <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-2xl p-7 text-left font-custom">
+                Analytics
+              </h2>
+              <div className="flex flex-col items-center justify-center">
+                <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary mx-16 mt-10 mb-7 lg:mt-0 lg:mb-5 lg:text-base lg:w-3/4 text-xl font-customText">
+                  See the impact your migraines have on your life in easily
+                  digestible charts and graphs.
+                </h2>
+                <Link to="/analytics">
+                  <Button className="group lg:w-full lg:text-sm text-md p-5 rounded-md bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:bg-card-lightMode dark:hover:bg-card-lightModeSecondary flex items-center">
+                    Go to Analytics
+                    <span className="right-5 transform-translate-y transition-transform duration-500 ease-in-out group-hover:translate-x-2 ml-3 mr-2">
+                      <MoveRight w-5 h-5 />
+                    </span>
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="bg-card-lightMode  dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-3/4 mt-3 rounded-lg relative">
+              <h2 className="text-card-darkModePrimary lg:hidden dark:text-card-lightMode text-2xl absolute top-0 left-0 p-7 font-custom">
+                Weather
+              </h2>
+              <div className="flex items-center justify-center h-full w-full">
+                <div className="flex flex-col">
+                  <div className="flex gap-2 lg:gap-0.5 lg:mx-4 mx-8">
+                    <div className="flex flex-col w-1/2 font-medium leading-none border border-card-coolorsPrimary dark:border-gray-400 p-3 justify-center rounded-md">
+                      <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-md mb-4 lg:mb-0">
+                        Humidity Forecast:
+                      </h2>
+                      <div className="flex items-center gap-1 justify-center">
+                        <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText lg:py-3 lg:text-base">
+                          {weatherData
+                            ? humidityAnalysis(weatherData)
+                            : 'Sorry, there seems to be an error...'}
+                        </p>
+                        <ThermometerSun className="h-6 w-6 text-red-500" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col w-1/2 font-medium leading-none border border-card-coolorsPrimary dark:border-gray-400 p-3 justify-center rounded-md">
+                      <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-md mb-4 lg:mb-0 lg:text-sm">
+                        Temperature Change Forecast:
+                      </h2>
+                      <div className="flex items-center gap-1 justify-center">
+                        <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText lg:py-3 lg:text-base">
+                          {weatherData
+                            ? tempChange(
+                                tempAndPressureChangeAnalysis(weatherData) || {}
+                              )
+                            : 'Sorry, there seems to be an error...'}
+                        </p>
+                        <TrendingUpDown className="h-6 w-6 text-purple-400" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 mx-8 lg:mx-4 lg:gap-0.5 mt-4 lg:mt-2">
+                    <div className="flex flex-col w-1/2 font-medium leading-none border border-card-coolorsPrimary dark:border-gray-400 p-3 justify-center rounded-md">
+                      <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-md mb-4 lg:mb-0 lg:text-sm">
+                        Barometric Change Forecast:
+                      </h2>
+                      <div className="flex items-center gap-1 justify-center">
+                        <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText lg:py-3 lg:text-base">
+                          {weatherData
+                            ? pressureChange(
+                                tempAndPressureChangeAnalysis(weatherData) || {}
+                              )
+                            : 'Sorry, there seems to be an error...'}
+                        </p>
+                        <Gauge className="h-7 w-7 text-yellow-400" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col w-1/2 font-medium leading-none border border-card-coolorsPrimary dark:border-gray-400 p-3 justify-center rounded-md">
+                      <h2 className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-md mb-4 lg:mb-0 lg:text-sm">
+                        Storm Forecast:
+                      </h2>
+                      <div className="flex items-center gap-1 justify-center">
+                        <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText lg:py-3 lg:text-base">
+                          None detected
+                        </p>
+                        <CloudLightning className="h-6 w-6 text-orange-500" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="mr-3">
+                  {weatherData !== null ? (
+                    <WeatherRadialChart score={migraineProbability()} />
+                  ) : (
+                    <div>Loading...</div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

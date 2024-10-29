@@ -256,7 +256,12 @@ function Analytics({ migraines }: AnalyticsProps) {
 
   return (
     <>
-      <div className="min-h-screen w-full flex flex-col p-3 bg-card-lightMode dark:bg-card-dashboard gap-2 overflow-auto">
+      <div className="flex items-center justify-center min-h-screen lg:hidden">
+        <p className="text-xl ml-10 text-gray-800 dark:text-gray-100">
+          Please use a desktop device to view your analytics.
+        </p>
+      </div>
+      <div className="min-h-screen hidden w-full lg:flex flex-col p-3 bg-card-lightMode dark:bg-card-dashboard gap-2 overflow-auto">
         <div className="flex justify-between items-center">
           <div className="flex space-x-20 items-center">
             <h2 className="text-3xl font-custom mr-0">Analytics</h2>
