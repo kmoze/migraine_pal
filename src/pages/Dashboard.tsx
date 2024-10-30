@@ -406,7 +406,7 @@ function Dashboard({ migraines }: DashboardProps) {
         </div>
         <div className="flex-grow flex flex-col">
           <div className="flex flex-grow justify-evenly gap-2">
-            <div className="bg-card-lightModeOther  dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 rounded-lg flex flex-col">
+            <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 rounded-lg flex flex-col">
               <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl lg:text-base text-left mt-3 ml-4 font-custom">
                 Your average pain level
               </h2>
