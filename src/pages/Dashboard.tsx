@@ -358,7 +358,7 @@ function Dashboard({ migraines }: DashboardProps) {
           Please use a desktop device to view your dashboard.
         </p>
       </div>
-      <div className="hidden lg:block">
+      <div className="hidden lg:block overflow-auto">
         <div className="min-h-screen flex flex-col w-full p-3 bg-card-darkModeTextPrimary dark:bg-card-darkModeOther">
           <div className="flex items-start gap-2 mb-3">
             <div className="bg-card-lightMode shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-3/4 h-52 rounded-xl p-2 bg-opacity-55 dark:bg-card-darkModePrimary">
@@ -404,7 +404,7 @@ function Dashboard({ migraines }: DashboardProps) {
               <CarouselPlugin />
             </div>
           </div>
-          <div className="flex-grow flex flex-col overflow-y-auto">
+          <div className="flex-grow flex flex-col">
             <div className="flex flex-grow justify-evenly gap-2">
               <div className="bg-card-lightModeOther  dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 rounded-lg flex flex-col">
                 <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl lg:text-base text-left mt-3 ml-4 font-custom">
