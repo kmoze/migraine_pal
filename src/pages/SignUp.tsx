@@ -2,7 +2,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../utils/authService';
+import migraine from '../assets/headache_3d.webp';
+import { ArrowRight } from 'lucide-react';
+import styles from './login.module.css';
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
@@ -31,7 +35,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="bg-card-darkModeSecondary w-full flex">
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -76,18 +80,19 @@ export default function SignUp() {
               />
             </div>
           </div>
-
           <div>
-            <button
+            <Button
               type="submit"
               disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400"
+              className="relative text-lg flex w-full bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:text-card-lightMode px-20 py-5 mt-5 group"
             >
               {loading ? 'Creating account...' : 'Sign up'}
-            </button>
+              <span className="absolute right-5 top-1/2 transform -translate-y-1/2 transition-transform duration-500 ease-in-out group-hover:translate-x-2">
+                <ArrowRight w-6 h-6 />
+              </span>
+            </Button>
           </div>
         </form>
-
         <div className="text-sm text-center">
           <p className="text-gray-600">
             Already have an account?{' '}
@@ -99,6 +104,13 @@ export default function SignUp() {
             </Link>
           </p>
         </div>
+      </div>
+      <div className="flex w-1/2 flex-col justify-center items-center">
+        <img
+          className={styles.migraineImg}
+          src={migraine}
+          alt="migraine graphic"
+        />
       </div>
     </div>
   );
