@@ -119,7 +119,7 @@ function InsightsSheet({ sorted }: InsightsSheetProps) {
       </SheetTrigger>
       <SheetContent
         side={'top'}
-        className="w-full lg:h-1/2 2xl:h-1/3 bg-card-coolorsPrimary border-none pt-10"
+        className="w-full lg:h-1/2 2xl:h-auto bg-card-coolorsPrimary border-none pt-10"
       >
         <SheetHeader>
           <SheetTitle className="text-xl text-card-darkModeTextPrimary">
