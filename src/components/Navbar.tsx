@@ -66,7 +66,7 @@ function Navbar({
             mostRecentMigraine={mostRecentMigraine}
           />
           <Link to={'/login'}>
-            <Button className="text-base mb-10 w-1/2 bg-foreground lg:min-w-fit rounded-sm flex items-center justify-center gap-2 pl-4">
+            <Button className="text-base mb-10 w-1/2 bg-foreground md:min-w-fit rounded-sm flex items-center justify-center gap-2 pl-4">
               <ArrowLeftStartOnRectangleIcon className="h-5 w-5" />
               <div className="flex-1 text-center">Log out</div>
             </Button>
