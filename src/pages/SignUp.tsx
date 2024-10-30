@@ -1,29 +1,29 @@
-import { Button } from '@/components/ui/button';
-import { Link, useNavigate } from 'react-router-dom';
-import migraine from '../assets/headache_3d.webp';
-import styles from './login.module.css';
-import { ArrowRight } from 'lucide-react';
+// src/pages/SignUp.tsx
 import { useState } from 'react';
-import { authService } from '@/utils/authService';
+import { useNavigate } from 'react-router-dom';
+import { authService } from '../utils/authService';
+import { Link } from 'react-router-dom';
 
-function Login() {
+export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
 
     try {
-      await authService.signIn(email, password);
-      navigate('/'); // Redirect to dashboard after login
+      await authService.signUp(email, password);
+      // Supabase sends a confirmation email by default
+      // You might want to show a success message telling users to check their email
+      navigate('/login');
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : 'Invalid email or password'
+        err instanceof Error ? err.message : 'An error occurred during sign up'
       );
     } finally {
       setLoading(false);
@@ -31,25 +31,14 @@ function Login() {
   };
 
   return (
-    <div className="bg-card-darkModeSecondary w-full flex">
-      {/* <div className="w-1/2 flex flex-col justify-center items-center">
-        <h2 className="text-4xl text-white font-custom">MigrainePal</h2>
-        <Link to={'/'}>
-          <Button className="relative text-lg bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:text-card-lightMode px-20 py-5 mt-5 group">
-            Login
-            <span className="absolute right-5 top-1/2 transform -translate-y-1/2 transition-transform duration-500 ease-in-out group-hover:translate-x-2">
-              <ArrowRight w-6 h-6 />
-            </span>
-          </Button>
-        </Link>
-      </div> */}
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
+            Create your account
           </h2>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleLogin}>
+        <form className="mt-8 space-y-6" onSubmit={handleSignUp}>
           {error && (
             <div className="rounded-md bg-red-50 p-4">
               <div className="text-sm text-red-700">{error}</div>
@@ -89,47 +78,28 @@ function Login() {
           </div>
 
           <div>
-            <Button
-              type="submit"
-              disabled={loading}
-              className="relative text-lg flex w-full bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:text-card-lightMode px-20 py-5 mt-5 group"
-            >
-              {loading ? 'Signing in...' : 'Sign in'}
-              <span className="absolute right-5 top-1/2 transform -translate-y-1/2 transition-transform duration-500 ease-in-out group-hover:translate-x-2">
-                <ArrowRight w-6 h-6 />
-              </span>
-            </Button>
-            {/* <button
+            <button
               type="submit"
               disabled={loading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400"
             >
-              {loading ? 'Signing in...' : 'Sign in'}
-            </button> */}
+              {loading ? 'Creating account...' : 'Sign up'}
+            </button>
           </div>
         </form>
 
         <div className="text-sm text-center">
           <p className="text-gray-600">
-            Don't have an account?{' '}
+            Already have an account?{' '}
             <Link
-              to="/signup"
+              to="/login"
               className="font-medium text-indigo-600 hover:text-indigo-500"
             >
-              Sign up
+              Log in
             </Link>
           </p>
         </div>
       </div>
-      <div className="flex w-1/2 flex-col justify-center items-center">
-        <img
-          className={styles.migraineImg}
-          src={migraine}
-          alt="migraine graphic"
-        />
-      </div>
     </div>
   );
 }
-
-export default Login;
