@@ -8,7 +8,6 @@ import {
 } from '@/components/ui/sheet';
 import { Button } from './ui/button';
 import { ChartNoAxesGantt } from 'lucide-react';
-import { format } from 'date-fns';
 import { monthNames } from '@/data/monthOptions';
 
 interface Migraine {
@@ -56,7 +55,7 @@ function InsightsSheet({ sorted }: InsightsSheetProps) {
     sorted,
     previousMonth,
     previousMonthYear
-  ); //
+  );
 
   function calculateAverageDuration(
     data: Migraine[],
@@ -120,7 +119,7 @@ function InsightsSheet({ sorted }: InsightsSheetProps) {
       </SheetTrigger>
       <SheetContent
         side={'top'}
-        className="w-full h-1/2 bg-card-coolorsPrimary border-none"
+        className="w-full lg:h-1/2 2xl:h-1/3 bg-card-coolorsPrimary border-none pt-10"
       >
         <SheetHeader>
           <SheetTitle className="text-xl text-card-darkModeTextPrimary">
@@ -128,35 +127,37 @@ function InsightsSheet({ sorted }: InsightsSheetProps) {
           </SheetTitle>
           <SheetDescription className="text-white">
             <h2 className="text-sm">
-              As it's reaching the end of {format(currentDate, 'MMMM')}, we've
-              prepared an end of month comparison for you.
+              It's ideal to check this towards the end of the month but here you
+              <br />
+              can quickly see how {monthNames[currentMonth]} compares to{' '}
+              {monthNames[previousMonth]}.
             </h2>
             <div className="flex gap-4">
-              <div className="relative flex w-1/3 mt-5 bg-card-darkModePrimary px-0 py-7 rounded-lg">
+              <div className="relative flex w-1/3 mt-5 bg-card-darkModePrimary px-0 pt-10 pb-4 rounded-lg">
                 <div className="flex-1 flex flex-col items-center gap-2">
                   <p className="text-sm font-customText">
-                    PrevMonthPlaceholder
+                    {monthNames[previousMonth]}
                   </p>
                   <div className="p-10 bg-card-coolorsAccent rounded-sm text-center">
                     <p className="text-xl">{Math.floor(prevMonthAvgPain)}</p>
                   </div>
                 </div>
-                <h2 className="absolute text-md left-1/2 transform -translate-x-1/2 top-1/2 py-2">
+                <h2 className="absolute top-5 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-md py-2 px-2 rounded-lg">
                   Average Pain Level
                 </h2>
                 <div className="flex-1 flex flex-col items-center gap-2">
                   <p className="text-sm font-customText">
-                    CurrMonthPlaceholder
+                    {monthNames[currentMonth]}
                   </p>
                   <div className="p-10 bg-card-coolorsSecondary rounded-sm text-center">
                     <p className="text-xl">{Math.floor(currentMonthAvgPain)}</p>
                   </div>
                 </div>
               </div>
-              <div className="relative flex w-1/3 mt-5 bg-card-darkModePrimary px-0 py-7 rounded-lg">
+              <div className="relative flex w-1/3 mt-5 bg-card-darkModePrimary px-0 pt-10 pb-4 rounded-lg">
                 <div className="flex-1 flex flex-col items-center gap-2">
                   <p className="text-sm font-customText">
-                    PrevMonthPlaceholder
+                    {monthNames[previousMonth]}
                   </p>
                   <div className="p-10 bg-card-coolorsAccent rounded-sm text-center">
                     <p className="text-xl">
@@ -164,12 +165,13 @@ function InsightsSheet({ sorted }: InsightsSheetProps) {
                     </p>
                   </div>
                 </div>
-                <h2 className="absolute text-md left-1/2 transform -translate-x-1/2 top-1/2 py-2">
-                  Average Migraine Duration
+                <h2 className="absolute top-5 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-md py-2 px-2 rounded-lg">
+                  Average Duration
                 </h2>
                 <div className="flex-1 flex flex-col items-center gap-2">
-                  CurrMonthPlaceholder
-                  <p className="text-lg font-customText"></p>
+                  <p className="text-sm font-customText">
+                    {monthNames[currentMonth]}
+                  </p>
                   <div className="p-10 bg-card-coolorsSecondary rounded-sm text-center">
                     <p className="text-xl">
                       {Math.floor(currMonthAverageDuration)}h
@@ -177,21 +179,21 @@ function InsightsSheet({ sorted }: InsightsSheetProps) {
                   </div>
                 </div>
               </div>
-              <div className="relative flex w-1/3 mt-5 bg-card-darkModePrimary px-0 py-7 rounded-lg">
+              <div className="relative flex w-1/3 mt-5 bg-card-darkModePrimary px-0 pt-10 pb-4 rounded-lg">
                 <div className="flex-1 flex flex-col items-center gap-2">
                   <p className="text-sm font-customText">
-                    PrevMonthPlaceholder
+                    {monthNames[previousMonth]}
                   </p>
                   <div className="p-10 bg-card-coolorsAccent rounded-sm text-center">
                     <p className="text-xl">{prevMonthMigraineCount}</p>
                   </div>
                 </div>
-                <h2 className="absolute text-md left-1/2 transform -translate-x-1/2 top-1/2 py-2">
+                <h2 className="absolute top-5 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-md py-2 px-2 rounded-lg">
                   Migraines Logged
                 </h2>
                 <div className="flex-1 flex flex-col items-center gap-2">
                   <p className="text-sm font-customText">
-                    CurrMonthPlaceholder
+                    {monthNames[currentMonth]}
                   </p>
                   <div className="p-10 bg-card-coolorsSecondary rounded-sm text-center">
                     <p className="text-xl">{currMonthMigraineCount}</p>
