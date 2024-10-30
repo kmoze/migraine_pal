@@ -411,10 +411,15 @@ function Dashboard({ migraines }: DashboardProps) {
               <h2 className="text-card-coolorsPrimary dark:text-card-darkModeTextPrimary text-xl lg:text-base text-left mt-3 ml-4 font-custom">
                 Your average pain level
               </h2>
-              <div className="flex items-center justify-center">
-                <AvgPainRadialChart
-                  score={Math.round(averagePainLevel(migraines))}
-                />
+              <div className="flex items-center justify-center h-[200px]">
+                {typeof averagePainLevel(migraines) === 'number' &&
+                !isNaN(averagePainLevel(migraines)) ? (
+                  <AvgPainRadialChart
+                    score={Math.round(averagePainLevel(migraines))}
+                  />
+                ) : (
+                  <p>Loading...</p> // Placeholder while data is loading
+                )}
               </div>
             </div>
             <div className="bg-card-lightModeOther dark:bg-card-coolorsPrimary shadow-md shadow-gray-500 dark:shadow-md dark:shadow-slate-950 w-1/3 rounded-lg p-4 flex flex-grow flex-col">
