@@ -19,11 +19,19 @@ interface Migraine {
 }
 
 interface InsightsSheetProps {
-  sorted: Migraine[]; // Specify that sorted is an array of Migraine objects
+  sorted: Migraine[];
 }
 
 function InsightsSheet({ sorted }: InsightsSheetProps) {
-  console.log(sorted);
+  const currentDate = new Date();
+
+  // Calculate current and previous month/year
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
+
+  // Previous month and year calculation
+  const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+  const previousMonthYear = currentMonth === 0 ? currentYear - 1 : currentYear;
 
   function calculateAveragePain(data: Migraine[], month: number, year: number) {
     const filteredData = data.filter((item) => {
@@ -37,8 +45,16 @@ function InsightsSheet({ sorted }: InsightsSheetProps) {
     return totalPain / filteredData.length;
   }
 
-  const augustAverage = calculateAveragePain(sorted, 7, 2024);
-  const septemberAverage = calculateAveragePain(sorted, 8, 2024); //
+  const currentMonthAvgPain = calculateAveragePain(
+    sorted,
+    currentMonth,
+    currentYear
+  );
+  const prevMonthAvgPain = calculateAveragePain(
+    sorted,
+    previousMonth,
+    previousMonthYear
+  ); //
 
   function calculateAverageDuration(
     data: Migraine[],
@@ -59,8 +75,16 @@ function InsightsSheet({ sorted }: InsightsSheetProps) {
     return totalDuration / filteredData.length;
   }
 
-  const augustAverageDuration = calculateAverageDuration(sorted, 7, 2024);
-  const septemberAverageDuration = calculateAverageDuration(sorted, 8, 2024);
+  const currMonthAverageDuration = calculateAverageDuration(
+    sorted,
+    currentMonth,
+    currentYear
+  );
+  const prevMonthAverageDuration = calculateAverageDuration(
+    sorted,
+    previousMonth,
+    previousMonthYear
+  );
 
   function getMonthlyMigraineCount(
     data: Migraine[],
@@ -73,8 +97,16 @@ function InsightsSheet({ sorted }: InsightsSheetProps) {
     }).length;
   }
 
-  const augustMigraineCount = getMonthlyMigraineCount(sorted, 7, 2024);
-  const septemberMigraineCount = getMonthlyMigraineCount(sorted, 8, 2024);
+  const currMonthMigraineCount = getMonthlyMigraineCount(
+    sorted,
+    currentMonth,
+    currentYear
+  );
+  const prevMonthMigraineCount = getMonthlyMigraineCount(
+    sorted,
+    previousMonth,
+    previousMonthYear
+  );
 
   return (
     <Sheet>
@@ -100,27 +132,33 @@ function InsightsSheet({ sorted }: InsightsSheetProps) {
             <div className="flex gap-4">
               <div className="relative flex w-1/3 mt-5 bg-card-darkModePrimary px-0 py-7 rounded-lg">
                 <div className="flex-1 flex flex-col items-center gap-2">
-                  <p className="text-lg font-customText">August</p>
+                  <p className="text-sm font-customText">
+                    PrevMonthPlaceholder
+                  </p>
                   <div className="p-10 bg-card-coolorsAccent rounded-sm text-center">
-                    <p className="text-xl">{Math.floor(augustAverage)}</p>
+                    <p className="text-xl">{Math.floor(prevMonthAvgPain)}</p>
                   </div>
                 </div>
                 <h2 className="absolute text-md left-1/2 transform -translate-x-1/2 top-1/2 py-2">
                   Average Pain Level
                 </h2>
                 <div className="flex-1 flex flex-col items-center gap-2">
-                  <p className="text-lg font-customText">September</p>
+                  <p className="text-sm font-customText">
+                    CurrMonthPlaceholder
+                  </p>
                   <div className="p-10 bg-card-coolorsSecondary rounded-sm text-center">
-                    <p className="text-xl">{Math.floor(septemberAverage)}</p>
+                    <p className="text-xl">{Math.floor(currentMonthAvgPain)}</p>
                   </div>
                 </div>
               </div>
               <div className="relative flex w-1/3 mt-5 bg-card-darkModePrimary px-0 py-7 rounded-lg">
                 <div className="flex-1 flex flex-col items-center gap-2">
-                  <p className="text-lg font-customText">August</p>
+                  <p className="text-sm font-customText">
+                    PrevMonthPlaceholder
+                  </p>
                   <div className="p-10 bg-card-coolorsAccent rounded-sm text-center">
                     <p className="text-xl">
-                      {Math.floor(augustAverageDuration)}h
+                      {Math.floor(prevMonthAverageDuration)}h
                     </p>
                   </div>
                 </div>
@@ -128,28 +166,33 @@ function InsightsSheet({ sorted }: InsightsSheetProps) {
                   Average Migraine Duration
                 </h2>
                 <div className="flex-1 flex flex-col items-center gap-2">
-                  <p className="text-lg font-customText">September</p>
+                  CurrMonthPlaceholder
+                  <p className="text-lg font-customText"></p>
                   <div className="p-10 bg-card-coolorsSecondary rounded-sm text-center">
                     <p className="text-xl">
-                      {Math.floor(septemberAverageDuration)}h
+                      {Math.floor(currMonthAverageDuration)}h
                     </p>
                   </div>
                 </div>
               </div>
               <div className="relative flex w-1/3 mt-5 bg-card-darkModePrimary px-0 py-7 rounded-lg">
                 <div className="flex-1 flex flex-col items-center gap-2">
-                  <p className="text-lg font-customText">August</p>
+                  <p className="text-sm font-customText">
+                    PrevMonthPlaceholder
+                  </p>
                   <div className="p-10 bg-card-coolorsAccent rounded-sm text-center">
-                    <p className="text-xl">{augustMigraineCount}</p>
+                    <p className="text-xl">{prevMonthMigraineCount}</p>
                   </div>
                 </div>
                 <h2 className="absolute text-md left-1/2 transform -translate-x-1/2 top-1/2 py-2">
                   Migraines Logged
                 </h2>
                 <div className="flex-1 flex flex-col items-center gap-2">
-                  <p className="text-lg font-customText">September</p>
+                  <p className="text-sm font-customText">
+                    CurrMonthPlaceholder
+                  </p>
                   <div className="p-10 bg-card-coolorsSecondary rounded-sm text-center">
-                    <p className="text-xl">{septemberMigraineCount}</p>
+                    <p className="text-xl">{currMonthMigraineCount}</p>
                   </div>
                 </div>
               </div>
