@@ -356,6 +356,9 @@ function Dashboard({ migraines }: DashboardProps) {
       <div className="flex items-center justify-center min-h-screen lg:hidden">
         <p className="text-xl ml-10 text-gray-800 dark:text-gray-100">
           Please use a desktop device to view your dashboard.
+          <br />
+          <br />
+          But, feel free to log a migraine in the meantime.
         </p>
       </div>
       <div className="min-h-screen hidden lg:flex flex-col w-full p-3 bg-card-darkModeTextPrimary dark:bg-card-darkModeOther overflow-auto">

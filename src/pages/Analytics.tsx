@@ -259,6 +259,9 @@ function Analytics({ migraines }: AnalyticsProps) {
       <div className="flex items-center justify-center min-h-screen lg:hidden">
         <p className="text-xl ml-10 text-gray-800 dark:text-gray-100">
           Please use a desktop device to view your analytics.
+          <br />
+          <br />
+          But, feel free to log a migraine in the meantime.
         </p>
       </div>
       <div className="min-h-screen hidden w-full lg:flex flex-col p-3 bg-card-lightMode dark:bg-card-dashboard gap-2 overflow-auto">
