@@ -8,6 +8,8 @@ import {
 } from '@/components/ui/sheet';
 import { Button } from './ui/button';
 import { ChartNoAxesGantt } from 'lucide-react';
+import { format } from 'date-fns';
+import { monthNames } from '@/data/monthOptions';
 
 interface Migraine {
   id: number;
@@ -118,7 +120,7 @@ function InsightsSheet({ sorted }: InsightsSheetProps) {
       </SheetTrigger>
       <SheetContent
         side={'top'}
-        className="w-full h-1/3 bg-card-coolorsPrimary border-none"
+        className="w-full h-1/2 bg-card-coolorsPrimary border-none"
       >
         <SheetHeader>
           <SheetTitle className="text-xl text-card-darkModeTextPrimary">
@@ -126,8 +128,8 @@ function InsightsSheet({ sorted }: InsightsSheetProps) {
           </SheetTitle>
           <SheetDescription className="text-white">
             <h2 className="text-sm">
-              As it's reaching the end of September, we've prepared an end of
-              month comparison for you.
+              As it's reaching the end of {format(currentDate, 'MMMM')}, we've
+              prepared an end of month comparison for you.
             </h2>
             <div className="flex gap-4">
               <div className="relative flex w-1/3 mt-5 bg-card-darkModePrimary px-0 py-7 rounded-lg">
