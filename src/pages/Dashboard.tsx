@@ -368,21 +368,21 @@ function Dashboard({ migraines }: DashboardProps) {
               Welcome to MigrainePal, Kier 👋🏻
             </h2>
             <div className="flex justify-around gap-2 1440-1600:max-h-36 lg:max-h-32">
-              <h4 className="text-card-coolorsPrimary 1440-1600:text-xl 2xl:text-lg lg:text-sm text-2xl py-8 px-4 w-1/4 bg-card-lightModeDashboard mt-2 rounded-lg text-left font-customText dark:bg-card-darkModeSecondary dark:text-card-darkModeTextPrimary">
+              <h4 className="text-card-coolorsPrimary 1440-1600:text-xl 2xl:text-lg lg:text-sm text-2xl py-8 px-6 w-1/4 bg-card-lightModeDashboard mt-2 rounded-lg text-left font-customText dark:bg-card-darkModeSecondary dark:text-card-darkModeTextPrimary">
                 {mostRecentDay(migraines, mostRecentMonth(migraines)) === 0 ? (
                   <>Your last migraine was today.</>
                 ) : mostRecentDay(migraines, mostRecentMonth(migraines)) ===
                   1 ? (
                   <>
                     Your last migraine was yesterday{' '}
-                    <Sparkles className="inline-block mb-2 text-yellow-500 h-7 w-7" />
+                    <Sparkles className="inline-block mb-2 text-yellow-500 h-6 w-6" />
                   </>
                 ) : (
                   <>
                     Your last migraine was{' '}
                     {mostRecentDay(migraines, mostRecentMonth(migraines))} days
                     ago{' '}
-                    <PartyPopper className="inline-block mb-2 text-green-500 h-7 w-7" />
+                    <PartyPopper className="inline-block mb-2 text-green-500 h-6 w-6" />
                   </>
                 )}
               </h4>
@@ -391,11 +391,10 @@ function Dashboard({ migraines }: DashboardProps) {
                 them out below.
               </h4>
               <h4 className="text-card-coolorsPrimary 1440-1600:text-lg 2xl:text-lg lg:text-sm text-xl py-5 px-4 w-1/3 bg-card-lightModeTertiary dark:bg-card-darkModeOther dark:text-card-darkModeTextPrimary mt-2 rounded-lg font-customText">
-                <Lightbulb className="inline-block mb-2 h-7 w-7 text-yellow-500" />{' '}
+                <Lightbulb className="inline-block mb-2 h-6 w-6 text-yellow-500" />{' '}
                 <span className="text-card-coolorsPrimary font-customText dark:text-card-darkModeTextPrimary">
-                  {' '}
-                  Daily tip from us:{' '}
-                </span>{' '}
+                  Daily tip from us:
+                </span>
                 <br />
                 Hydrate well to reduce headaches during high humidity.
               </h4>
@@ -418,7 +417,7 @@ function Dashboard({ migraines }: DashboardProps) {
                     score={Math.round(averagePainLevel(migraines))}
                   />
                 ) : (
-                  <p>Loading...</p> // Placeholder while data is loading
+                  <p>Loading...</p>
                 )}
               </div>
             </div>
