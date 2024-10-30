@@ -7,6 +7,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { Toaster } from './components/ui/toaster';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { supabase } from './lib/supabaseClient';
+import { AuthProvider } from './contexts/AuthContext';
 
 interface Migraine {
   id: number;
@@ -63,26 +64,28 @@ function App() {
 
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <div className="flex h-screen">
-          {showNavbar && (
-            <Navbar
-              getMigraines={getMigraines}
-              deleteMostRecentMigraine={deleteMostRecentMigraine}
-              mostRecentMigraine={mostRecentMigraine}
-            />
-          )}
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Dashboard migraines={migraines} />} />
-            <Route
-              path="/analytics"
-              element={<Analytics migraines={migraines} />}
-            />
-          </Routes>
-          <Toaster />
-        </div>
-      </QueryClientProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <div className="flex h-screen">
+            {showNavbar && (
+              <Navbar
+                getMigraines={getMigraines}
+                deleteMostRecentMigraine={deleteMostRecentMigraine}
+                mostRecentMigraine={mostRecentMigraine}
+              />
+            )}
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/" element={<Dashboard migraines={migraines} />} />
+              <Route
+                path="/analytics"
+                element={<Analytics migraines={migraines} />}
+              />
+            </Routes>
+            <Toaster />
+          </div>
+        </QueryClientProvider>
+      </AuthProvider>
     </>
   );
 }
