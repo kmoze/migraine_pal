@@ -126,7 +126,7 @@ function InsightsSheet({ sorted }: InsightsSheetProps) {
             Month to Month Comparison
           </SheetTitle>
           <SheetDescription className="text-white">
-            <h2 className="text-sm">
+            <h2 className="text-sm text-gray-100">
               It's ideal to check this towards the end of the month but here you
               <br />
               can quickly see how {monthNames[currentMonth]} compares to{' '}
