@@ -9,6 +9,7 @@ import { Toaster } from './components/ui/toaster';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { supabase } from './lib/supabaseClient';
 import { AuthProvider } from './contexts/AuthContext';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 interface Migraine {
   id: number;
@@ -79,11 +80,16 @@ function App() {
             <Routes>
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/" element={<Dashboard migraines={migraines} />} />
-              <Route
-                path="/analytics"
-                element={<Analytics migraines={migraines} />}
-              />
+              <Route element={<ProtectedRoute />}>
+                <Route
+                  path="/dashboard"
+                  element={<Dashboard migraines={migraines} />}
+                />
+                <Route
+                  path="/analytics"
+                  element={<Analytics migraines={migraines} />}
+                />
+              </Route>
             </Routes>
             <Toaster />
           </div>

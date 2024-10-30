@@ -56,7 +56,7 @@ function Navbar({
           <Button className="mt-10 w-10/12 md:w-full md:text-sm xl:text-lg bg-foreground text-base flex items-center justify-start gap-2 pl-4">
             <Squares2X2Icon className="h-5 w-5" />
             <div className="flex-1 text-center">
-              <Link to="/">Dashboard</Link>
+              <Link to="/dashboard">Dashboard</Link>
             </div>
           </Button>
           <Button className="mt-6 w-10/12 md:w-full md:text-sm xl:text-lg bg-foreground text-base flex items-center justify-start gap-2 pl-4">

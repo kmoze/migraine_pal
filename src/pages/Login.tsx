@@ -20,7 +20,7 @@ function Login() {
 
     try {
       await authService.signIn(email, password);
-      navigate('/'); // Redirect to dashboard after login
+      navigate('/dashboard'); // Redirect to dashboard after login
     } catch (err) {
       setError(
         err instanceof Error ? err.message : 'Invalid email or password'
