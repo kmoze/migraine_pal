@@ -41,7 +41,7 @@ export default function SignUp() {
       </div>
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow flex flex-col">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-normal text-gray-800">
+          <h2 className="mt-6 text-center text-3xl font-normal text-gray-800 font-customText">
             Create your account
           </h2>
         </div>
