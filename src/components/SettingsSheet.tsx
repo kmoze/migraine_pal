@@ -10,13 +10,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { toast } from '@/hooks/use-toast';
 import { Cog6ToothIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
-
-import profile from '../assets/FDC030EB-E9C5-463E-B234-6F5FA6FB828C_1_105_c.jpeg';
 
 import { Sun, Moon } from 'lucide-react';
 
@@ -165,14 +162,6 @@ export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
             <p className="text-lg text-gray-400 font-light">User since 2019</p>
             <p className="text-lg text-gray-400 font-light">kier@gmail.com</p>
           </div>
-          <Avatar>
-            <AvatarImage
-              src={profile}
-              alt="profile picture"
-              className="w-12 h-16"
-            />
-            <AvatarFallback>KM</AvatarFallback>
-          </Avatar>
         </div>
       </SheetContent>
     </Sheet>

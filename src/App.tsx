@@ -39,6 +39,8 @@ function App() {
 
     if (!user) return;
 
+    console.log(user.created_at);
+
     const { data, error } = await supabase
       .from('migraine_logs')
       .select()
@@ -48,8 +50,6 @@ function App() {
       console.error('Error fetching migraines:', error);
       return;
     }
-
-    console.log(data);
 
     const sortedData =
       data?.sort(
@@ -64,18 +64,14 @@ function App() {
 
   // useEffect for setting up auth state listener
   useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        if (event === 'SIGNED_IN') {
-          console.log(event);
-          getMigraines();
-        } else if (event === 'SIGNED_OUT') {
-          console.log(event);
-          setMigraines([]);
-          setMostRecentMigraine(null);
-        }
+    const { data: authListener } = supabase.auth.onAuthStateChange((event) => {
+      if (event === 'SIGNED_IN') {
+        getMigraines();
+      } else if (event === 'SIGNED_OUT') {
+        setMigraines([]);
+        setMostRecentMigraine(null);
       }
-    );
+    });
 
     return () => {
       authListener.subscription.unsubscribe();
