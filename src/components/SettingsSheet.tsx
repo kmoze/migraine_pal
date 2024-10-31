@@ -14,7 +14,6 @@ import { toast } from '@/hooks/use-toast';
 import { Cog6ToothIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
-
 import { Sun, Moon } from 'lucide-react';
 
 interface Migraine {

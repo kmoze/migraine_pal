@@ -39,8 +39,6 @@ function App() {
 
     if (!user) return;
 
-    console.log(user.created_at);
-
     const { data, error } = await supabase
       .from('migraine_logs')
       .select()
