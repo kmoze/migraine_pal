@@ -12,6 +12,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 interface Migraine {
+  user_id: string;
   id: number;
   date: Date;
   symptoms: string[];
@@ -33,12 +34,36 @@ function App() {
   }, []);
 
   async function getMigraines() {
-    const { data } = await supabase.from('migraine_logs').select();
+    // const { data } = await supabase.from('migraine_logs').select();
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
+
+    if (sessionError) {
+      throw new Error('Authentication error: ' + sessionError.message);
+    }
+
+    if (!session?.user) {
+      throw new Error('No authenticated user found');
+    }
+
+    // Fetch only the current user's migraine logs
+    const { data, error: fetchError } = await supabase
+      .from('migraine_logs')
+      .select()
+      .eq('user_id', session.user.id);
+
+    if (fetchError) {
+      throw new Error('Error fetching migraine logs: ' + fetchError.message);
+    }
+
     const sortedData =
       data?.sort(
         (a: Migraine, b: Migraine) =>
           new Date(b.date).getTime() - new Date(a.date).getTime()
       ) || [];
+
     setMigraines(sortedData);
     if (sortedData.length > 0) {
       setMostRecentMigraine(sortedData[0]);
