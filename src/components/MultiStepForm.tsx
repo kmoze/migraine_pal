@@ -100,50 +100,115 @@ function MultiStepForm({
   const prevStep = () => setStep((prev) => prev - 1);
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    onOpenChange(false);
-
-    let newDate = new Date(data.date);
-    const formattedDate = format(newDate, 'yyyy-MM-dd');
-
-    // Transforming the data to array format instead of array of objects
-    let symptomsArray = data.symptoms.map((symptom) => symptom.value);
-    let triggersArray = data.triggers.map((trigger) => trigger.value);
-
-    let painLevelInteger = Number(data.pain);
-    let durationVal = Number(data.duration);
-
-    const migraineData = {
-      date: formattedDate,
-      symptoms: symptomsArray,
-      triggers: triggersArray,
-      pain: painLevelInteger,
-      duration: durationVal,
-    };
-
     try {
-      const { data: insertedData, error } = await supabase
+      // Get the current user's session
+      const {
+        data: { session },
+        error: sessionError,
+      } = await supabase.auth.getSession();
+
+      if (sessionError) {
+        throw new Error('Authentication error: ' + sessionError.message);
+      }
+
+      if (!session?.user) {
+        throw new Error('No authenticated user found');
+      }
+
+      onOpenChange(false);
+
+      let newDate = new Date(data.date);
+      const formattedDate = format(newDate, 'yyyy-MM-dd');
+
+      // Transforming the data to array format instead of array of objects
+      let symptomsArray = data.symptoms.map((symptom) => symptom.value);
+      let triggersArray = data.triggers.map((trigger) => trigger.value);
+
+      let painLevelInteger = Number(data.pain);
+      let durationVal = Number(data.duration);
+
+      const migraineData = {
+        user_id: session.user.id, // Add the user_id to the migraine data
+        date: formattedDate,
+        symptoms: symptomsArray,
+        triggers: triggersArray,
+        pain: painLevelInteger,
+        duration: durationVal,
+      };
+
+      const { data: insertedData, error: insertError } = await supabase
         .from('migraine_logs')
         .insert([migraineData]);
 
-      if (error) {
-        console.error('Error inserting data', error.message);
-      } else {
-        console.log('Data successfully inserted:', insertedData);
+      if (insertError) {
+        throw new Error('Error inserting data: ' + insertError.message);
       }
+
+      console.log('Data successfully inserted:', insertedData);
+
       // Re-fetch the migraines to ensure the UI is updated
       await getMigraines();
-    } catch (error) {
-      console.error('Error during Supabase insert', error);
-    }
 
-    form.reset({
-      date: undefined,
-      pain: undefined,
-      symptoms: undefined,
-      triggers: undefined,
-      duration: undefined,
-    });
-    setStep(1);
+      form.reset({
+        date: undefined,
+        pain: undefined,
+        symptoms: undefined,
+        triggers: undefined,
+        duration: undefined,
+      });
+      setStep(1);
+    } catch (error) {
+      console.error(
+        'Error:',
+        error instanceof Error ? error.message : 'Unknown error occurred'
+      );
+      // Here you might want to show an error message to the user
+      // For example, using a toast notification
+    }
+    // onOpenChange(false);
+
+    // let newDate = new Date(data.date);
+    // const formattedDate = format(newDate, 'yyyy-MM-dd');
+
+    // // Transforming the data to array format instead of array of objects
+    // let symptomsArray = data.symptoms.map((symptom) => symptom.value);
+    // let triggersArray = data.triggers.map((trigger) => trigger.value);
+
+    // let painLevelInteger = Number(data.pain);
+    // let durationVal = Number(data.duration);
+
+    // const migraineData = {
+    //   date: formattedDate,
+    //   symptoms: symptomsArray,
+    //   triggers: triggersArray,
+    //   pain: painLevelInteger,
+    //   duration: durationVal,
+    // };
+
+    // try {
+    //   const { data: insertedData, error } = await supabase
+    //     .from('migraine_logs')
+    //     .insert([migraineData]);
+
+    //   if (error) {
+    //     console.error('Error inserting data', error.message);
+    //   } else {
+    //     console.log('Data successfully inserted:', insertedData);
+    //   }
+    //   // Re-fetch the migraines to ensure the UI is updated
+    //   await getMigraines();
+    // } catch (error) {
+    //   console.error('Error during Supabase insert', error);
+    // }
+
+    // form.reset({
+    //   date: undefined,
+    //   pain: undefined,
+    //   symptoms: undefined,
+    //   triggers: undefined,
+    //   duration: undefined,
+    // });
+    // setStep(1);
   };
 
   return (
@@ -380,7 +445,6 @@ function MultiStepForm({
                                 onChange={(value) => field.onChange(value)}
                                 value={field.value}
                                 isMulti
-                                // className="dark:text-card-dashboard"
                                 className={`${
                                   document.documentElement.classList.contains(
                                     'dark'
