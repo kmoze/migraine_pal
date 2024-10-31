@@ -20,7 +20,7 @@ function Login() {
 
     try {
       await authService.signIn(email, password);
-      navigate('/dashboard'); // Redirect to dashboard after login
+      navigate('/dashboard');
     } catch (err) {
       setError(
         err instanceof Error ? err.message : 'Invalid email or password'
@@ -31,10 +31,13 @@ function Login() {
   };
 
   return (
-    <div className="bg-card-darkModeSecondary w-full flex">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
+    <div className="bg-card-darkModeSecondary w-full flex-col flex pt-20 h-screen items-center justify-center md:flex-row md:pt-0">
+      <div className="absolute top-4 left-4 text-3xl font-bold text-white font-custom">
+        MigrainePal
+      </div>
+      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow flex flex-col">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-3xl font-normal text-gray-800">
             Sign in to your account
           </h2>
         </div>
@@ -101,7 +104,7 @@ function Login() {
           </p>
         </div>
       </div>
-      <div className="flex w-1/2 flex-col justify-center items-center">
+      <div className="flex w-1/2 h-full flex-col justify-center items-center">
         <img
           className={styles.migraineImg}
           src={migraine}
