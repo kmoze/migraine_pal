@@ -34,41 +34,55 @@ function App() {
   }, []);
 
   async function getMigraines() {
-    // const { data } = await supabase.from('migraine_logs').select();
-    const {
-      data: { session },
-      error: sessionError,
-    } = await supabase.auth.getSession();
+    const { data: sessionData } = await supabase.auth.getSession();
+    const user = sessionData.session?.user;
 
-    if (sessionError) {
-      throw new Error('Authentication error: ' + sessionError.message);
-    }
+    // console.log(user);
 
-    if (!session?.user) {
-      throw new Error('No authenticated user found');
-    }
+    if (!user) return;
 
-    // Fetch only the current user's migraine logs
-    const { data, error: fetchError } = await supabase
+    const { data, error } = await supabase
       .from('migraine_logs')
       .select()
-      .eq('user_id', session.user.id);
+      .eq('user_id', user.id); // Filter by user_id
 
-    if (fetchError) {
-      throw new Error('Error fetching migraine logs: ' + fetchError.message);
+    if (error) {
+      console.error('Error fetching migraines:', error);
+      return;
     }
+
+    console.log(data);
 
     const sortedData =
       data?.sort(
         (a: Migraine, b: Migraine) =>
           new Date(b.date).getTime() - new Date(a.date).getTime()
       ) || [];
-
     setMigraines(sortedData);
     if (sortedData.length > 0) {
       setMostRecentMigraine(sortedData[0]);
     }
   }
+
+  // useEffect for setting up auth state listener
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === 'SIGNED_IN') {
+          console.log(event);
+          getMigraines();
+        } else if (event === 'SIGNED_OUT') {
+          console.log(event);
+          setMigraines([]);
+          setMostRecentMigraine(null);
+        }
+      }
+    );
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
 
   async function deleteMostRecentMigraine() {
     if (mostRecentMigraine) {
