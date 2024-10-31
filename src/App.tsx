@@ -37,14 +37,12 @@ function App() {
     const { data: sessionData } = await supabase.auth.getSession();
     const user = sessionData.session?.user;
 
-    // console.log(user);
-
     if (!user) return;
 
     const { data, error } = await supabase
       .from('migraine_logs')
       .select()
-      .eq('user_id', user.id); // Filter by user_id
+      .eq('user_id', user.id);
 
     if (error) {
       console.error('Error fetching migraines:', error);
