@@ -144,9 +144,11 @@ function Dashboard({ migraines }: DashboardProps) {
       return response.json();
     },
     enabled: !!coords.latitude && !!coords.longitude,
+    staleTime: 1000 * 60 * 30,
   });
 
   if (isPending) {
+    console.log('pending');
     return <span>Loading...</span>;
   }
 
@@ -177,7 +179,6 @@ function Dashboard({ migraines }: DashboardProps) {
   function tempAndPressureChangeAnalysis(array: WeatherData | undefined) {
     if (array && array.list.length > 0) {
       const forecastData = array.list;
-      console.log(forecastData);
       const organizedData: {
         [date: string]: { [time: string]: { temp: number; pressure: number } };
       } = {};
