@@ -325,6 +325,7 @@ function Analytics({ migraines }: AnalyticsProps) {
                       }
                       fileName="report.pdf"
                     >
+                      {/* @ts-ignore */}
                       {({ loading }: { loading: boolean }) => (
                         <Button className="relative text-lg bg-card-coolorsSecondary hover:bg-card-coolorsAccent dark:text-card-lightMode px-16 py-5 mt-5 group">
                           Download PDF
