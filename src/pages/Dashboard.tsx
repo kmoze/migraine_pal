@@ -19,8 +19,6 @@ import { useEffect, useState } from 'react';
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
-const BASE_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=51.5072&lon=-0.1276&appid=${API_KEY}&units=metric&cnt=40`;
-
 interface Migraine {
   id: number;
   date: Date;
@@ -109,7 +107,10 @@ function averagePainLevel(migraineData: Migraine[]) {
 }
 
 function Dashboard({ migraines }: DashboardProps) {
-  const [coords, setCoords] = useState({ latitude: null, longitude: null });
+  const [coords, setCoords] = useState<{
+    latitude: number | null;
+    longitude: number | null;
+  }>({ latitude: null, longitude: null });
 
   // Get user coordinates using the Geolocation API
   useEffect(() => {
