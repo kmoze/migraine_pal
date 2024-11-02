@@ -15,6 +15,7 @@ import {
   MoveRight,
   CloudLightning,
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
@@ -108,6 +109,21 @@ function averagePainLevel(migraineData: Migraine[]) {
 }
 
 function Dashboard({ migraines }: DashboardProps) {
+  const [coords, setCoords] = useState({ latitude: null, longitude: null });
+
+  // Get user coordinates using the Geolocation API
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setCoords({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      },
+      (error) => console.error('Error fetching location:', error)
+    );
+  }, []);
+
   // Using Tanstack Query - Removal of useEffect and states
   const {
     isPending,
@@ -115,14 +131,18 @@ function Dashboard({ migraines }: DashboardProps) {
     data: weatherData,
     error,
   } = useQuery({
-    queryKey: ['weatherData'],
+    queryKey: ['weatherData', coords.latitude, coords.longitude],
     queryFn: async () => {
-      const response = await fetch(BASE_URL);
+      if (!coords.latitude || !coords.longitude) return null;
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&appid=${API_KEY}`
+      );
       if (!response.ok) {
         throw new Error('Failed to fetch weather');
       }
       return response.json();
     },
+    enabled: !!coords.latitude && !!coords.longitude,
   });
 
   if (isPending) {
@@ -133,25 +153,37 @@ function Dashboard({ migraines }: DashboardProps) {
     return <span>Error: {error.message}</span>;
   }
 
-  function humidityAnalysis(array: WeatherData): string {
-    let list = array.list;
-    let over70 = [];
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].main.humidity > 70) {
-        over70.push(list[i]);
-      }
+  function humidityAnalysis(array: WeatherData | undefined) {
+    if (!array || !array.list) {
+      // Return a default value or message when data is not yet available
+      return 'Data not available';
     }
 
-    if (over70.length >= 30) {
-      return 'High';
-    } else if (over70.length >= 20 && over70.length <= 29) {
-      return 'Moderate';
-    } else {
-      return 'Mild';
+    if (array && array.list.length > 0) {
+      let list = array.list;
+      let over70 = [];
+      for (let i = 0; i < list.length; i++) {
+        if (list[i].main.humidity > 70) {
+          over70.push(list[i]);
+        }
+      }
+
+      if (over70.length >= 30) {
+        return 'High';
+      } else if (over70.length >= 20 && over70.length <= 29) {
+        return 'Moderate';
+      } else {
+        return 'Mild';
+      }
     }
   }
 
-  function tempAndPressureChangeAnalysis(array: WeatherData) {
+  function tempAndPressureChangeAnalysis(array: WeatherData | undefined) {
+    if (!array || !array.list || array.list.length === 0) {
+      // Return a default value or message when data is not available
+      return {};
+    }
+
     if (array && array.list.length > 0) {
       const forecastData = array.list;
       const organizedData: {
