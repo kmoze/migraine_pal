@@ -147,10 +147,10 @@ function Dashboard({ migraines }: DashboardProps) {
     staleTime: 1000 * 60 * 30,
   });
 
-  if (isPending) {
-    console.log('pending');
-    return <span>Loading...</span>;
-  }
+  // if (isPending) {
+  //   console.log('pending');
+  //   return <span>Loading...</span>;
+  // }
 
   if (isError) {
     return <span>Error: {error.message}</span>;
@@ -541,7 +541,12 @@ function Dashboard({ migraines }: DashboardProps) {
                     </h2>
                     <div className="flex items-center gap-1 justify-center">
                       <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText lg:py-3 lg:text-base">
-                        {weatherData
+                        {/* {weatherData
+                          ? humidityAnalysis(weatherData)
+                          : 'Sorry, there seems to be an error...'} */}
+                        {isPending
+                          ? 'Loading weather data...'
+                          : weatherData
                           ? humidityAnalysis(weatherData)
                           : 'Sorry, there seems to be an error...'}
                       </p>
@@ -554,7 +559,14 @@ function Dashboard({ migraines }: DashboardProps) {
                     </h2>
                     <div className="flex items-center gap-1 justify-center">
                       <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText lg:py-3 lg:text-base">
-                        {weatherData
+                        {/* {weatherData
+                          ? tempChange(
+                              tempAndPressureChangeAnalysis(weatherData) || {}
+                            )
+                          : 'Sorry, there seems to be an error...'} */}
+                        {isPending
+                          ? 'Loading weather data...'
+                          : weatherData
                           ? tempChange(
                               tempAndPressureChangeAnalysis(weatherData) || {}
                             )
@@ -571,7 +583,14 @@ function Dashboard({ migraines }: DashboardProps) {
                     </h2>
                     <div className="flex items-center gap-1 justify-center">
                       <p className="text-card-darkModePrimary dark:text-card-darkModeTextPrimary text-xl font-customText lg:py-3 lg:text-base">
-                        {weatherData
+                        {/* {weatherData
+                          ? pressureChange(
+                              tempAndPressureChangeAnalysis(weatherData) || {}
+                            )
+                          : 'Sorry, there seems to be an error...'} */}
+                        {isPending
+                          ? 'Loading weather data...'
+                          : weatherData
                           ? pressureChange(
                               tempAndPressureChangeAnalysis(weatherData) || {}
                             )
@@ -594,10 +613,17 @@ function Dashboard({ migraines }: DashboardProps) {
                 </div>
               </div>
               <div className="mr-3">
-                {weatherData !== null ? (
+                {/* {weatherData !== null ? (
                   <WeatherRadialChart score={migraineProbability()} />
                 ) : (
                   <div>Loading...</div>
+                )} */}
+                {isPending ? (
+                  <div>Loading...</div>
+                ) : weatherData ? (
+                  <WeatherRadialChart score={migraineProbability()} />
+                ) : (
+                  <div>Error loading weather data</div>
                 )}
               </div>
             </div>
