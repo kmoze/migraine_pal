@@ -135,11 +135,12 @@ function Dashboard({ migraines }: DashboardProps) {
     queryFn: async () => {
       if (!coords.latitude || !coords.longitude) return null;
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${coords.latitude}&lon=${coords.longitude}&appid=${API_KEY}&units=metric&cnt=40`
       );
       if (!response.ok) {
         throw new Error('Failed to fetch weather');
       }
+
       return response.json();
     },
     enabled: !!coords.latitude && !!coords.longitude,
@@ -154,11 +155,6 @@ function Dashboard({ migraines }: DashboardProps) {
   }
 
   function humidityAnalysis(array: WeatherData | undefined) {
-    if (!array || !array.list) {
-      // Return a default value or message when data is not yet available
-      return 'Data not available';
-    }
-
     if (array && array.list.length > 0) {
       let list = array.list;
       let over70 = [];
@@ -179,13 +175,9 @@ function Dashboard({ migraines }: DashboardProps) {
   }
 
   function tempAndPressureChangeAnalysis(array: WeatherData | undefined) {
-    if (!array || !array.list || array.list.length === 0) {
-      // Return a default value or message when data is not available
-      return {};
-    }
-
     if (array && array.list.length > 0) {
       const forecastData = array.list;
+      console.log(forecastData);
       const organizedData: {
         [date: string]: { [time: string]: { temp: number; pressure: number } };
       } = {};
