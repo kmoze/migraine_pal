@@ -4,7 +4,7 @@ import Dashboard from './pages/Dashboard';
 import Analytics from './pages/Analytics';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Toaster } from './components/ui/toaster';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { supabase } from './lib/supabaseClient';
@@ -109,6 +109,7 @@ function App() {
               />
             )}
             <Routes>
+              <Route path="/" element={<Navigate to="/login" replace />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
               <Route element={<ProtectedRoute />}>
@@ -121,6 +122,7 @@ function App() {
                   element={<Analytics migraines={migraines} />}
                 />
               </Route>
+              <Route path="*" element={<Navigate to="/login" replace />} />
             </Routes>
             <Toaster />
           </div>
