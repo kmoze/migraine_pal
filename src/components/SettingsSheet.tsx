@@ -155,13 +155,6 @@ export function SheetDemo({ onDelete, mostRecentMigraine }: SheetDemoProps) {
             )}
           </Label>
         </div>
-        <div className="p-5 bg-card-coolorsPrimary rounded-md flex justify-between w-full mt-32">
-          <div className="flex flex-col">
-            <h2 className="text-xl text-white font-customText">Kier M.</h2>
-            <p className="text-lg text-gray-400 font-light">User since 2019</p>
-            <p className="text-lg text-gray-400 font-light">kier@gmail.com</p>
-          </div>
-        </div>
       </SheetContent>
     </Sheet>
   );
